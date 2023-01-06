@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh-CN" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>4.数据探索和可视化 &mdash; Python数据分析入门（简易版） V 1.0 文档</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/sg_gallery.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/translations.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="author" title="关于这些文档" href="about.html" />
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="搜索" href="search.html" />
+    <link rel="next" title="5.数据分析报告" href="5.%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%8A%A5%E5%91%8A.html" />
+    <link rel="prev" title="3.数据准备" href="3.%E6%95%B0%E6%8D%AE%E5%87%86%E5%A4%87.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> Python数据分析入门（简易版）
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="搜索文档" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="导航菜单">
+              <p class="caption" role="heading"><span class="caption-text">目录:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="about.html">Python数据分析学习项目说明</a></li>
+<li class="toctree-l1"><a class="reference internal" href="0.%E5%BC%95%E8%A8%80.html">0.引言</a></li>
+<li class="toctree-l1"><a class="reference internal" href="1.%E9%97%AE%E9%A2%98%E5%AE%9A%E4%B9%89.html">1.问题定义——共享单车需求数据分析</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2.%E6%95%B0%E6%8D%AE%E6%8A%BD%E5%8F%96.html">2.数据抽取（采集、获取方式）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3.%E6%95%B0%E6%8D%AE%E5%87%86%E5%A4%87.html">3.数据准备</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">4.数据探索和可视化</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id2">4.1 可视化图表类型</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id3">4.1.1 曲线图和散点图介绍</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">4.1.2 初始化图表格式</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id5">4.2 问题探索</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id6">4.3 共享单车四季租用数量占比</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id7">4.3.1 导入数据初始化代码</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#p109">4.3.2 显示四季占比数据 P109</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id8">4.3.3 结论</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id9">4.4 不同天气情况下共享单车的租用数量</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id10">4.4.1 导入数据初始化代码</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#p108">4.4.2 显示天气数据 P108</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id11">4.4.3 结论</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id12">4.4.4 思考题</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id13">4.5 某一个月中温度对共享单车租用影响（以6月份数据为例）</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id14">4.5.1 查看是否有异常数据</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#p107">4.5.2 显示温度数据 P107</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id15">4.5.3 结论</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id16">4.6 某月每小时单车租用情况（以7月份数据为例）练习</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="5.%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%8A%A5%E5%91%8A.html">5.<em>数据分析报告</em></a></li>
+<li class="toctree-l1"><a class="reference internal" href="6.%E6%80%BB%E7%BB%93.html">6.总结</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="移动版导航菜单" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Python数据分析入门（简易版）</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="页面导航">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a></li>
+      <li class="breadcrumb-item active">4.数据探索和可视化</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/4.数据探索和可视化.md.txt" rel="nofollow"> 查看页面源码</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<section id="id1">
+<h1>4.数据探索和可视化<a class="headerlink" href="#id1" title="永久链接至标题"></a></h1>
+<section id="id2">
+<h2>4.1 可视化图表类型<a class="headerlink" href="#id2" title="永久链接至标题"></a></h2>
+<p>从下面图中我们可以看到图表中经常会用到的几种数据图形,但不仅限于这些图表，我们可以运用<code class="docutils literal notranslate"><span class="pre">matplotlib</span></code>这个库，创建更多适合我们数据分析的图表。当然，pandas自己也继承了<code class="docutils literal notranslate"><span class="pre">matplotlib</span></code>中很多优点，所以我们可以在pandas中直接调用DF对象的plot功能函数，可以直接绘图，从而避免和省去不要的代码学习麻烦。可以更加高效专注于数据本身的探索和挖掘。<br>
+<img alt="png" src="_images/4-1.png" /><br></p>
+<ul class="simple">
+<li><p>常见图表介绍<br>
+1.<strong>柱状图</strong>：是由一系列高度不等的纵向条纹或线段表示数据分布的情况，一般用横轴表示数据所属类别，用纵轴表示数量或者占比。用柱状图可以比较直观地看出产品质量特性的分布状态，便于判断其总体质量分布情况。<br>
+2.<strong>折线图</strong>：是一种将数据点按照顺序连接起来的图形,可以看作是将散点图按照x轴坐标顺序连接起来。折线图的主要功能是查看因变量y随着自变量x改变的趋势,最适合用于显示随时间(根据常用比例设置)而变化的连续数据,同时还可以看出数量的差异和增长趋势的变化。比如：时间、温度、速度等。<br>
+3.<strong>饼图</strong>：是将各项的大小与各项总和的比例显示在一张“饼”中，以占“饼”的面积大小来确定每一项的占比。饼图可以比较清楚地反映出部分与部分、部分与整体之间的比例关系，易于显示每组数据相对于总数的大小，而且显示方式直观。<br></p></li>
+</ul>
+<section id="id3">
+<h3>4.1.1 曲线图和散点图介绍<a class="headerlink" href="#id3" title="永久链接至标题"></a></h3>
+<p>前面我们介绍了三种常见的图表，后面会运用到，当然在<code class="docutils literal notranslate"><span class="pre">matplotlib</span></code>中还两种图（曲线图、散点图）比较适合我们进行数据分析或者进行别的数据观察使用，下面将一一介绍。</p>
+<ul class="simple">
+<li><p><strong>曲线图 P104</strong><br>
+有时候我们可能需要将一个数学公式具体化，这时候就可以用matplotlib中的<code class="docutils literal notranslate"><span class="pre">legend</span></code>功能函数，它会对相关的函数公式进行绘图处理。</p></li>
+</ul>
+<ul class="simple">
+<li><p>示例代码</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">)</span> <span class="c1">#在[0,1.1) 区间内，以0.01为间隔，创建一维数组</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;lines&#39;</span><span class="p">)</span> <span class="c1">#添加标题</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>    <span class="c1">#添加x轴的名称</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">)</span>    <span class="c1">#添加y轴的名称</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>    <span class="c1">#确定x轴范围</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>    <span class="c1">#确定y轴范围</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mf">0.2</span><span class="p">))</span>  <span class="c1">#确定x轴刻度</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mf">0.2</span><span class="p">))</span>  <span class="c1">#确定y轴刻度</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">data</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>       <span class="c1">#添加 y = x ^ 2曲线</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">data</span><span class="o">**</span><span class="mi">4</span><span class="p">)</span>       <span class="c1">#添加 y = x ^ 4曲线</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="s1">&#39;y=x^2&#39;</span><span class="p">,</span><span class="s1">&#39;y=x^4&#39;</span><span class="p">])</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>输出结果<br>
+<img alt="png" src="_images/4-2.png" /></p></li>
+</ul>
+<ul class="simple">
+<li><p><strong>散点图 P105</strong><br>
+散点图(scatter diagram)又称为散点分布图，是以一个特征为横坐标，以另一个特征为纵坐标，利用坐标点(散点)的分布形态反映特征间统计关系的一种图形。散点图中，值由点在图中的位置表示。<br></p></li>
+</ul>
+<blockquote>
+<div><p>散点图可以提供两类关键信息:<br></p>
+<ol class="simple">
+<li><p>特征之间是否存在数值或者数量的关联趋势，以及关联趋势是线性的，还是非线性的。</p></li>
+<li><p>如果某一个点或者某几个点偏离大多数点，则这些点就是离群值，通过散点图可以一目了然，从而可以进一步分析这些离群值是否会在建模分析中产生很大的影响。</p></li>
+</ol>
+</div></blockquote>
+<p>pyplot中绘制散点图的函数为<code class="docutils literal notranslate"><span class="pre">scatter()</span></code>，示例代码如下所示：</p>
+<ul class="simple">
+<li><p>示例代码</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">1.4</span> <span class="p">,</span> <span class="mf">0.1</span><span class="p">)</span> <span class="c1">#在[0,1.4) 区间内，以0.01为间隔，创建一维数组</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Scatter Plot&#39;</span><span class="p">)</span> <span class="c1">#添加标题</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>    <span class="c1">#添加x轴的名称</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">)</span>    <span class="c1">#添加y轴的名称</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">data</span> <span class="o">**</span> <span class="mi">2</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">data</span> <span class="o">**</span> <span class="mi">4</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="s1">&#39;g&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="s1">&#39;y=x^2&#39;</span><span class="p">,</span><span class="s1">&#39;y=x^4&#39;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>输出结果<br><br /><img alt="png" src="_images/4-3.png" /></p></li>
+</ul>
+</section>
+<section id="id4">
+<h3>4.1.2 初始化图表格式<a class="headerlink" href="#id4" title="永久链接至标题"></a></h3>
+<p>在之后的图表操作中，我们需要对图表的样式做一些统一的设定，所以下面有初始化的一些代码。我们通过魔法命令生成文件，之后可以通过魔法命令运行和调用。</p>
+<ul class="simple">
+<li><p>示例代码</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="n">writefile</span> <span class="n">Font_Style</span><span class="o">.</span><span class="n">py</span>
+<span class="c1">#写入魔法命令，设定图表样式</span>
+
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">platform</span>
+
+<span class="n">sys</span> <span class="o">=</span> <span class="n">platform</span><span class="o">.</span><span class="n">system</span><span class="p">()</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="c1">#获取系统类型</span>
+<span class="k">if</span><span class="p">(</span><span class="n">sys</span> <span class="o">==</span> <span class="s1">&#39;win32&#39;</span><span class="p">):</span> <span class="c1">#判定系统类型</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;font.sans-serif&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;SimHei&#39;</span><span class="p">]</span> <span class="c1">#windows os下支持中文，用于正常显示中文标签</span>
+<span class="k">else</span><span class="p">:</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;font.sans-serif&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Arial Unicode MS&#39;</span><span class="p">]</span> <span class="c1">#mac os 下显示中文 二选一 两行代码</span>
+<span class="c1">#end if</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;font.size&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">18</span> <span class="c1">#调整字体大小</span>
+<span class="c1">#以上-------字体格式代码，根据运行环境自行调整------------------------------</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>输出结果<br></p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Writing</span> <span class="n">Font_Style</span><span class="o">.</span><span class="n">py</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="id5">
+<h2>4.2 问题探索<a class="headerlink" href="#id5" title="永久链接至标题"></a></h2>
+<p>在1.2中我们提出了“通过历史用车记录结合天气等数据预测共享单车项目在该地区的需求。”这么一个问题。既然说到天气，我们不难从数据表格中发现“season”、“weather”、“temp_value”、“wind_speed”这四个参数是天气数据，可以用于来进一步分析。为了便于我们的讲解，我们这里就选去了前三个数据进行分析和讲解，即“season”、“weather”、“temp_value”是我们这次重点分析的三个对象。我们将对这三个数据逐步深入的讨论以下几个问题：</p>
+<ol class="simple">
+<li><p><strong>共享单车四季租用数量占比（饼图）</strong></p></li>
+<li><p><strong>不同天气情况下共享单车的租用数量（柱状图）</strong></p></li>
+<li><p><strong>某一个月中温度对共享单车租用影响（箱图、折线图）</strong></p></li>
+<li><p><strong>某一个月中每小时单车租用情况（折线图）</strong></p></li>
+</ol>
+</section>
+<section id="id6">
+<h2>4.3 共享单车四季租用数量占比<a class="headerlink" href="#id6" title="永久链接至标题"></a></h2>
+<p>在第3节中我们经过“查重”、“删空值”、“删特殊值（#VALUE）”等一系列操作，好像已经处理得很完美了，那么我们现在要根据季节来分析一下数据。这时候我们发现又有一个坑等着我们了，就是数据中只有“Summer”的数据，没有别的季节数据。回溯原因，可能是在前面的处理中有些数据中可能只有季节数据，后面的天气等详细数据都是缺失没有的，导致数据都被删除，所以这里的数据我们又要重新清洗。不过还好比较简单，因为只需要提取季节数据，所以只要“查重”就行了，我们初始化的导入代码如下所示：</p>
+<section id="id7">
+<h3>4.3.1 导入数据初始化代码<a class="headerlink" href="#id7" title="永久链接至标题"></a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span> <span class="c1">#导入pandas库</span>
+
+<span class="n">DataFilePath</span> <span class="o">=</span> <span class="s2">&quot;./bike_data.csv&quot;</span> <span class="c1">#需要分析的数据文件路径</span>
+<span class="n">BikeDataFrame</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">DataFilePath</span><span class="p">,</span><span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;gb2312&#39;</span><span class="p">)</span> <span class="c1">#建立BikeDataFrame对象访问数据</span>
+
+<span class="c1">#-----初步处理-------</span>
+<span class="n">BikeDataFrame</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">(</span><span class="n">subset</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;bike_id&#39;</span><span class="p">,</span><span class="s1">&#39;datetime&#39;</span><span class="p">,</span><span class="s1">&#39;date&#39;</span><span class="p">],</span>  <span class="n">keep</span> <span class="o">=</span> <span class="s1">&#39;first&#39;</span> <span class="p">,</span> <span class="n">inplace</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="c1">#删除重复的数据</span>
+</pre></div>
+</div>
+</section>
+<section id="p109">
+<h3>4.3.2 显示四季占比数据 P109<a class="headerlink" href="#p109" title="永久链接至标题"></a></h3>
+<ul class="simple">
+<li><p>示例代码</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="n">run</span> <span class="s2">&quot;Font_Style.py&quot;</span>
+
+<span class="n">SeasonCount</span> <span class="o">=</span> <span class="n">BikeDataFrame</span><span class="p">[</span><span class="s1">&#39;season&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="c1">#选取season属性数据，同时进行计数</span>
+<span class="n">piefig</span> <span class="o">=</span> <span class="n">SeasonCount</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">pie</span><span class="p">(</span><span class="n">title</span> <span class="o">=</span><span class="s2">&quot;共享单车四季租用数量占比图&quot;</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span><span class="mi">7</span><span class="p">),</span><span class="n">autopct</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%1.1f%%</span><span class="s1">&#39;</span><span class="p">,</span><span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>输出结果<br>
+<img alt="png" src="_images/4-4.png" /></p></li>
+</ul>
+<ul class="simple">
+<li><p>代码解析<br></p></li>
+</ul>
+<p><code class="docutils literal notranslate"><span class="pre">SeasonCount</span> <span class="pre">=</span> <span class="pre">BikeDataFrame['season'].value_counts()</span></code> <br></p>
+<blockquote>
+<div><p><strong>BikeDataFrame[’season’]</strong>: 获取数据中season这一列数据<br>
+<strong>value_counts()</strong>: 给相同数值的数据进行分类计数<br>
+<strong>SeasonCount</strong>: 最后将统计好的数据赋值给“SeasonCount”对象，类型为Series(属于pandas)</p>
+</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">SeasonCount.plot.pie(title</span> <span class="pre">=&quot;共享单车四季租用数量占比&quot;,figsize=(8,8),autopct</span> <span class="pre">=</span> <span class="pre">'%1.1f%%',ylabel=&quot;&quot;)</span></code><br></p>
+<blockquote>
+<div><p><strong>.plot.pie</strong>: 直接调用pandas自带的plot画图功能函数下的画饼图（pie）功能<br>
+<strong>title</strong>: 图表标题<br>
+<strong>figsize</strong>: 图表大小（单位：英寸）<br>
+<strong>autopct</strong>: 显示所占百分比<br>
+<strong>ylabel</strong>: y轴显示标签，这里我们使用空字符，不显示</p>
+</div></blockquote>
+</section>
+<section id="id8">
+<h3>4.3.3 结论<a class="headerlink" href="#id8" title="永久链接至标题"></a></h3>
+<p>直观数据结论：我们可以发现春秋两季租用人数占比较多，占比数据相近，且租用人数较多。冬夏两季租用占比较少，租用人数较少，尤其冬天占比只有夏天的一般。<br>
+分析：春、秋气候适宜，适合出行。冬、夏气候较为极端，会影响出行人数。</p>
+</section>
+</section>
+<section id="id9">
+<h2>4.4 不同天气情况下共享单车的租用数量<a class="headerlink" href="#id9" title="永久链接至标题"></a></h2>
+<p>前面我们通过对季节数据进行了分析，接下来我们在观察一下不同天气对出行的影响，从而导致对共享单车的租赁数量的影响。</p>
+<section id="id10">
+<h3>4.4.1 导入数据初始化代码<a class="headerlink" href="#id10" title="永久链接至标题"></a></h3>
+<p>在上一章节中我们讨论过因为季节数据的关系，我们对数据只是初步处理。但是这里我们需要天气数据，所以对数据进行了完善处理，可以直接沿用3.2.6中的代码，我们直接使用魔法命令来调用。代码如下所示：</p>
+<ul class="simple">
+<li><p>示例代码</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="n">run</span> <span class="n">import_data_CleanUP</span><span class="o">.</span><span class="n">py</span>
+<span class="c1">#使用魔法命令，导入清洗过的数据数据</span>
+</pre></div>
+</div>
+</section>
+<section id="p108">
+<h3>4.4.2 显示天气数据 P108<a class="headerlink" href="#p108" title="永久链接至标题"></a></h3>
+<ul class="simple">
+<li><p>示例代码</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="n">run</span> <span class="s2">&quot;Font_Style.py&quot;</span>
+
+<span class="n">WeatherData</span> <span class="o">=</span> <span class="n">BikeDataFrame</span><span class="p">[</span><span class="s1">&#39;weather&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span> <span class="c1">#统计不同天气情况下租赁的车辆</span>
+<span class="n">WeatherData</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">title</span> <span class="o">=</span><span class="s2">&quot;不同天气下共享单车租赁数量对比&quot;</span><span class="p">,</span><span class="n">xlabel</span> <span class="o">=</span> <span class="s2">&quot;weather&quot;</span><span class="p">,</span><span class="n">ylabel</span> <span class="o">=</span> <span class="s2">&quot;amount&quot;</span><span class="p">,</span>
+                     <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span><span class="mi">10</span><span class="p">),</span><span class="n">grid</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="c1">#画柱状图</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>输出结果<br>
+<img alt="png" src="_images/4-5.png" /></p></li>
+</ul>
+<ul class="simple">
+<li><p>代码解析<br>
+<code class="docutils literal notranslate"><span class="pre">WeatherData.plot.bar(title</span> <span class="pre">=&quot;不同天气情况下单车租赁情况对比&quot;,xlabel</span> <span class="pre">=</span> <span class="pre">&quot;weather&quot;,ylabel</span> <span class="pre">=</span> <span class="pre">&quot;amount&quot;,figsize=(20,10),grid</span> <span class="pre">=</span> <span class="pre">True)</span></code><br></p></li>
+</ul>
+<blockquote>
+<div><p><strong>xlabel、ylabel</strong>: 表示设定对应轴上的标签<br>
+<strong>grid</strong>: 表示显示网格<br></p>
+</div></blockquote>
+</section>
+<section id="id11">
+<h3>4.4.3 结论<a class="headerlink" href="#id11" title="永久链接至标题"></a></h3>
+<p>通过图表我们不难发现，只要是晴好天气租赁数量比较多，下雨、大雾、下雪等影响骑行出行的天气，租赁车辆的人集聚减少。因为这些天气对骑行有一定程度的影响。</p>
+</section>
+<section id="id12">
+<h3>4.4.4 思考题<a class="headerlink" href="#id12" title="永久链接至标题"></a></h3>
+<p>我们从上面的数据中可以发现一些问题，比如sunny数据有两个，是首字母大小写不一样导致，还有sunny的天气类型有很多，rain的天气类型有很多，还有snow的类型也有很多，我们是否需要这么细分天气？是不是需要将这些天气数据再“清洗一下”？并且同时将天气数据分为大类别？这样便于我们在宏观层面分析，当然也可以保留这些数据，有可能在具体情况下也需要进行具体问题分析，比如rain的天气情况下，不同的rain对单车租赁的影响也是有不同的，这时候就又需要我们细化去分析。那么，这个问题就留给读者去思考了。</p>
+</section>
+</section>
+<section id="id13">
+<h2>4.5 某一个月中温度对共享单车租用影响（以6月份数据为例）<a class="headerlink" href="#id13" title="永久链接至标题"></a></h2>
+<section id="id14">
+<h3>4.5.1 查看是否有异常数据<a class="headerlink" href="#id14" title="永久链接至标题"></a></h3>
+<p>前面我们已经导入过清洗好的数据了，这里我们可以直接调用<code class="docutils literal notranslate"><span class="pre">BikeDataFrame</span></code>进行数据分析。在清洗完的数据中，6月份的数据比较完整，所以我们这里使用6月份的数据进行分析。同时这里我们需要注意，在统计分析前，我们需要显查看一下是否有异常值的数据，这样以便于我们对后面的数据分析有一个更加好的决断。</p>
+<ul class="simple">
+<li><p>示例代码</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="n">run</span> <span class="n">import_data_CleanUP</span><span class="o">.</span><span class="n">py</span>
+<span class="o">%</span><span class="n">run</span> <span class="n">Font_Style</span><span class="o">.</span><span class="n">py</span>
+<span class="c1">#使用魔法命令，导入清洗过的数据数据和设定好的格式参数</span>
+
+<span class="n">TempData</span> <span class="o">=</span> <span class="n">BikeDataFrame</span><span class="p">[</span><span class="n">BikeDataFrame</span><span class="p">[</span><span class="s1">&#39;month&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">6</span><span class="p">]</span> <span class="c1">#选取6月份数据。</span>
+<span class="n">TempData</span><span class="p">[</span><span class="s1">&#39;temp_value&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">TempData</span><span class="p">[</span><span class="s1">&#39;temp_value&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="nb">round</span><span class="p">)</span> <span class="c1">#整理温度数据，进行四舍五入</span>
+<span class="n">TempData</span><span class="p">[</span><span class="s1">&#39;temp_value&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">box</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">7</span><span class="p">),</span><span class="n">grid</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="c1">#调用一下箱图查看一下是否有异常数值</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>输出结果<br>
+<img alt="png" src="_images/4-6.png" /></p></li>
+</ul>
+<ul class="simple">
+<li><p>代码解析<br></p></li>
+</ul>
+<p><code class="docutils literal notranslate"><span class="pre">TempData['temp_value']</span> <span class="pre">=</span> <span class="pre">TempData['temp_value'].apply(round)</span></code><br></p>
+<blockquote>
+<div><p><strong>apply</strong>: 对选取的数据应用某一个功能函数<br>
+<strong>round</strong>: 对数据进行四舍五入，仅保留整数部分<br></p>
+</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">TempData['temp_value'].plot.box(figsize=(5,7))</span></code><br></p>
+<blockquote>
+<div><p><strong>plot.box()</strong>: 调用箱图功能<br></p>
+</div></blockquote>
+<ul class="simple">
+<li><p><strong>箱形图 P110</strong><br>
+能提供有关数据位置和分数情况的关键信息，尤其在比较不同特征时，更可表现其分散程度差异。图3.26标出了箱形图中每条线所表示的含义。箱形图利用数据中的五个统计量(最小值、下四分位数、中位数、上四分位数和最大值)来描述数据。四分位数也称为四分位点,是把所有数据由小到大排列并四等分后,处于三个分割点位置的数值。处在25%位置上的四分位数称为下四分位数,处在75%位置上的四分位数称为上四分位数,处在中间的四分位数即为中位数。利用箱形图,可以粗略地看出数据是否具有对称性以及数据分布的分散程度等信息,也可以用于对数据进行异常值检测。<br>
+如上图所示：</p></li>
+</ul>
+<blockquote>
+<div><p>最小值 : 16<br>
+下四分位数 : 20<br>
+中位数 : 22<br>
+上四分位数 : 25<br>
+最大值 : 32<br>
+异常值 : 35、37</p>
+</div></blockquote>
+</section>
+<section id="p107">
+<h3>4.5.2 显示温度数据 P107<a class="headerlink" href="#p107" title="永久链接至标题"></a></h3>
+<p>从上面的箱图结果我们可以看到，有35度和37度两个异常值，那么在接下来的数据分析中，我们就需要排除这两个数据选项。同时一半数据集中在20-25度左右，这是需要我们注意观察的数据区域。下面我们将对每一个温度进行计数统计，来观察温度与租借量的关系。</p>
+<ul class="simple">
+<li><p>示例代码</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="n">run</span> <span class="s2">&quot;Font_Style.py&quot;</span>
+
+<span class="n">TempCount</span> <span class="o">=</span> <span class="n">TempData</span><span class="p">[</span><span class="s1">&#39;temp_value&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">sort_index</span><span class="p">()</span> <span class="c1">#统计不同温度下租赁单车的数据,结果并按照温度排序</span>
+<span class="n">Tempfig</span> <span class="o">=</span> <span class="n">TempCount</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s2">&quot;6月份温度变化与单车租用数量趋势图&quot;</span> <span class="p">,</span><span class="n">xlabel</span> <span class="o">=</span> <span class="s2">&quot;Temperature(C)&quot;</span><span class="p">,</span><span class="n">ylabel</span> <span class="o">=</span> <span class="s1">&#39;Bike Sum&#39;</span><span class="p">,</span>
+               <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span><span class="mi">10</span><span class="p">),</span><span class="n">grid</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span><span class="n">xticks</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">39</span><span class="p">))</span> <span class="c1">#将数据结果用折线图显示</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>输出结果<br><br /><img alt="png" src="_images/4-7.png" /></p></li>
+</ul>
+<ul class="simple">
+<li><p>代码解析<br>
+<code class="docutils literal notranslate"><span class="pre">TempCount.plot(title=&quot;6月份温度变化与单车租用数量趋势图&quot;</span> <span class="pre">,figsize=(20,10),grid</span> <span class="pre">=</span> <span class="pre">True,xticks</span> <span class="pre">=</span> <span class="pre">range(15,39))</span></code></p></li>
+</ul>
+<blockquote>
+<div><p><strong>plot</strong> 默认plot为折线图<br>
+<strong>xticks</strong> 表示x轴坐标开始与结束数值，可以用range函数赋值</p>
+</div></blockquote>
+</section>
+<section id="id15">
+<h3>4.5.3 结论<a class="headerlink" href="#id15" title="永久链接至标题"></a></h3>
+<p>17至26度这段区间温度比较适宜，单车租用量比较大，通过箱图和折线图都能反应这一点。舒适的温度让人更加倾向租用共享单车，但是高温和较低的温度会降低用户租用单车的意愿。</p>
+</section>
+</section>
+<section id="id16">
+<h2>4.6 某月每小时单车租用情况（以7月份数据为例）练习<a class="headerlink" href="#id16" title="永久链接至标题"></a></h2>
+<ul class="simple">
+<li><p>示例代码</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="n">run</span> <span class="n">import_data_CleanUP</span><span class="o">.</span><span class="n">py</span>
+<span class="o">%</span><span class="n">run</span> <span class="n">Font_Style</span><span class="o">.</span><span class="n">py</span>
+<span class="c1">#使用魔法命令，导入清洗过的数据数据和设定好的格式参数</span>
+
+<span class="n">HourData</span> <span class="o">=</span> <span class="n">BikeDataFrame</span><span class="p">[</span><span class="n">BikeDataFrame</span><span class="p">[</span><span class="s1">&#39;month&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">7</span><span class="p">]</span> <span class="c1">#选取7月份数据。</span>
+<span class="n">HourCount</span> <span class="o">=</span> <span class="n">HourData</span><span class="p">[</span><span class="s1">&#39;hour&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">sort_index</span><span class="p">()</span>
+<span class="n">hourfig</span> <span class="o">=</span> <span class="n">HourCount</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s2">&quot;7月每小时共享单车流量趋势图&quot;</span> <span class="p">,</span><span class="n">xlabel</span> <span class="o">=</span> <span class="s2">&quot;Hour&quot;</span><span class="p">,</span><span class="n">ylabel</span> <span class="o">=</span> <span class="s1">&#39;Bike Sum&#39;</span><span class="p">,</span>
+               <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span><span class="mi">10</span><span class="p">),</span><span class="n">grid</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span><span class="n">xticks</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">24</span><span class="p">))</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>输出结果<br><br /><img alt="png" src="_images/4-8.png" /></p></li>
+</ul>
+<ul class="simple">
+<li><p>结论<br></p></li>
+</ul>
+<ol class="simple">
+<li><p>上午时段租赁小高峰出现在6-8点，之后回落一些。</p></li>
+<li><p>9-15是一个平缓期，但仍然有很大的需求量。</p></li>
+<li><p>16-19点是晚高峰，单车需求量达到最大。<br>
+根据上述三组分析我们可以得出，早上到中午大家出行时间较为分散，单车需求量一直维持在<strong>5千辆</strong>左右，到了晚高峰单车需求量急剧增加，是一天中最大需求量(<em>17点到达近1万辆</em>)，这个时间段是需要重点关注。</p></li>
+</ol>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="页脚">
+        <a href="3.%E6%95%B0%E6%8D%AE%E5%87%86%E5%A4%87.html" class="btn btn-neutral float-left" title="3.数据准备" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
+        <a href="5.%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%8A%A5%E5%91%8A.html" class="btn btn-neutral float-right" title="5.数据分析报告" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; 版权所有 2023, 老李Init_Lee.</p>
+  </div>
+
+  利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用的 
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
+    由 <a href="https://readthedocs.org">Read the Docs</a> 开发.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

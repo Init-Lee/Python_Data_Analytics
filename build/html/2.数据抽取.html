@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh-CN" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>2.数据抽取（采集、获取方式） &mdash; Python数据分析入门（简易版） V 1.0 文档</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/sg_gallery.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/translations.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="author" title="关于这些文档" href="about.html" />
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="搜索" href="search.html" />
+    <link rel="next" title="3.数据准备" href="3.%E6%95%B0%E6%8D%AE%E5%87%86%E5%A4%87.html" />
+    <link rel="prev" title="1.问题定义——共享单车需求数据分析" href="1.%E9%97%AE%E9%A2%98%E5%AE%9A%E4%B9%89.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> Python数据分析入门（简易版）
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="搜索文档" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="导航菜单">
+              <p class="caption" role="heading"><span class="caption-text">目录:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="about.html">Python数据分析学习项目说明</a></li>
+<li class="toctree-l1"><a class="reference internal" href="0.%E5%BC%95%E8%A8%80.html">0.引言</a></li>
+<li class="toctree-l1"><a class="reference internal" href="1.%E9%97%AE%E9%A2%98%E5%AE%9A%E4%B9%89.html">1.问题定义——共享单车需求数据分析</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">2.数据抽取（采集、获取方式）</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id2">2.1 互联网数据采集</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#p84">2.1.1 获取网页 P84</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#p85">2.1.2 网页解析 P85</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">2.1.3 数据存储 P85</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id4">2.2 下载开源数据集（<em>本次活动数据集来源</em>）</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id5">2.2.1 数据内容说明</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id6">2.2.2 数据格式说明</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="3.%E6%95%B0%E6%8D%AE%E5%87%86%E5%A4%87.html">3.数据准备</a></li>
+<li class="toctree-l1"><a class="reference internal" href="4.%E6%95%B0%E6%8D%AE%E6%8E%A2%E7%B4%A2%E5%92%8C%E5%8F%AF%E8%A7%86%E5%8C%96.html">4.数据探索和可视化</a></li>
+<li class="toctree-l1"><a class="reference internal" href="5.%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%8A%A5%E5%91%8A.html">5.<em>数据分析报告</em></a></li>
+<li class="toctree-l1"><a class="reference internal" href="6.%E6%80%BB%E7%BB%93.html">6.总结</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="移动版导航菜单" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Python数据分析入门（简易版）</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="页面导航">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a></li>
+      <li class="breadcrumb-item active">2.数据抽取（采集、获取方式）</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/2.数据抽取.md.txt" rel="nofollow"> 查看页面源码</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<section id="id1">
+<h1>2.数据抽取（采集、获取方式）<a class="headerlink" href="#id1" title="永久链接至标题"></a></h1>
+<p>数据采集的方法有很多，目前较为广泛使用的传感器数据采集和互联网数据。<br></p>
+<ol class="simple">
+<li><p>传感数据采集<br>
+传感数据是由传感设备收集和测量的数据，传感设备可穿戴在用户身上，也可以设计在现实环境中。</p></p></li>
+<li><p>互联网数据采集<br>
+互联网数据采集是指利用互联网搜索引擎技术实现有针对性、行业性的数据抓取，并按照一定规则和筛选标准进行数据归类，最终形成数据库文件的一个过程。
+一般过程：获取网页、解析网页、保存数据。</p></li>
+<li><p>下载开源数据集<br>
+目前有些网站提供一些开源数据，无需用户通过数据抓取的方式，可以直接下载数据用于数据分析练习，如“0.5”章节中提到的相关开源数据网站。本次数据分析实验，也是通过这个方式进行数据获取。</p></li>
+</ol>
+<section id="id2">
+<h2>2.1 互联网数据采集<a class="headerlink" href="#id2" title="永久链接至标题"></a></h2>
+<section id="p84">
+<h3>2.1.1 获取网页 P84<a class="headerlink" href="#p84" title="永久链接至标题"></a></h3>
+<p>beautifulsoup使用参考文档<br>
+https://beautifulsoup.readthedocs.io/zh_CN/v4.4.0/index.html#id13</p>
+<ul class="simple">
+<li><p>示例代码</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://www.baidu.com/&quot;</span> <span class="c1">#网址赋值</span>
+<span class="n">html</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>       <span class="c1">#用GET方法获取网页数据</span>
+<span class="n">html</span><span class="o">.</span><span class="n">encoding</span> <span class="o">=</span> <span class="s2">&quot;utf-8&quot;</span>        <span class="c1">#设定网页编码方式：utf-8</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">html</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>  <span class="c1">#输出结果</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>输出结果</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>&lt;!DOCTYPE html&gt;
+&lt;!--STATUS OK--&gt;&lt;html&gt; &lt;head&gt;&lt;meta http-equiv=content-type content=text/html;charset=utf-8&gt;&lt;meta http-equiv=X-UA-Compatible content=IE=Edge&gt;&lt;meta content=always name=referrer&gt;&lt;link rel=stylesheet type=text/css href=https://ss1.bdstatic.com/5eN1bjq8AAUYm2zgoY3K/r/www/cache/bdorz/baidu.min.css&gt;&lt;title&gt;百度一下，你就知道&lt;/title&gt;&lt;/head&gt; &lt;body link=#0000cc&gt; &lt;div id=wrapper&gt; &lt;div id=head&gt; &lt;div class=head_wrapper&gt; &lt;div class=s_form&gt; &lt;div class=s_form_wrapper&gt; &lt;div id=lg&gt; &lt;img hidefocus=true src=//www.baidu.com/img/bd_logo1.png width=270 height=129&gt; &lt;/div&gt; &lt;form id=form name=f action=//www.baidu.com/s class=fm&gt; &lt;input type=hidden name=bdorz_come value=1&gt; &lt;input type=hidden name=ie value=utf-8&gt; &lt;input type=hidden name=f value=8&gt; &lt;input type=hidden name=rsv_bp value=1&gt; &lt;input type=hidden name=rsv_idx value=1&gt; &lt;input type=hidden name=tn value=baidu&gt;&lt;span class=&quot;bg s_ipt_wr&quot;&gt;&lt;input id=kw name=wd class=s_ipt value maxlength=255 autocomplete=off autofocus=autofocus&gt;&lt;/span&gt;&lt;span class=&quot;bg s_btn_wr&quot;&gt;&lt;input type=submit id=su value=百度一下 class=&quot;bg s_btn&quot; autofocus&gt;&lt;/span&gt; &lt;/form&gt; &lt;/div&gt; &lt;/div&gt; &lt;div id=u1&gt; &lt;a href=http://news.baidu.com name=tj_trnews class=mnav&gt;新闻&lt;/a&gt; &lt;a href=https://www.hao123.com name=tj_trhao123 class=mnav&gt;hao123&lt;/a&gt; &lt;a href=http://map.baidu.com name=tj_trmap class=mnav&gt;地图&lt;/a&gt; &lt;a href=http://v.baidu.com name=tj_trvideo class=mnav&gt;视频&lt;/a&gt; &lt;a href=http://tieba.baidu.com name=tj_trtieba class=mnav&gt;贴吧&lt;/a&gt; &lt;noscript&gt; &lt;a href=http://www.baidu.com/bdorz/login.gif?login&amp;amp;tpl=mn&amp;amp;u=http%3A%2F%2Fwww.baidu.com%2f%3fbdorz_come%3d1 name=tj_login class=lb&gt;登录&lt;/a&gt; &lt;/noscript&gt; &lt;script&gt;document.write(&#39;&lt;a href=&quot;http://www.baidu.com/bdorz/login.gif?login&amp;tpl=mn&amp;u=&#39;+ encodeURIComponent(window.location.href+ (window.location.search === &quot;&quot; ? &quot;?&quot; : &quot;&amp;&quot;)+ &quot;bdorz_come=1&quot;)+ &#39;&quot; name=&quot;tj_login&quot; class=&quot;lb&quot;&gt;登录&lt;/a&gt;&#39;);
+&lt;/script&gt; &lt;a href=//www.baidu.com/more/ name=tj_briicon class=bri style=&quot;display: block;&quot;&gt;更多产品&lt;/a&gt; &lt;/div&gt; &lt;/div&gt; &lt;/div&gt; &lt;div id=ftCon&gt; &lt;div id=ftConw&gt; &lt;p id=lh&gt; &lt;a href=http://home.baidu.com&gt;关于百度&lt;/a&gt; &lt;a href=http://ir.baidu.com&gt;About Baidu&lt;/a&gt; &lt;/p&gt; &lt;p id=cp&gt;&amp;copy;2017&amp;nbsp;Baidu&amp;nbsp;&lt;a href=http://www.baidu.com/duty/&gt;使用百度前必读&lt;/a&gt;&amp;nbsp; &lt;a href=http://jianyi.baidu.com/ class=cp-feedback&gt;意见反馈&lt;/a&gt;&amp;nbsp;京ICP证030173号&amp;nbsp; &lt;img src=//www.baidu.com/img/gs.gif&gt; &lt;/p&gt; &lt;/div&gt; &lt;/div&gt; &lt;/div&gt; &lt;/body&gt; &lt;/html&gt;
+</pre></div>
+</div>
+</section>
+<section id="p85">
+<h3>2.1.2 网页解析 P85<a class="headerlink" href="#p85" title="永久链接至标题"></a></h3>
+<p>在2.1中我们看到已经可以获取到网页的数据，但是数据比较杂乱，这时候我们需要专门的工具对这些数据进行<strong>整理分析</strong>。</p>
+<ul class="simple">
+<li><p>示例代码</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#整理网页</span>
+<span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">from</span> <span class="nn">bs4</span> <span class="kn">import</span> <span class="n">BeautifulSoup</span>
+
+<span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://www.baidu.com&quot;</span>  <span class="c1">#网址赋值</span>
+<span class="n">html</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>       <span class="c1">#用GET方法获取网页数据</span>
+<span class="n">html</span><span class="o">.</span><span class="n">encoding</span> <span class="o">=</span> <span class="s2">&quot;utf-8&quot;</span>        <span class="c1">#设定网页编码方式：utf-8</span>
+
+<span class="c1">#---------new code here--------</span>
+<span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">html</span><span class="o">.</span><span class="n">text</span><span class="p">,</span><span class="s1">&#39;html.parser&#39;</span><span class="p">)</span>  <span class="c1">#建立soup对象，获取网页源代码</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">soup</span><span class="o">.</span><span class="n">prettify</span><span class="p">())</span>   <span class="c1">#将网页源代码排版整理输出，以便观察相关结果</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>输出结果</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>&lt;!DOCTYPE html&gt;
+&lt;!--STATUS OK--&gt;
+&lt;html&gt;
+ &lt;head&gt;
+  &lt;meta content=&quot;text/html;charset=utf-8&quot; http-equiv=&quot;content-type&quot;/&gt;
+  &lt;meta content=&quot;IE=Edge&quot; http-equiv=&quot;X-UA-Compatible&quot;/&gt;
+  &lt;meta content=&quot;always&quot; name=&quot;referrer&quot;/&gt;
+  &lt;link href=&quot;https://ss1.bdstatic.com/5eN1bjq8AAUYm2zgoY3K/r/www/cache/bdorz/baidu.min.css&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot;/&gt;
+  &lt;title&gt;
+   百度一下，你就知道
+  &lt;/title&gt;
+ &lt;/head&gt;
+ &lt;body link=&quot;#0000cc&quot;&gt;
+  &lt;div id=&quot;wrapper&quot;&gt;
+   &lt;div id=&quot;head&quot;&gt;
+    &lt;div class=&quot;head_wrapper&quot;&gt;
+     &lt;div class=&quot;s_form&quot;&gt;
+      &lt;div class=&quot;s_form_wrapper&quot;&gt;
+       &lt;div id=&quot;lg&quot;&gt;
+        &lt;img height=&quot;129&quot; hidefocus=&quot;true&quot; src=&quot;//www.baidu.com/img/bd_logo1.png&quot; width=&quot;270&quot;/&gt;
+       &lt;/div&gt;
+       &lt;form action=&quot;//www.baidu.com/s&quot; class=&quot;fm&quot; id=&quot;form&quot; name=&quot;f&quot;&gt;
+        &lt;input name=&quot;bdorz_come&quot; type=&quot;hidden&quot; value=&quot;1&quot;/&gt;
+        &lt;input name=&quot;ie&quot; type=&quot;hidden&quot; value=&quot;utf-8&quot;/&gt;
+        &lt;input name=&quot;f&quot; type=&quot;hidden&quot; value=&quot;8&quot;/&gt;
+        &lt;input name=&quot;rsv_bp&quot; type=&quot;hidden&quot; value=&quot;1&quot;/&gt;
+        &lt;input name=&quot;rsv_idx&quot; type=&quot;hidden&quot; value=&quot;1&quot;/&gt;
+        &lt;input name=&quot;tn&quot; type=&quot;hidden&quot; value=&quot;baidu&quot;/&gt;
+        &lt;span class=&quot;bg s_ipt_wr&quot;&gt;
+         &lt;input autocomplete=&quot;off&quot; autofocus=&quot;autofocus&quot; class=&quot;s_ipt&quot; id=&quot;kw&quot; maxlength=&quot;255&quot; name=&quot;wd&quot; value=&quot;&quot;/&gt;
+        &lt;/span&gt;
+        &lt;span class=&quot;bg s_btn_wr&quot;&gt;
+         &lt;input autofocus=&quot;&quot; class=&quot;bg s_btn&quot; id=&quot;su&quot; type=&quot;submit&quot; value=&quot;百度一下&quot;/&gt;
+        &lt;/span&gt;
+       &lt;/form&gt;
+      &lt;/div&gt;
+     &lt;/div&gt;
+     &lt;div id=&quot;u1&quot;&gt;
+      &lt;a class=&quot;mnav&quot; href=&quot;http://news.baidu.com&quot; name=&quot;tj_trnews&quot;&gt;
+       新闻
+      &lt;/a&gt;
+      &lt;a class=&quot;mnav&quot; href=&quot;https://www.hao123.com&quot; name=&quot;tj_trhao123&quot;&gt;
+       hao123
+      &lt;/a&gt;
+      &lt;a class=&quot;mnav&quot; href=&quot;http://map.baidu.com&quot; name=&quot;tj_trmap&quot;&gt;
+       地图
+      &lt;/a&gt;
+      &lt;a class=&quot;mnav&quot; href=&quot;http://v.baidu.com&quot; name=&quot;tj_trvideo&quot;&gt;
+       视频
+      &lt;/a&gt;
+      &lt;a class=&quot;mnav&quot; href=&quot;http://tieba.baidu.com&quot; name=&quot;tj_trtieba&quot;&gt;
+       贴吧
+      &lt;/a&gt;
+      &lt;noscript&gt;
+       &lt;a class=&quot;lb&quot; href=&quot;http://www.baidu.com/bdorz/login.gif?login&amp;amp;tpl=mn&amp;amp;u=http%3A%2F%2Fwww.baidu.com%2f%3fbdorz_come%3d1&quot; name=&quot;tj_login&quot;&gt;
+        登录
+       &lt;/a&gt;
+      &lt;/noscript&gt;
+      &lt;script&gt;
+       document.write(&#39;&lt;a href=&quot;http://www.baidu.com/bdorz/login.gif?login&amp;tpl=mn&amp;u=&#39;+ encodeURIComponent(window.location.href+ (window.location.search === &quot;&quot; ? &quot;?&quot; : &quot;&amp;&quot;)+ &quot;bdorz_come=1&quot;)+ &#39;&quot; name=&quot;tj_login&quot; class=&quot;lb&quot;&gt;登录&lt;/a&gt;&#39;);
+      &lt;/script&gt;
+      &lt;a class=&quot;bri&quot; href=&quot;//www.baidu.com/more/&quot; name=&quot;tj_briicon&quot; style=&quot;display: block;&quot;&gt;
+       更多产品
+      &lt;/a&gt;
+     &lt;/div&gt;
+    &lt;/div&gt;
+   &lt;/div&gt;
+   &lt;div id=&quot;ftCon&quot;&gt;
+    &lt;div id=&quot;ftConw&quot;&gt;
+     &lt;p id=&quot;lh&quot;&gt;
+      &lt;a href=&quot;http://home.baidu.com&quot;&gt;
+       关于百度
+      &lt;/a&gt;
+      &lt;a href=&quot;http://ir.baidu.com&quot;&gt;
+       About Baidu
+      &lt;/a&gt;
+     &lt;/p&gt;
+     &lt;p id=&quot;cp&quot;&gt;
+      ©2017 Baidu
+      &lt;a href=&quot;http://www.baidu.com/duty/&quot;&gt;
+       使用百度前必读
+      &lt;/a&gt;
+      &lt;a class=&quot;cp-feedback&quot; href=&quot;http://jianyi.baidu.com/&quot;&gt;
+       意见反馈
+      &lt;/a&gt;
+      京ICP证030173号
+      &lt;img src=&quot;//www.baidu.com/img/gs.gif&quot;/&gt;
+     &lt;/p&gt;
+    &lt;/div&gt;
+   &lt;/div&gt;
+  &lt;/div&gt;
+ &lt;/body&gt;
+&lt;/html&gt;
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>抓取title属性示例代码<br>
+<strong>注意：一定要先运行上面代码！！再运行本行代码！！！！</strong><br></p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#使用select方法，抓取相关属性</span>
+<span class="n">select_data</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s2">&quot;title&quot;</span><span class="p">)</span>   <span class="c1">#这里我们选择title     </span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">select_data</span><span class="p">)</span>   <span class="c1">#输出抓取结果</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>输出结果</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>[&lt;title&gt;百度一下，你就知道&lt;/title&gt;]
+</pre></div>
+</div>
+</section>
+<section id="id3">
+<h3>2.1.3 数据存储 P85<a class="headerlink" href="#id3" title="永久链接至标题"></a></h3>
+<p>注意：一定要先运行上面代码！！再运行本行代码！！！！</p>
+<ul class="simple">
+<li><p>示例代码</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">time</span> <span class="c1">#导入时间库</span>
+
+<span class="sd">&#39;&#39;&#39;前期数据准备、文件路径、数据预处理&#39;&#39;&#39;</span>
+<span class="n">file_path</span> <span class="o">=</span> <span class="s1">&#39;./html_solve.txt&#39;</span>   <span class="c1">#文件路径</span>
+<span class="n">localtime</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">asctime</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">localtime</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()))</span><span class="c1">#加入时间戳</span>
+<span class="n">write_string</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">select_data</span><span class="p">)</span> <span class="o">+</span> <span class="n">localtime</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
+
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">write data 将数据写入文件</span>
+<span class="sd">    mode = &quot;a+&quot; 模式:</span>
+<span class="sd">    开一个文件用于读写。</span>
+<span class="sd">    如果该文件已存在，文件指针将会放在文件的结尾。文件打开时会是追加模式。</span>
+<span class="sd">    如果该文件不存在，创建新文件用于读写。</span>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="n">mode</span> <span class="o">=</span> <span class="s2">&quot;a+&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span> 
+    <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">write_string</span><span class="p">)</span>
+    <span class="n">file</span><span class="o">.</span><span class="n">close</span>
+<span class="c1">#end with</span>
+
+
+<span class="sd">&#39;&#39;&#39;open file to check data&#39;&#39;&#39;</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span> <span class="k">as</span> <span class="n">file_object</span><span class="p">:</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">file_object</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="c1">#end with</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>输出结果</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>[&lt;script&gt;document.write(&#39;&lt;a href=&quot;http://www.baidu.com/bdorz/login.gif?login&amp;tpl=mn&amp;u=&#39;+ encodeURIComponent(window.location.href+ (window.location.search === &quot;&quot; ? &quot;?&quot; : &quot;&amp;&quot;)+ &quot;bdorz_come=1&quot;)+ &#39;&quot; name=&quot;tj_login&quot; class=&quot;lb&quot;&gt;登录&lt;/a&gt;&#39;);
+[&lt;script&gt;document.write(&#39;&lt;a href=&quot;http://www.baidu.com/bdorz/login.gif?login&amp;tpl=mn&amp;u=&#39;+ encodeURIComponent(window.location.href+ (window.location.search === &quot;&quot; ? &quot;?&quot; : &quot;&amp;&quot;)+ &quot;bdorz_come=1&quot;)+ &#39;&quot; name=&quot;tj_login&quot; class=&quot;lb&quot;&gt;登录&lt;/a&gt;&#39;);
+                &lt;/script&gt;]Wed Nov 30 22:54:37 2022
+[&lt;script&gt;document.write(&#39;&lt;a href=&quot;http://www.baidu.com/bdorz/login.gif?login&amp;tpl=mn&amp;u=&#39;+ encodeURIComponent(window.location.href+ (window.location.search === &quot;&quot; ? &quot;?&quot; : &quot;&amp;&quot;)+ &quot;bdorz_come=1&quot;)+ &#39;&quot; name=&quot;tj_login&quot; class=&quot;lb&quot;&gt;登录&lt;/a&gt;&#39;);
+                &lt;/script&gt;]Wed Nov 30 22:56:27 2022
+[&lt;title&gt;百度一下，你就知道&lt;/title&gt;]Wed Nov 30 22:57:41 2022
+</pre></div>
+</div>
+</section>
+</section>
+<section id="id4">
+<h2>2.2 下载开源数据集（<em>本次活动数据集来源</em>）<a class="headerlink" href="#id4" title="永久链接至标题"></a></h2>
+<p>本次活动我们主要通过下载开源数据集的方式来获取数据，既然是通过网站上下载的数据集，那么我们就需要查看下载网站上给出的数据相关<em>内容说明</em>和<em>格式说明</em>，以便我们用正确的方式来打开和分析数据。<br></p>
+<ul class="simple">
+<li><p>如下图所示，这是某个网站上的开源数据，分别对数据内容和格式进行详细说明。
+<img alt="avatar" src="_images/2-1.png" /></p></li>
+</ul>
+<section id="id5">
+<h3>2.2.1 数据内容说明<a class="headerlink" href="#id5" title="永久链接至标题"></a></h3>
+<p>数据中包含某一年的某市某一区域内共享单车的每一次的租赁情况，期中包括时间、日期、月份、地点、天气等相关数据。<br></p>
+<ul class="simple">
+<li><p>数据总量：1509922条<br>
+<strong>数据样式如图所示：</strong><br>
+<img alt="avatar" src="_images/2-2.png" /></p></li>
+</ul>
+</section>
+<section id="id6">
+<h3>2.2.2 数据格式说明<a class="headerlink" href="#id6" title="永久链接至标题"></a></h3>
+<ul class="simple">
+<li><p>index 索引</p></li>
+<li><p>bike_id 车辆编号</p></li>
+<li><p>datetime 时间（格式：hh:mm:ss）</p></li>
+<li><p>date 日期</p></li>
+<li><p>month 月份</p></li>
+<li><p>season 季节</p></li>
+<li><p>workingday 工作日（是：Yes，否：No）</p></li>
+<li><p>localhost 所在位置</p></li>
+<li><p>weather 天气</p></li>
+<li><p>isdaytime 是否白天（白天：True，晚上：False）</p></li>
+<li><p>temp_value 温度数值</p></li>
+<li><p>temp_unit 温度单位</p></li>
+<li><p>wind_speed 风速</p></li>
+<li><p>wind_unit 风速单位</p></li>
+</ul>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="页脚">
+        <a href="1.%E9%97%AE%E9%A2%98%E5%AE%9A%E4%B9%89.html" class="btn btn-neutral float-left" title="1.问题定义——共享单车需求数据分析" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
+        <a href="3.%E6%95%B0%E6%8D%AE%E5%87%86%E5%A4%87.html" class="btn btn-neutral float-right" title="3.数据准备" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; 版权所有 2023, 老李Init_Lee.</p>
+  </div>
+
+  利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用的 
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
+    由 <a href="https://readthedocs.org">Read the Docs</a> 开发.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -30,7 +30,7 @@ release = 'V 1.0'
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
-extensions = ["myst_parser", #配置markdown文件
+extensions = ['recommonmark', #配置markdown文件
               "nbsphinx", "sphinx_gallery.load_style" #配置jupyter
 ]
 
