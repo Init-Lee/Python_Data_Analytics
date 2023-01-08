@@ -43,7 +43,7 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="导航菜单">
               <p class="caption" role="heading"><span class="caption-text">目录:</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="about.html">Python数据分析学习项目说明</a></li>
+<li class="toctree-l1"><a class="reference internal" href="about.html">序言：Python数据分析学习项目说明</a></li>
 <li class="toctree-l1"><a class="reference internal" href="0.%E5%BC%95%E8%A8%80.html">0.引言</a></li>
 <li class="toctree-l1"><a class="reference internal" href="1.%E9%97%AE%E9%A2%98%E5%AE%9A%E4%B9%89.html">1.问题定义——共享单车需求数据分析</a></li>
 <li class="toctree-l1"><a class="reference internal" href="2.%E6%95%B0%E6%8D%AE%E6%8A%BD%E5%8F%96.html">2.数据抽取（采集、获取方式）</a></li>
@@ -138,18 +138,18 @@
 <h3>3.1.1 Pandas库介绍<a class="headerlink" href="#pandas" title="永久链接至标题"></a></h3>
 <ul class="simple">
 <li><p>Pandas简介<br>
-Pandas（发音：/ˈpændəz/）是 Python 语言开发的用于数据处理（data manipulation）和数据分析（data analysis）的第三方库。它擅长处理数字型数据和时间序列数据，当然文本型的数据也能轻松处理。<br></p></li>
+Pandas（发音：/ˈpændəz/）是 Python 语言开发的用于数据处理（data manipulation）和数据分析（data analysis）的第三方库。它擅长处理数字型数据和时间序列数据，当然文本型的数据也能轻松处理。<br><br></p></li>
 <li><p>名字来源<br>
-Pandas 的命名来源并非「熊猫」，而是来自于计量经济学中术语<strong>面板数据</strong>（Panel data），它是一种数据集的结构类型，具有横截面和时间序列两个维度。不过，我们不用必须了解它，它只是一种灵感、思想来源。<br></p></li>
+Pandas 的命名来源并非「熊猫」，而是来自于计量经济学中术语<strong>面板数据</strong>（Panel data），它是一种数据集的结构类型，具有横截面和时间序列两个维度。不过，我们不用必须了解它，它只是一种灵感、思想来源。<br><br></p></li>
 <li><p>用途<br>
 Pandas 对数据的处理是为数据的分析服务的，它所提供的各种数据处理方法、工具是基于数理统计学出发，包含了日常应用中的众多数据分析方法。我们学习它不光掌控它的相应操作技术，还要从它的处理思路中学习数据分析的理论和方法。<br>
 1.轻松应用在<strong>金融、统计、数理研究、物理计算、社会科学、工程等领域里</strong>；<br>
 2.<strong>实现复杂的处理逻辑</strong>，这些往往是 Excel 等工具无法处理的；<br>
-3.可以做到<strong>非常震撼的可视化</strong>，它对接众多的高颜值可视化库，可以实现动态数据交互效果。<br></p></li>
+3.可以做到<strong>非常震撼的可视化</strong>，它对接众多的高颜值可视化库，可以实现动态数据交互效果。<br><br></p></li>
 <li><p>适用的数据<br>
 Pandas 适合处理一个规正的二维数据（一维也可以，应用较少），即有 N 行 N 列，类似于 SQL 执行后产出的，或者 无合并单元格Excel 表格这样的数据。它可以把多个文件的数据合并在一起，如果结构不一样，也可以经过处理进行合并。<br>
 这里说的二维数据是指，像一个矩形的平面在横向和纵向被分隔成多个格子，每个格子里存放一个数据。下图是一个 pandas 中定义的数据框架：<br>
-<img alt="avatar" src="_images/3-1.png" /></p></li>
+<img alt="image" src="_images/3-1.png" /></p></li>
 </ul>
 </section>
 <section id="id3">
@@ -204,7 +204,7 @@ memory usage: 161.3+ MB
 <div><p>建立BikeDataFrame对象<br>
 通过read_csv方法来访问数据<br>
 encoding表示数据字符编码方式,这里我们使用<strong>gb2312</strong>国标码，该参数不写默认编码为：utf-8。可以尝试使用默认编码，系统会报错如下图所示：<br>
-<img alt="avatar" src="_images/3-2.png" /><br></p>
+<img alt="image" src="_images/3-2.png" /><br></p>
 </div></blockquote>
 <p><code class="docutils literal notranslate"><span class="pre">BikeDataFrame.info()</span></code><br></p>
 <blockquote>
@@ -229,7 +229,7 @@ encoding表示数据字符编码方式,这里我们使用<strong>gb2312</strong>
 </div>
 <ul class="simple">
 <li><p>输出结果<br>
-<img alt="avatar" src="_images/3-3.png" /><br></p></li>
+<img alt="image" src="_images/3-3.png" /><br></p></li>
 </ul>
 <ul class="simple">
 <li><p>代码解析<br>
@@ -242,10 +242,8 @@ encoding表示数据字符编码方式,这里我们使用<strong>gb2312</strong>
 <h3>3.1.4 检测与处理重复值 P88<a class="headerlink" href="#p88" title="永久链接至标题"></a></h3>
 <p>数据去掉重复数值这一步是我们在数据分析中经常会用到的，在某些特定的场景下需要去掉某些重复的数值。这里我们举例的就是对原始数据的处理，可能因为共享单车硬件的因素，比如在数据交换通信过程中，发生了通信异常，导致同一条数据被反复上传记录的情况时有发生。这里我们可以看到在6月份的时候，就有很多条在同一地点、同一个时间、同一天、同一个bike_ID的数据有多条记录。这个时候就需要我们使用<code class="docutils literal notranslate"><span class="pre">drop_duplicates()</span></code>功能函数来除去这些重复的数值。<br></p>
 <p><strong>当然，在数据除重的过程中，我们需要以下几个步骤：</strong></p>
-<ol class="simple">
-<li><p>观察重复数值的形态<br>
-在删除重复的数值之前，我们首先要了解到是什么数据重复了，主要重复的点在哪里，删除重复数据的时候需要哪些关键字，从而避免造成多删、误删、少删的情况出现。在这里我们可以看到，主要重复的数值关键字集中在“bike_id“、”datetime“、”date”、“localhost”这些上面。</p></li>
-</ol>
+<p>1.观察重复数值的形态<br>
+在删除重复的数值之前，我们首先要了解到是什么数据重复了，主要重复的点在哪里，删除重复数据的时候需要哪些关键字，从而避免造成多删、误删、少删的情况出现。在这里我们可以看到，主要重复的数值关键字集中在“bike_id“、”datetime“、”date”、“localhost”这些上面。</p>
 <ul class="simple">
 <li><p>示例代码</p></li>
 </ul>
@@ -254,12 +252,10 @@ encoding表示数据字符编码方式,这里我们使用<strong>gb2312</strong>
 </div>
 <ul class="simple">
 <li><p>输出结果<br>
-<img alt="avatar" src="_images/3-4.png" /><br></p></li>
+<img alt="image" src="_images/3-4.png" /><br></p></li>
 </ul>
-<ol class="simple">
-<li><p>统计重复的数值<br>
-当然，我们在看了重复数据之后，我们还需要统计一下重复的数值，可以通过<code class="docutils literal notranslate"><span class="pre">info()</span></code>功能来观察，发现共有2309条数据重复。（这里的重复指在已有数据的情况下，再出现的重复数据会被统计。）</p></li>
-</ol>
+<p>2.统计重复的数值<br>
+当然，我们在看了重复数据之后，我们还需要统计一下重复的数值，可以通过<code class="docutils literal notranslate"><span class="pre">info()</span></code>功能来观察，发现共有2309条数据重复。（这里的重复指在已有数据的情况下，再出现的重复数据会被统计。）</p>
 <ul class="simple">
 <li><p>示例代码</p></li>
 </ul>
@@ -292,11 +288,9 @@ dtypes: float64(1), int64(2), object(11)
 memory usage: 270.6+ KB
 </pre></div>
 </div>
-<ol class="simple">
-<li><p>删除重复的数值<br>
+<p>3.删除重复的数值<br>
 通过之前两个步骤的分析，我们已经锁定了“bike_id“、”datetime“、”date”、“localhost”这4个关键字。再进一步分析，同一辆车只可能在同一个出现在同一个地点。如下图所示，一辆单车在同一时间出现在了两个地点，所以这个时候我们在删除重复值的时候，不能将“localhost”考虑为除重关键字，不然会出现跨越空间的问题，本次数据集里面就有这么几条数据跨空间了，可以观察下图。<br>
-<img alt="avatar" src="_images/3-5.png" /><br></p></li>
-</ol>
+<img alt="image" src="_images/3-5.png" /><br></p>
 <ul class="simple">
 <li><p>示例代码</p></li>
 </ul>
@@ -309,10 +303,8 @@ memory usage: 270.6+ KB
 <code class="docutils literal notranslate"><span class="pre">keep</span></code>关键字，‘first’表示出现重复的数据，只保留第一个数据，其余删除。<br>
 <code class="docutils literal notranslate"><span class="pre">inplace</span></code>关键字，‘True’表示替换原表格数据，不返回处理好的新表格。</p></li>
 </ul>
-<ol class="simple">
-<li><p>查看祛重结果<br>
-删除掉重复的数值之后，查看一下相关数据结果。</p></li>
-</ol>
+<p>4.查看祛重结果<br>
+删除掉重复的数值之后，查看一下相关数据结果。</p>
 <ul class="simple">
 <li><p>示例代码</p></li>
 </ul>
@@ -345,9 +337,7 @@ dtypes: float64(1), int64(2), object(11)
 memory usage: 170.4+ MB
 </pre></div>
 </div>
-<ol class="simple">
-<li><p>检测一下是否有重复的数值</p></li>
-</ol>
+<p>5.检测一下是否有重复的数值</p>
 <ul class="simple">
 <li><p>示例代码</p></li>
 </ul>
@@ -383,10 +373,8 @@ memory usage: 0.0+ bytes
 </section>
 <section id="id5">
 <h3>3.1.5 检测与处理缺失值<a class="headerlink" href="#id5" title="永久链接至标题"></a></h3>
-<ol class="simple">
-<li><p>观察数据<br>
-在前面数据祛重的时候，我们已经通过info这个功能函数发现数据有缺失值（NaN），不过我们需要再观察一下数据样式，以确保这些缺失值是否会对我们后面的数据分析产生影响。根据1.2中的提出问题，我们需要通过天气数据来进行预测未来共享单车的租赁情况，所以数据中的天气数据至关重要。我们可以看到下表中的天气数据有缺失的情况，所以我们需要将缺失天气数据的单车信息剔除。</p></li>
-</ol>
+<p>1.观察数据<br>
+在前面数据祛重的时候，我们已经通过info这个功能函数发现数据有缺失值（NaN），不过我们需要再观察一下数据样式，以确保这些缺失值是否会对我们后面的数据分析产生影响。根据1.2中的提出问题，我们需要通过天气数据来进行预测未来共享单车的租赁情况，所以数据中的天气数据至关重要。我们可以看到下表中的天气数据有缺失的情况，所以我们需要将缺失天气数据的单车信息剔除。</p>
 <ul class="simple">
 <li><p>示例代码</p></li>
 </ul>
@@ -395,13 +383,11 @@ memory usage: 0.0+ bytes
 </div>
 <ul class="simple">
 <li><p>输出结果<br>
-<img alt="avatar" src="_images/3-6.png" /><br></p></li>
+<img alt="image" src="_images/3-6.png" /><br></p></li>
 </ul>
-<ol class="simple">
-<li><p>删除数据<br>
+<p>2.删除数据<br>
 下图是我们刚导入数据时候显示的信息，上面我们说到要删除没有天气数据的单车数据，我们这里可以看到基本上缺失的都是天气数据（天气、风速、温度等），同时date数据也有两条缺失，所以我们这里直接选择将包含缺失值（NaN）的数据直接删除，不在分类进行讨论删除。<br>
-<img alt="avatar" src="_images/3-7-1.png" /><br></p></li>
-</ol>
+<img alt="image" src="_images/3-7-1.png" /><br></p>
 <ul class="simple">
 <li><p>示例代码</p></li>
 </ul>
@@ -411,7 +397,7 @@ memory usage: 0.0+ bytes
 </div>
 <ul class="simple">
 <li><p>输出结果<br>
-<img alt="avatar" src="_images/3-7.png" /><br></p></li>
+<img alt="image" src="_images/3-7.png" /><br></p></li>
 </ul>
 <ul>
 <li><p>代码解析<br>
@@ -420,10 +406,8 @@ memory usage: 0.0+ bytes
 <p>最后用<code class="docutils literal notranslate"><span class="pre">head</span></code>函数观察一下删除好的数据情况，这里我们可以看到天气数据都已经在表中显示了。</p>
 </li>
 </ul>
-<ol class="simple">
-<li><p>观察处理后的数据<br>
-最后我们还是要通过<code class="docutils literal notranslate"><span class="pre">info()</span></code>函数再观察一下整体数据，从结果来看数据初步整理已经完成，缺失数值已经删除，所有数据均以对齐，共计162424条数据可以分析。这时候我们可以和刚刚导入的数据进行对比一下，发现数据少了将近1/10，<strong>这就是导入数据后初步处理的重要性</strong>。</p></li>
-</ol>
+<p>3.观察处理后的数据<br>
+最后我们还是要通过<code class="docutils literal notranslate"><span class="pre">info()</span></code>函数再观察一下整体数据，从结果来看数据初步整理已经完成，缺失数值已经删除，所有数据均以对齐，共计162424条数据可以分析。这时候我们可以和刚刚导入的数据进行对比一下，发现数据少了将近1/10，<strong>这就是导入数据后初步处理的重要性</strong>。</p>
 <ul class="simple">
 <li><p>示例代码</p></li>
 </ul>
@@ -504,7 +488,7 @@ dtypes: float64(1), int64(2), object(11)
 memory usage: 18.6+ MB
 </pre></div>
 </div>
-<p><img alt="avatar" src="_images/3-8.png" /><br></p>
+<p><img alt="image" src="_images/3-8.png" /><br></p>
 </section>
 </section>
 <section id="id7">
@@ -516,12 +500,12 @@ memory usage: 18.6+ MB
 <p>但事与愿违，我们得到的数据还是有一些错误数据存在，我们可以通过系统报错来得知竟然有时间超过了<code class="docutils literal notranslate"><span class="pre">23:59:59</span></code>，所以这里需要把“datetime”数据整理一下。<br></p>
 <blockquote>
 <div><p><strong>代码运行后报错内容：</strong><br>
-<img alt="avatar" src="_images/3-9.png" /><br></p>
+<img alt="image" src="_images/3-9.png" /><br></p>
 </div></blockquote>
 <p>同时,我们还发现另一个问题，就是‘datetime’数据长度不一。有的格式为<code class="docutils literal notranslate"><span class="pre">hh:mm:ss</span></code>，有的格式为<code class="docutils literal notranslate"><span class="pre">(h)h:mm:ss</span></code>，即小时位置的两位时间数中如果高位数为0，结果中就省略了，这也会为我们后期数据处理带来麻烦。<br></p>
 <blockquote>
 <div><p><strong>不符合格式的时间数据：</strong><br>
-<img alt="avatar" src="_images/3-10.png" /><br></p>
+<img alt="image" src="_images/3-10.png" /><br></p>
 </div></blockquote>
 <section id="id8">
 <h3>3.2.1 导入数据并初步处理<a class="headerlink" href="#id8" title="永久链接至标题"></a></h3>
@@ -540,12 +524,6 @@ memory usage: 18.6+ MB
 <span class="n">BikeDataFrame</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">axis</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span><span class="n">inplace</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="c1">#删除空值数据</span>
 </pre></div>
 </div>
-<ul class="simple">
-<li><p>输出结果<br></p></li>
-</ul>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Overwriting</span> <span class="n">import_data_with_dropDup_dropna</span><span class="o">.</span><span class="n">py</span>
-</pre></div>
-</div>
 </section>
 <section id="id9">
 <h3>3.2.2 查看不符合条件的时间数据<a class="headerlink" href="#id9" title="永久链接至标题"></a></h3>
@@ -559,7 +537,7 @@ memory usage: 18.6+ MB
 </div>
 <ul class="simple">
 <li><p>输出结果<br>
-<img alt="avatar" src="_images/3-11.png" /><br></p></li>
+<img alt="image" src="_images/3-11.png" /><br></p></li>
 </ul>
 </section>
 <section id="id10">
@@ -591,7 +569,7 @@ memory usage: 18.6+ MB
 </div>
 <ul class="simple">
 <li><p>输出结果<br>
-<img alt="avatar" src="_images/3-12.png" /><br></p></li>
+<img alt="image" src="_images/3-12.png" /><br></p></li>
 <li><p>示例代码(检验处理后结果)</p></li>
 </ul>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#最后检验一下是否有不符合条件的数据，我们可以看到结果是没有</span>
@@ -600,7 +578,7 @@ memory usage: 18.6+ MB
 </div>
 <ul class="simple">
 <li><p>输出结果<br>
-<img alt="avatar" src="_images/3-13.png" /><br></p></li>
+<img alt="image" src="_images/3-13.png" /><br></p></li>
 </ul>
 <ul class="simple">
 <li><p>结论<br>
@@ -617,9 +595,9 @@ memory usage: 18.6+ MB
 <p>在前面显示数据结果的时候，笔者还发现一个问题，就是<code class="docutils literal notranslate"><span class="pre">temp_vlaue</span></code>和<code class="docutils literal notranslate"><span class="pre">wind_speed</span></code>应该都是<code class="docutils literal notranslate"><span class="pre">float</span></code>类型的。可是导入数据后只有后者类型正确，前者系统还是识别成<code class="docutils literal notranslate"><span class="pre">object</span></code>类型，这就说明数据有问题。经过一番探查，在对<code class="docutils literal notranslate"><span class="pre">temp_vlaue</span></code>使用<code class="docutils literal notranslate"><span class="pre">BikeDataFrame['temp_value'].astype('float')</span></code>这行转换代码系统报错了,说无法对’#VALUE!’这个字符串数值进行转换。那么这里我们就可以初步得到一个信息，就是<code class="docutils literal notranslate"><span class="pre">temp_vlaue</span></code>这一列的数据有异样。<br></p>
 <blockquote>
 <div><p><strong>显示数据结果的异样</strong><br>
-<img alt="avatar" src="_images/3-14.png" /><br>
+<img alt="image" src="_images/3-14.png" /><br>
 <strong>调用代码后的报错</strong><br>
-<img alt="avatar" src="_images/3-14-1.png" /><br></p>
+<img alt="image" src="_images/3-14-1.png" /><br></p>
 </div></blockquote>
 <p>接下来，我们通过查找<code class="docutils literal notranslate"><span class="pre">temp_vlaue</span></code>列中是否包含<code class="docutils literal notranslate"><span class="pre">'#VALUE!'</span></code>的方法得到一下结果，我们可以从代码调试的结果中得到有<strong>19261</strong>条数据产生异常，那么这里我们就需要运用到一个新的功能函数来处理这个异样数据。</p>
 <ul class="simple">
@@ -630,7 +608,7 @@ memory usage: 18.6+ MB
 </div>
 <ul class="simple">
 <li><p>输出结果<br>
-<img alt="avatar" src="_images/3-15.png" /><br></p></li>
+<img alt="image" src="_images/3-15.png" /><br></p></li>
 </ul>
 </section>
 <section id="drop-value">
@@ -758,7 +736,7 @@ dtypes: float64(2), int64(3), object(10)
 memory usage: 17.5+ MB
 </pre></div>
 </div>
-<p><img alt="avatar" src="_images/3-16.png" /><br></p>
+<p><img alt="image" src="_images/3-16.png" /><br></p>
 </section>
 </section>
 </section>

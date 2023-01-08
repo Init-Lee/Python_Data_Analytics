@@ -11,21 +11,19 @@
 ### 3.1.1 Pandas库介绍 
 
 * Pandas简介<br>
-Pandas（发音：/ˈpændəz/）是 Python 语言开发的用于数据处理（data manipulation）和数据分析（data analysis）的第三方库。它擅长处理数字型数据和时间序列数据，当然文本型的数据也能轻松处理。<br>
-
+Pandas（发音：/ˈpændəz/）是 Python 语言开发的用于数据处理（data manipulation）和数据分析（data analysis）的第三方库。它擅长处理数字型数据和时间序列数据，当然文本型的数据也能轻松处理。<br><br>
 * 名字来源<br>
-Pandas 的命名来源并非「熊猫」，而是来自于计量经济学中术语**面板数据**（Panel data），它是一种数据集的结构类型，具有横截面和时间序列两个维度。不过，我们不用必须了解它，它只是一种灵感、思想来源。<br>
-
+Pandas 的命名来源并非「熊猫」，而是来自于计量经济学中术语**面板数据**（Panel data），它是一种数据集的结构类型，具有横截面和时间序列两个维度。不过，我们不用必须了解它，它只是一种灵感、思想来源。<br><br>
 * 用途<br>
 Pandas 对数据的处理是为数据的分析服务的，它所提供的各种数据处理方法、工具是基于数理统计学出发，包含了日常应用中的众多数据分析方法。我们学习它不光掌控它的相应操作技术，还要从它的处理思路中学习数据分析的理论和方法。<br>
     1.轻松应用在**金融、统计、数理研究、物理计算、社会科学、工程等领域里**；<br>
     2.**实现复杂的处理逻辑**，这些往往是 Excel 等工具无法处理的；<br>
-    3.可以做到**非常震撼的可视化**，它对接众多的高颜值可视化库，可以实现动态数据交互效果。<br>
-
+    3.可以做到**非常震撼的可视化**，它对接众多的高颜值可视化库，可以实现动态数据交互效果。<br><br>
 * 适用的数据<br>
 Pandas 适合处理一个规正的二维数据（一维也可以，应用较少），即有 N 行 N 列，类似于 SQL 执行后产出的，或者 无合并单元格Excel 表格这样的数据。它可以把多个文件的数据合并在一起，如果结构不一样，也可以经过处理进行合并。<br>
 这里说的二维数据是指，像一个矩形的平面在横向和纵向被分隔成多个格子，每个格子里存放一个数据。下图是一个 pandas 中定义的数据框架：<br>
-![avatar](./pic/3-1.png)
+![image](./pic/3-1.png)
+
 
 ### 3.1.2 导入数据并检查数据完整度
 
@@ -76,7 +74,7 @@ memory usage: 161.3+ MB
 >建立BikeDataFrame对象<br>
 通过read_csv方法来访问数据<br>
 encoding表示数据字符编码方式,这里我们使用**gb2312**国标码，该参数不写默认编码为：utf-8。可以尝试使用默认编码，系统会报错如下图所示：<br>
-![avatar](./pic/3-2.png)<br>
+![image](./pic/3-2.png)<br>
 
 `BikeDataFrame.info()`<br>
 >建立完“BikeDataFrame”对象之后，就可以通过各种**方法（功能函数）**来访问、修改、调取“BikeDataFrame”中的数据。**<br>
@@ -96,7 +94,7 @@ BikeDataFrame.head(10) #调用head功能查看数据具体情况
 ```
 
 - 输出结果<br>
-![avatar](./pic/3-3.png)<br>
+![image](./pic/3-3.png)<br>
 
 
 * 代码解析<br>
@@ -110,7 +108,7 @@ BikeDataFrame.head(10) #调用head功能查看数据具体情况
 
 **当然，在数据除重的过程中，我们需要以下几个步骤：**
 
-1. 观察重复数值的形态<br>
+1.观察重复数值的形态<br>
 在删除重复的数值之前，我们首先要了解到是什么数据重复了，主要重复的点在哪里，删除重复数据的时候需要哪些关键字，从而避免造成多删、误删、少删的情况出现。在这里我们可以看到，主要重复的数值关键字集中在“bike_id“、”datetime“、”date”、“localhost”这些上面。
 
 - 示例代码
@@ -118,10 +116,10 @@ BikeDataFrame.head(10) #调用head功能查看数据具体情况
 BikeDataFrame[BikeDataFrame.duplicated(keep = False)].sort_values(["bike_id","datetime","date"]).head(10)
 ```
 - 输出结果<br>
-![avatar](./pic/3-4.png)<br>
+![image](./pic/3-4.png)<br>
 
 
-2. 统计重复的数值<br>
+2.统计重复的数值<br>
 当然，我们在看了重复数据之后，我们还需要统计一下重复的数值，可以通过`info()`功能来观察，发现共有2309条数据重复。（这里的重复指在已有数据的情况下，再出现的重复数据会被统计。）
 
 - 示例代码
@@ -154,9 +152,9 @@ dtypes: float64(1), int64(2), object(11)
 memory usage: 270.6+ KB
 ```
 
-3. 删除重复的数值<br>
+3.删除重复的数值<br>
 通过之前两个步骤的分析，我们已经锁定了“bike_id“、”datetime“、”date”、“localhost”这4个关键字。再进一步分析，同一辆车只可能在同一个出现在同一个地点。如下图所示，一辆单车在同一时间出现在了两个地点，所以这个时候我们在删除重复值的时候，不能将“localhost”考虑为除重关键字，不然会出现跨越空间的问题，本次数据集里面就有这么几条数据跨空间了，可以观察下图。<br>
-![avatar](./pic/3-5.png)<br>
+![image](./pic/3-5.png)<br>
 
 - 示例代码
 ```python
@@ -168,7 +166,7 @@ BikeDataFrame.drop_duplicates(subset = ['bike_id','datetime','date'],  keep = 'f
 `keep`关键字，‘first’表示出现重复的数据，只保留第一个数据，其余删除。<br>
 `inplace`关键字，‘True’表示替换原表格数据，不返回处理好的新表格。
 
-4. 查看祛重结果<br>
+4.查看祛重结果<br>
 删除掉重复的数值之后，查看一下相关数据结果。
 
 - 示例代码
@@ -201,7 +199,7 @@ dtypes: float64(1), int64(2), object(11)
 memory usage: 170.4+ MB
 ```
 
-5. 检测一下是否有重复的数值
+5.检测一下是否有重复的数值
 
 - 示例代码
 ```python
@@ -234,7 +232,7 @@ memory usage: 0.0+ bytes
 
 ### 3.1.5 检测与处理缺失值 
 
-1. 观察数据<br>
+1.观察数据<br>
 在前面数据祛重的时候，我们已经通过info这个功能函数发现数据有缺失值（NaN），不过我们需要再观察一下数据样式，以确保这些缺失值是否会对我们后面的数据分析产生影响。根据1.2中的提出问题，我们需要通过天气数据来进行预测未来共享单车的租赁情况，所以数据中的天气数据至关重要。我们可以看到下表中的天气数据有缺失的情况，所以我们需要将缺失天气数据的单车信息剔除。
 
 - 示例代码
@@ -243,11 +241,11 @@ BikeDataFrame.head()
 ```
 
 - 输出结果<br>
-![avatar](./pic/3-6.png)<br>
+![image](./pic/3-6.png)<br>
 
-2. 删除数据<br>
+2.删除数据<br>
 下图是我们刚导入数据时候显示的信息，上面我们说到要删除没有天气数据的单车数据，我们这里可以看到基本上缺失的都是天气数据（天气、风速、温度等），同时date数据也有两条缺失，所以我们这里直接选择将包含缺失值（NaN）的数据直接删除，不在分类进行讨论删除。<br>
-![avatar](./pic/3-7-1.png)<br>
+![image](./pic/3-7-1.png)<br>
 
 - 示例代码
 ```python
@@ -256,7 +254,7 @@ BikeDataFrame.head()
 ```
 
 - 输出结果<br>
-![avatar](./pic/3-7.png)<br>
+![image](./pic/3-7.png)<br>
 
 
 * 代码解析<br>
@@ -266,7 +264,7 @@ BikeDataFrame.head()
     最后用`head`函数观察一下删除好的数据情况，这里我们可以看到天气数据都已经在表中显示了。
 
 
-3. 观察处理后的数据<br>
+3.观察处理后的数据<br>
 最后我们还是要通过`info()`函数再观察一下整体数据，从结果来看数据初步整理已经完成，缺失数值已经删除，所有数据均以对齐，共计162424条数据可以分析。这时候我们可以和刚刚导入的数据进行对比一下，发现数据少了将近1/10，**这就是导入数据后初步处理的重要性**。
 
 - 示例代码
@@ -343,7 +341,7 @@ Data columns (total 14 columns):
 dtypes: float64(1), int64(2), object(11)
 memory usage: 18.6+ MB
 ```
-![avatar](./pic/3-8.png)<br>
+![image](./pic/3-8.png)<br>
 
 
 ## 3.2 数据清洗(选学)**
@@ -353,12 +351,12 @@ memory usage: 18.6+ MB
 
 但事与愿违，我们得到的数据还是有一些错误数据存在，我们可以通过系统报错来得知竟然有时间超过了`23:59:59`，所以这里需要把“datetime”数据整理一下。<br>
 >**代码运行后报错内容：**<br>
-![avatar](./pic/3-9.png)<br>
+![image](./pic/3-9.png)<br>
 
 同时,我们还发现另一个问题，就是‘datetime’数据长度不一。有的格式为`hh:mm:ss`，有的格式为`(h)h:mm:ss`，即小时位置的两位时间数中如果高位数为0，结果中就省略了，这也会为我们后期数据处理带来麻烦。<br>
 
 >**不符合格式的时间数据：**<br>
-![avatar](./pic/3-10.png)<br>
+![image](./pic/3-10.png)<br>
 
 ### 3.2.1 导入数据并初步处理
 
@@ -376,10 +374,6 @@ BikeDataFrame = pd.read_csv(DataFilePath,encoding='gb2312') #建立BikeDataFrame
 BikeDataFrame.drop_duplicates(subset = ['bike_id','datetime','date'],  keep = 'first' , inplace = True) #删除重复的数据
 BikeDataFrame.dropna(axis = 0,inplace = True) #删除空值数据
 ```
-- 输出结果<br>
-```
-Overwriting import_data_with_dropDup_dropna.py
-```
 
 ### 3.2.2 查看不符合条件的时间数据
 
@@ -392,7 +386,7 @@ BikeDataFrame[(BikeDataFrame['datetime']>='24:00:00')|(BikeDataFrame['datetime']
 ```
 
 - 输出结果<br>
-![avatar](./pic/3-11.png)<br>
+![image](./pic/3-11.png)<br>
 
 ### 3.2.3 处理不符合条件的时间数据
 
@@ -420,7 +414,7 @@ BikeDataFrame.head()
 ```
 
 - 输出结果<br>
-![avatar](./pic/3-12.png)<br>
+![image](./pic/3-12.png)<br>
 
 
 - 示例代码(检验处理后结果)
@@ -430,7 +424,7 @@ BikeDataFrame[(BikeDataFrame['datetime']>='24:00:00')|(BikeDataFrame['datetime']
 ```
 
 - 输出结果<br>
-![avatar](./pic/3-13.png)<br>
+![image](./pic/3-13.png)<br>
 
 
 * 结论<br>
@@ -443,9 +437,9 @@ BikeDataFrame[(BikeDataFrame['datetime']>='24:00:00')|(BikeDataFrame['datetime']
 在前面显示数据结果的时候，笔者还发现一个问题，就是`temp_vlaue`和`wind_speed`应该都是`float`类型的。可是导入数据后只有后者类型正确，前者系统还是识别成`object`类型，这就说明数据有问题。经过一番探查，在对`temp_vlaue`使用`BikeDataFrame['temp_value'].astype('float')`这行转换代码系统报错了,说无法对'#VALUE!'这个字符串数值进行转换。那么这里我们就可以初步得到一个信息，就是`temp_vlaue`这一列的数据有异样。<br>
 
 >**显示数据结果的异样**<br>
-![avatar](./pic/3-14.png)<br>
+![image](./pic/3-14.png)<br>
 **调用代码后的报错**<br>
-![avatar](./pic/3-14-1.png)<br>
+![image](./pic/3-14-1.png)<br>
 
 接下来，我们通过查找`temp_vlaue`列中是否包含`'#VALUE!'`的方法得到一下结果，我们可以从代码调试的结果中得到有**19261**条数据产生异常，那么这里我们就需要运用到一个新的功能函数来处理这个异样数据。
 
@@ -455,7 +449,7 @@ BikeDataFrame[BikeDataFrame['temp_value']=='#VALUE!']
 ```
 
 - 输出结果<br>
-![avatar](./pic/3-15.png)<br>
+![image](./pic/3-15.png)<br>
 
 
 ### 3.2.5 使用drop函数删除包含'#VALUE!'数值的数据
@@ -574,4 +568,4 @@ Data columns (total 15 columns):
 dtypes: float64(2), int64(3), object(10)
 memory usage: 17.5+ MB
 ```
-![avatar](./pic/3-16.png)<br>
+![image](./pic/3-16.png)<br>

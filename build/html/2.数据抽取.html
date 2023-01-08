@@ -43,7 +43,7 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="导航菜单">
               <p class="caption" role="heading"><span class="caption-text">目录:</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="about.html">Python数据分析学习项目说明</a></li>
+<li class="toctree-l1"><a class="reference internal" href="about.html">序言：Python数据分析学习项目说明</a></li>
 <li class="toctree-l1"><a class="reference internal" href="0.%E5%BC%95%E8%A8%80.html">0.引言</a></li>
 <li class="toctree-l1"><a class="reference internal" href="1.%E9%97%AE%E9%A2%98%E5%AE%9A%E4%B9%89.html">1.问题定义——共享单车需求数据分析</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">2.数据抽取（采集、获取方式）</a><ul>
@@ -116,22 +116,11 @@
 </style>
 <section id="id1">
 <h1>2.数据抽取（采集、获取方式）<a class="headerlink" href="#id1" title="永久链接至标题"></a></h1>
-<p>数据采集的方法有很多，目前较为广泛使用的传感器数据采集和互联网数据。<br></p>
-<ol class="simple">
-<li><p>传感数据采集<br>
-传感数据是由传感设备收集和测量的数据，传感设备可穿戴在用户身上，也可以设计在现实环境中。</p></p></li>
-<li><p>互联网数据采集<br>
-互联网数据采集是指利用互联网搜索引擎技术实现有针对性、行业性的数据抓取，并按照一定规则和筛选标准进行数据归类，最终形成数据库文件的一个过程。
-一般过程：获取网页、解析网页、保存数据。</p></li>
-<li><p>下载开源数据集<br>
-目前有些网站提供一些开源数据，无需用户通过数据抓取的方式，可以直接下载数据用于数据分析练习，如“0.5”章节中提到的相关开源数据网站。本次数据分析实验，也是通过这个方式进行数据获取。</p></li>
-</ol>
 <section id="id2">
 <h2>2.1 互联网数据采集<a class="headerlink" href="#id2" title="永久链接至标题"></a></h2>
 <section id="p84">
 <h3>2.1.1 获取网页 P84<a class="headerlink" href="#p84" title="永久链接至标题"></a></h3>
-<p>beautifulsoup使用参考文档<br>
-https://beautifulsoup.readthedocs.io/zh_CN/v4.4.0/index.html#id13</p>
+<p>在网页获取中我们需要用到两个库，一个是requests来获得网页源代码（html），然后通过bs4库对源代码（html）进行解析。</p>
 <ul class="simple">
 <li><p>示例代码</p></li>
 </ul>
@@ -155,8 +144,12 @@ https://beautifulsoup.readthedocs.io/zh_CN/v4.4.0/index.html#id13</p>
 </section>
 <section id="p85">
 <h3>2.1.2 网页解析 P85<a class="headerlink" href="#p85" title="永久链接至标题"></a></h3>
-<p>在2.1中我们看到已经可以获取到网页的数据，但是数据比较杂乱，这时候我们需要专门的工具对这些数据进行<strong>整理分析</strong>。</p>
+<p>在2.1.1中我们看到已经可以获取到网页的数据，但是数据比较杂乱，这时候我们需要专门的工具对这些数据进行<strong>整理分析</strong>。</p>
 <ul class="simple">
+<li><p>beautifulsoup使用参考文档:<br>
+<a class="reference external" href="https://beautifulsoup.readthedocs.io/zh_CN/v4.4.0/index.html#id13">https://beautifulsoup.readthedocs.io/zh_CN/v4.4.0/index.html#id13</a><br></p></li>
+</ul>
+<br><ul class="simple">
 <li><p>示例代码</p></li>
 </ul>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#整理网页</span>
@@ -338,7 +331,7 @@ https://beautifulsoup.readthedocs.io/zh_CN/v4.4.0/index.html#id13</p>
 <p>本次活动我们主要通过下载开源数据集的方式来获取数据，既然是通过网站上下载的数据集，那么我们就需要查看下载网站上给出的数据相关<em>内容说明</em>和<em>格式说明</em>，以便我们用正确的方式来打开和分析数据。<br></p>
 <ul class="simple">
 <li><p>如下图所示，这是某个网站上的开源数据，分别对数据内容和格式进行详细说明。
-<img alt="avatar" src="_images/2-1.png" /></p></li>
+<img alt="image" src="_images/2-1.png" /></p></li>
 </ul>
 <section id="id5">
 <h3>2.2.1 数据内容说明<a class="headerlink" href="#id5" title="永久链接至标题"></a></h3>
@@ -346,7 +339,7 @@ https://beautifulsoup.readthedocs.io/zh_CN/v4.4.0/index.html#id13</p>
 <ul class="simple">
 <li><p>数据总量：1509922条<br>
 <strong>数据样式如图所示：</strong><br>
-<img alt="avatar" src="_images/2-2.png" /></p></li>
+<img alt="image" src="_images/2-2.png" /></p></li>
 </ul>
 </section>
 <section id="id6">

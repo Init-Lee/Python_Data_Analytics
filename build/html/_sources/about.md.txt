@@ -9,7 +9,7 @@
 ## 项目文件说明
 所有测试数据、练习代码、参考答案均在“source_code”文件夹中，可以自行下载<br>
 项目挂在GitHub上:[下载链接](https://github.com/Init-Lee/Python_Data_Analytics)
-1. jupyter文件（.ipynb）：为“Student-练习文件”和“Answer-参考答案”文件,请在jupyter环境下运行。
+1. jupyter文件（.ipynb）：“Student“-练习文件；“Answer“-参考答案文件,请在jupyter环境下运行，安装Anaconda即可，或者VS_Code中配置jupyter环境亦可。
 2. python文件（.py）：是工具文件，在程序中会运用到。
 3. 数据文件（.csv）：bike_data为本次数据分析文件，数据量较大。
 
