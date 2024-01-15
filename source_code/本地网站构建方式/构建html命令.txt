@@ -1,0 +1,9 @@
+
+1.打开你的命令行或终端。
+2.导航到存放你的 HTML 文件的文件夹。使用 cd 命令进入包含你的 HTML 文件(文件名最好为index)的目录。
+例如，如果你的文件夹名为 website 并且位于 C:\Users\YourName\Documents，则输入："cd C:\Users\YourName\Documents\website"
+3.启动 HTTP 服务器。在该目录下，运行以下命令来启动服务器。这将在端口 8080 上启动服务器。如果你不指定端口，它将默认使用端口 8000。
+命令：python -m http.server --bind 0.0.0.0 8080
+4.在浏览器中查看你的网页。打开网页浏览器，访问 http://localhost:8080。你应该可以看到你的 HTML 页面。
+
+**请确保你在命令行或终端中运行这些命令，而不是在 Python 脚本中。

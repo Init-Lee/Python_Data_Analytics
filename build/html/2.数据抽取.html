@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>2.数据抽取（采集、获取方式） &mdash; Python数据分析入门（简易版） V 1.0 文档</title>
+  <title>数据分析 &mdash; Python数据分析入门（简易版） V 1.0 文档</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/sg_gallery.css" type="text/css" />
@@ -46,16 +46,22 @@
 <li class="toctree-l1"><a class="reference internal" href="about.html">序言：Python数据分析学习项目说明</a></li>
 <li class="toctree-l1"><a class="reference internal" href="0.%E5%BC%95%E8%A8%80.html">0.引言</a></li>
 <li class="toctree-l1"><a class="reference internal" href="1.%E9%97%AE%E9%A2%98%E5%AE%9A%E4%B9%89.html">1.问题定义——共享单车需求数据分析</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">2.数据抽取（采集、获取方式）</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#id2">2.1 互联网数据采集</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#p84">2.1.1 获取网页 P84</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#p85">2.1.2 网页解析 P85</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id3">2.1.3 数据存储 P85</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">数据分析</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id2">2.数据抽取（采集、获取方式）</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id3">2.1 互联网数据采集</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#p84">2.1.1 获取网页 P84</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id4">练习1:获取“共享单车数据“网页信息</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#beautifulsoup-p85">2.1.2解析网页（使用Beautifulsoup库） P85</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id5">练习2：分别找标题和数据的标签并记录</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id6">练习3:整理获取的数据</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id7">2.1.3 数据存储</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#id4">2.2 下载开源数据集（<em>本次活动数据集来源</em>）</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id5">2.2.1 数据内容说明</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id6">2.2.2 数据格式说明</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id8">2.2 下载开源数据集（<em>本次活动数据集来源</em>）</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id9">2.2.1 数据内容说明</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id10">2.2.2 数据格式说明</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -80,7 +86,7 @@
           <div role="navigation" aria-label="页面导航">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home"></a></li>
-      <li class="breadcrumb-item active">2.数据抽取（采集、获取方式）</li>
+      <li class="breadcrumb-item active">数据分析</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/2.数据抽取.md.txt" rel="nofollow"> 查看页面源码</a>
       </li>
@@ -115,18 +121,52 @@
 }
 </style>
 <section id="id1">
-<h1>2.数据抽取（采集、获取方式）<a class="headerlink" href="#id1" title="永久链接至标题"></a></h1>
+<h1>数据分析<a class="headerlink" href="#id1" title="永久链接至标题"></a></h1>
 <section id="id2">
-<h2>2.1 互联网数据采集<a class="headerlink" href="#id2" title="永久链接至标题"></a></h2>
-<section id="p84">
-<h3>2.1.1 获取网页 P84<a class="headerlink" href="#p84" title="永久链接至标题"></a></h3>
-<p>在网页获取中我们需要用到两个库，一个是requests来获得网页源代码（html），然后通过bs4库对源代码（html）进行解析。</p>
+<h2>2.数据抽取（采集、获取方式）<a class="headerlink" href="#id2" title="永久链接至标题"></a></h2>
+<p>数据采集的方法有很多，目前较为广泛使用的传感器数据采集和互联网数据。</p>
+<ol class="simple">
+<li><p>传感数据采集</p>
 <ul class="simple">
-<li><p>示例代码</p></li>
+<li><p>传感数据是由传感设备收集和测量的数据，传感设备可穿戴在用户身上，也可以设计在现实环境中。</p></li>
+</ul>
+</li>
+<li><p>互联网数据采集</p>
+<ul class="simple">
+<li><p>互联网数据采集是指利用互联网搜索引擎技术实现有针对性、行业性的数据抓取，并按照一定规则和筛选标准进行数据归类，最终形成数据库文件的一个过程。
+一般过程：获取网页、解析网页、保存数据。</p></li>
+</ul>
+</li>
+<li><p>下载开源数据集</p>
+<ul class="simple">
+<li><p>目前有些网站提供一些开源数据，无需用户通过数据抓取的方式，可以直接下载数据用于数据分析练习，如“0.5”章节中提到的相关开源数据网站。本次数据分析实验，也是通过这个方式进行数据获取。</p></li>
+</ul>
+</li>
+</ol>
+<section id="id3">
+<h3>2.1 互联网数据采集<a class="headerlink" href="#id3" title="永久链接至标题"></a></h3>
+<section id="p84">
+<h4>2.1.1 获取网页 P84<a class="headerlink" href="#p84" title="永久链接至标题"></a></h4>
+<p>在这一节中，我们将学习如何使用 <code class="docutils literal notranslate"><span class="pre">requests</span></code>库来获取网页的内容。我们将通过一个简单的例子来讲解这个过程，即如何获取并打印“百度”主页的 HTML 源码。</p>
+<ul class="simple">
+<li><p><strong>requests库</strong>这是一个非常流行且易于使用的“Python”库，用于发送“HTTP”请求。这个库的设计目标是使“HTTP”请求尽可能简单易用。它对于各种网络请求场景都非常有用，从简单的网页抓取到与 RESTful API 的交互等。</p></li>
+<li><p><strong>操作步骤</strong></p></li>
+</ul>
+<blockquote>
+<div><p>1.导入 <strong>requests</strong> 库，这个库允许我们方便地发送 <strong>HTTP</strong> 请求：<code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">requests</span></code></p>
+<p>2.定义一个变量 <strong>url</strong> ，这个变量包含了我们想要获取的网页的地址：<code class="docutils literal notranslate"><span class="pre">url</span> <span class="pre">=</span> <span class="pre">&quot;https://www.baidu.com/&quot;</span></code></p>
+<p>3.使用 <strong>requests.get()</strong> 函数来发送一个 <strong>GET</strong> 请求到我们刚才定义的 <strong>URL</strong>：<code class="docutils literal notranslate"><span class="pre">html</span> <span class="pre">=</span> <span class="pre">requests.get(url)</span></code>
+<strong>GET</strong> 请求是 <strong>HTTP</strong> 请求的一种，通常用于请求数据。这个函数会返回一个响应对象，我们将它保存在变量 <strong>html</strong> 中</p>
+<p>4.由于网页内容可能使用不同的字符编码，我们可以指定编码确保内容正确显示：<code class="docutils literal notranslate"><span class="pre">html.encoding</span> <span class="pre">=</span> <span class="pre">&quot;utf-8&quot;</span></code>
+对于大多数网页，<strong>’utf-8’</strong> 编码是一个安全的选择。</p>
+<p>5.打印出响应对象中的文本内容，即网页的 <strong>HTML</strong> 源码：<code class="docutils literal notranslate"><span class="pre">print(html.text)</span></code></p>
+</div></blockquote>
+<ul class="simple">
+<li><p><strong>示例代码</strong></p></li>
 </ul>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">requests</span>
 
-<span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://www.baidu.com/&quot;</span> <span class="c1">#网址赋值</span>
+<span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://www.bilibili.com/&quot;</span> <span class="c1">#网址赋值</span>
 <span class="n">html</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>       <span class="c1">#用GET方法获取网页数据</span>
 <span class="n">html</span><span class="o">.</span><span class="n">encoding</span> <span class="o">=</span> <span class="s2">&quot;utf-8&quot;</span>        <span class="c1">#设定网页编码方式：utf-8</span>
 
@@ -134,216 +174,841 @@
 </pre></div>
 </div>
 <ul class="simple">
-<li><p>输出结果</p></li>
+<li><p>运行结果</p></li>
 </ul>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>&lt;!DOCTYPE html&gt;
-&lt;!--STATUS OK--&gt;&lt;html&gt; &lt;head&gt;&lt;meta http-equiv=content-type content=text/html;charset=utf-8&gt;&lt;meta http-equiv=X-UA-Compatible content=IE=Edge&gt;&lt;meta content=always name=referrer&gt;&lt;link rel=stylesheet type=text/css href=https://ss1.bdstatic.com/5eN1bjq8AAUYm2zgoY3K/r/www/cache/bdorz/baidu.min.css&gt;&lt;title&gt;百度一下，你就知道&lt;/title&gt;&lt;/head&gt; &lt;body link=#0000cc&gt; &lt;div id=wrapper&gt; &lt;div id=head&gt; &lt;div class=head_wrapper&gt; &lt;div class=s_form&gt; &lt;div class=s_form_wrapper&gt; &lt;div id=lg&gt; &lt;img hidefocus=true src=//www.baidu.com/img/bd_logo1.png width=270 height=129&gt; &lt;/div&gt; &lt;form id=form name=f action=//www.baidu.com/s class=fm&gt; &lt;input type=hidden name=bdorz_come value=1&gt; &lt;input type=hidden name=ie value=utf-8&gt; &lt;input type=hidden name=f value=8&gt; &lt;input type=hidden name=rsv_bp value=1&gt; &lt;input type=hidden name=rsv_idx value=1&gt; &lt;input type=hidden name=tn value=baidu&gt;&lt;span class=&quot;bg s_ipt_wr&quot;&gt;&lt;input id=kw name=wd class=s_ipt value maxlength=255 autocomplete=off autofocus=autofocus&gt;&lt;/span&gt;&lt;span class=&quot;bg s_btn_wr&quot;&gt;&lt;input type=submit id=su value=百度一下 class=&quot;bg s_btn&quot; autofocus&gt;&lt;/span&gt; &lt;/form&gt; &lt;/div&gt; &lt;/div&gt; &lt;div id=u1&gt; &lt;a href=http://news.baidu.com name=tj_trnews class=mnav&gt;新闻&lt;/a&gt; &lt;a href=https://www.hao123.com name=tj_trhao123 class=mnav&gt;hao123&lt;/a&gt; &lt;a href=http://map.baidu.com name=tj_trmap class=mnav&gt;地图&lt;/a&gt; &lt;a href=http://v.baidu.com name=tj_trvideo class=mnav&gt;视频&lt;/a&gt; &lt;a href=http://tieba.baidu.com name=tj_trtieba class=mnav&gt;贴吧&lt;/a&gt; &lt;noscript&gt; &lt;a href=http://www.baidu.com/bdorz/login.gif?login&amp;amp;tpl=mn&amp;amp;u=http%3A%2F%2Fwww.baidu.com%2f%3fbdorz_come%3d1 name=tj_login class=lb&gt;登录&lt;/a&gt; &lt;/noscript&gt; &lt;script&gt;document.write(&#39;&lt;a href=&quot;http://www.baidu.com/bdorz/login.gif?login&amp;tpl=mn&amp;u=&#39;+ encodeURIComponent(window.location.href+ (window.location.search === &quot;&quot; ? &quot;?&quot; : &quot;&amp;&quot;)+ &quot;bdorz_come=1&quot;)+ &#39;&quot; name=&quot;tj_login&quot; class=&quot;lb&quot;&gt;登录&lt;/a&gt;&#39;);
-&lt;/script&gt; &lt;a href=//www.baidu.com/more/ name=tj_briicon class=bri style=&quot;display: block;&quot;&gt;更多产品&lt;/a&gt; &lt;/div&gt; &lt;/div&gt; &lt;/div&gt; &lt;div id=ftCon&gt; &lt;div id=ftConw&gt; &lt;p id=lh&gt; &lt;a href=http://home.baidu.com&gt;关于百度&lt;/a&gt; &lt;a href=http://ir.baidu.com&gt;About Baidu&lt;/a&gt; &lt;/p&gt; &lt;p id=cp&gt;&amp;copy;2017&amp;nbsp;Baidu&amp;nbsp;&lt;a href=http://www.baidu.com/duty/&gt;使用百度前必读&lt;/a&gt;&amp;nbsp; &lt;a href=http://jianyi.baidu.com/ class=cp-feedback&gt;意见反馈&lt;/a&gt;&amp;nbsp;京ICP证030173号&amp;nbsp; &lt;img src=//www.baidu.com/img/gs.gif&gt; &lt;/p&gt; &lt;/div&gt; &lt;/div&gt; &lt;/div&gt; &lt;/body&gt; &lt;/html&gt;
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>`&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.01 Transitional//EN&quot;&gt;`
+    `&lt;html lang=&quot;zh-cn&quot;&gt;`
+
+    `&lt;head&gt;`
+        `&lt;meta http-equiv=&quot;Access-Control-Allow-Origin&quot; content=&quot;*&quot; /&gt;`
+        `&lt;meta http-equiv=&quot;Page-Enter&quot; content=&quot;blendTrans(Duration=0.5)&quot;&gt;`
+        `&lt;meta http-equiv=&quot;Page-Exit&quot; content=&quot;blendTrans(Duration=0.5)&quot;&gt;`
+        `&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;`
+        `&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0&quot;&gt;`
+        `&lt;meta name=&quot;spm_prefix&quot; content=&quot;333.937&quot;&gt;`
+        `&lt;title&gt;`出错啦! - bilibili.com `&lt;/title&gt;`
+        `&lt;link rel=&quot;shortcut icon&quot; href=&quot;//static.hdslb.com/images/favicon.ico&quot;&gt;`
+        `&lt;script type=&quot;text/javascript&quot; src=&quot;//s1.hdslb.com/bfs/static/jinkela/long/js/jquery/jquery1.7.2.min.js&quot;&gt;&lt;/script&gt;`
+
+    `&lt;/head&gt;`
+
+    `&lt;body&gt;`
+        `&lt;div class=&quot;error-container&quot;&gt;`
+            `&lt;div class=&quot;txt-item err-code&quot;&gt;`错误号:412 `&lt;/div&gt;`
+            `&lt;div class=&quot;txt-item err-text&quot;&gt;`由于触发哔哩哔哩安全风控策略，该次访问请求被拒绝。`&lt;/div&gt;`
+            `&lt;div class=&quot;txt-item&quot;&gt;`The request was rejected because of the bilibili security control policy.`&lt;/div&gt;`
+            `&lt;div class=&quot;txt-item datetime_now&quot;&gt;&lt;/div&gt;`
+            `&lt;div class=&quot;txt-item user_url&quot;&gt;&lt;/div&gt;`
+            `&lt;div class=&quot;txt-item user_ip&quot;&gt;&lt;/div&gt;`
+            `&lt;div class=&quot;txt-item user_id&quot;&gt;&lt;/div&gt;`
+            `&lt;div class=&quot;check-input&quot;&gt;`
+                `&lt;div class=&quot;title&quot;&gt;&lt;/div&gt;`
+                `&lt;div class=&quot;box-pic&quot;&gt;&lt;/div&gt;`
+                `&lt;div class=&quot;box&quot;&gt;&lt;/div&gt;`
+                `&lt;div class=&quot;state&quot;&gt;&lt;/div&gt;`
+            `&lt;/div&gt;`
+        `&lt;/div&gt;`
+        `&lt;script type=&quot;text/javascript&quot; charset=&quot;utf-8&quot; src=&quot;//security.bilibili.com/static/js/sha256.min.js&quot;&gt;&lt;/script&gt;`
+        `&lt;script type=&quot;text/javascript&quot; charset=&quot;utf-8&quot; src=&quot;//security.bilibili.com/static/js/js.cookie.min.js&quot;&gt;&lt;/script&gt;`
+        `&lt;script type=&quot;text/javascript&quot; charset=&quot;utf-8&quot; src=&quot;//security.bilibili.com/static/js/412.js&quot;&gt;&lt;/script&gt;`
+    `&lt;/body&gt;`
+    `&lt;/html&gt;`
 </pre></div>
 </div>
-</section>
-<section id="p85">
-<h3>2.1.2 网页解析 P85<a class="headerlink" href="#p85" title="永久链接至标题"></a></h3>
-<p>在2.1.1中我们看到已经可以获取到网页的数据，但是数据比较杂乱，这时候我们需要专门的工具对这些数据进行<strong>整理分析</strong>。</p>
-<ul class="simple">
-<li><p>beautifulsoup使用参考文档:<br>
-<a class="reference external" href="https://beautifulsoup.readthedocs.io/zh_CN/v4.4.0/index.html#id13">https://beautifulsoup.readthedocs.io/zh_CN/v4.4.0/index.html#id13</a><br></p></li>
-</ul>
-<br><ul class="simple">
-<li><p>示例代码</p></li>
-</ul>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#整理网页</span>
-<span class="kn">import</span> <span class="nn">requests</span>
-<span class="kn">from</span> <span class="nn">bs4</span> <span class="kn">import</span> <span class="n">BeautifulSoup</span>
-
-<span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://www.baidu.com&quot;</span>  <span class="c1">#网址赋值</span>
-<span class="n">html</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>       <span class="c1">#用GET方法获取网页数据</span>
-<span class="n">html</span><span class="o">.</span><span class="n">encoding</span> <span class="o">=</span> <span class="s2">&quot;utf-8&quot;</span>        <span class="c1">#设定网页编码方式：utf-8</span>
-
-<span class="c1">#---------new code here--------</span>
-<span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">html</span><span class="o">.</span><span class="n">text</span><span class="p">,</span><span class="s1">&#39;html.parser&#39;</span><span class="p">)</span>  <span class="c1">#建立soup对象，获取网页源代码</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">soup</span><span class="o">.</span><span class="n">prettify</span><span class="p">())</span>   <span class="c1">#将网页源代码排版整理输出，以便观察相关结果</span>
-</pre></div>
-</div>
-<ul class="simple">
-<li><p>输出结果</p></li>
-</ul>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>&lt;!DOCTYPE html&gt;
-&lt;!--STATUS OK--&gt;
-&lt;html&gt;
- &lt;head&gt;
-  &lt;meta content=&quot;text/html;charset=utf-8&quot; http-equiv=&quot;content-type&quot;/&gt;
-  &lt;meta content=&quot;IE=Edge&quot; http-equiv=&quot;X-UA-Compatible&quot;/&gt;
-  &lt;meta content=&quot;always&quot; name=&quot;referrer&quot;/&gt;
-  &lt;link href=&quot;https://ss1.bdstatic.com/5eN1bjq8AAUYm2zgoY3K/r/www/cache/bdorz/baidu.min.css&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot;/&gt;
-  &lt;title&gt;
-   百度一下，你就知道
-  &lt;/title&gt;
- &lt;/head&gt;
- &lt;body link=&quot;#0000cc&quot;&gt;
-  &lt;div id=&quot;wrapper&quot;&gt;
-   &lt;div id=&quot;head&quot;&gt;
-    &lt;div class=&quot;head_wrapper&quot;&gt;
-     &lt;div class=&quot;s_form&quot;&gt;
-      &lt;div class=&quot;s_form_wrapper&quot;&gt;
-       &lt;div id=&quot;lg&quot;&gt;
-        &lt;img height=&quot;129&quot; hidefocus=&quot;true&quot; src=&quot;//www.baidu.com/img/bd_logo1.png&quot; width=&quot;270&quot;/&gt;
-       &lt;/div&gt;
-       &lt;form action=&quot;//www.baidu.com/s&quot; class=&quot;fm&quot; id=&quot;form&quot; name=&quot;f&quot;&gt;
-        &lt;input name=&quot;bdorz_come&quot; type=&quot;hidden&quot; value=&quot;1&quot;/&gt;
-        &lt;input name=&quot;ie&quot; type=&quot;hidden&quot; value=&quot;utf-8&quot;/&gt;
-        &lt;input name=&quot;f&quot; type=&quot;hidden&quot; value=&quot;8&quot;/&gt;
-        &lt;input name=&quot;rsv_bp&quot; type=&quot;hidden&quot; value=&quot;1&quot;/&gt;
-        &lt;input name=&quot;rsv_idx&quot; type=&quot;hidden&quot; value=&quot;1&quot;/&gt;
-        &lt;input name=&quot;tn&quot; type=&quot;hidden&quot; value=&quot;baidu&quot;/&gt;
-        &lt;span class=&quot;bg s_ipt_wr&quot;&gt;
-         &lt;input autocomplete=&quot;off&quot; autofocus=&quot;autofocus&quot; class=&quot;s_ipt&quot; id=&quot;kw&quot; maxlength=&quot;255&quot; name=&quot;wd&quot; value=&quot;&quot;/&gt;
-        &lt;/span&gt;
-        &lt;span class=&quot;bg s_btn_wr&quot;&gt;
-         &lt;input autofocus=&quot;&quot; class=&quot;bg s_btn&quot; id=&quot;su&quot; type=&quot;submit&quot; value=&quot;百度一下&quot;/&gt;
-        &lt;/span&gt;
-       &lt;/form&gt;
-      &lt;/div&gt;
-     &lt;/div&gt;
-     &lt;div id=&quot;u1&quot;&gt;
-      &lt;a class=&quot;mnav&quot; href=&quot;http://news.baidu.com&quot; name=&quot;tj_trnews&quot;&gt;
-       新闻
-      &lt;/a&gt;
-      &lt;a class=&quot;mnav&quot; href=&quot;https://www.hao123.com&quot; name=&quot;tj_trhao123&quot;&gt;
-       hao123
-      &lt;/a&gt;
-      &lt;a class=&quot;mnav&quot; href=&quot;http://map.baidu.com&quot; name=&quot;tj_trmap&quot;&gt;
-       地图
-      &lt;/a&gt;
-      &lt;a class=&quot;mnav&quot; href=&quot;http://v.baidu.com&quot; name=&quot;tj_trvideo&quot;&gt;
-       视频
-      &lt;/a&gt;
-      &lt;a class=&quot;mnav&quot; href=&quot;http://tieba.baidu.com&quot; name=&quot;tj_trtieba&quot;&gt;
-       贴吧
-      &lt;/a&gt;
-      &lt;noscript&gt;
-       &lt;a class=&quot;lb&quot; href=&quot;http://www.baidu.com/bdorz/login.gif?login&amp;amp;tpl=mn&amp;amp;u=http%3A%2F%2Fwww.baidu.com%2f%3fbdorz_come%3d1&quot; name=&quot;tj_login&quot;&gt;
-        登录
-       &lt;/a&gt;
-      &lt;/noscript&gt;
-      &lt;script&gt;
-       document.write(&#39;&lt;a href=&quot;http://www.baidu.com/bdorz/login.gif?login&amp;tpl=mn&amp;u=&#39;+ encodeURIComponent(window.location.href+ (window.location.search === &quot;&quot; ? &quot;?&quot; : &quot;&amp;&quot;)+ &quot;bdorz_come=1&quot;)+ &#39;&quot; name=&quot;tj_login&quot; class=&quot;lb&quot;&gt;登录&lt;/a&gt;&#39;);
-      &lt;/script&gt;
-      &lt;a class=&quot;bri&quot; href=&quot;//www.baidu.com/more/&quot; name=&quot;tj_briicon&quot; style=&quot;display: block;&quot;&gt;
-       更多产品
-      &lt;/a&gt;
-     &lt;/div&gt;
-    &lt;/div&gt;
-   &lt;/div&gt;
-   &lt;div id=&quot;ftCon&quot;&gt;
-    &lt;div id=&quot;ftConw&quot;&gt;
-     &lt;p id=&quot;lh&quot;&gt;
-      &lt;a href=&quot;http://home.baidu.com&quot;&gt;
-       关于百度
-      &lt;/a&gt;
-      &lt;a href=&quot;http://ir.baidu.com&quot;&gt;
-       About Baidu
-      &lt;/a&gt;
-     &lt;/p&gt;
-     &lt;p id=&quot;cp&quot;&gt;
-      ©2017 Baidu
-      &lt;a href=&quot;http://www.baidu.com/duty/&quot;&gt;
-       使用百度前必读
-      &lt;/a&gt;
-      &lt;a class=&quot;cp-feedback&quot; href=&quot;http://jianyi.baidu.com/&quot;&gt;
-       意见反馈
-      &lt;/a&gt;
-      京ICP证030173号
-      &lt;img src=&quot;//www.baidu.com/img/gs.gif&quot;/&gt;
-     &lt;/p&gt;
-    &lt;/div&gt;
-   &lt;/div&gt;
-  &lt;/div&gt;
- &lt;/body&gt;
-&lt;/html&gt;
-</pre></div>
-</div>
-<ul class="simple">
-<li><p>抓取title属性示例代码<br>
-<strong>注意：一定要先运行上面代码！！再运行本行代码！！！！</strong><br></p></li>
-</ul>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#使用select方法，抓取相关属性</span>
-<span class="n">select_data</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s2">&quot;title&quot;</span><span class="p">)</span>   <span class="c1">#这里我们选择title     </span>
-
-<span class="nb">print</span><span class="p">(</span><span class="n">select_data</span><span class="p">)</span>   <span class="c1">#输出抓取结果</span>
-</pre></div>
-</div>
-<ul class="simple">
-<li><p>输出结果</p></li>
-</ul>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>[&lt;title&gt;百度一下，你就知道&lt;/title&gt;]
-</pre></div>
-</div>
-</section>
-<section id="id3">
-<h3>2.1.3 数据存储 P85<a class="headerlink" href="#id3" title="永久链接至标题"></a></h3>
-<p>注意：一定要先运行上面代码！！再运行本行代码！！！！</p>
-<ul class="simple">
-<li><p>示例代码</p></li>
-</ul>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">time</span> <span class="c1">#导入时间库</span>
-
-<span class="sd">&#39;&#39;&#39;前期数据准备、文件路径、数据预处理&#39;&#39;&#39;</span>
-<span class="n">file_path</span> <span class="o">=</span> <span class="s1">&#39;./html_solve.txt&#39;</span>   <span class="c1">#文件路径</span>
-<span class="n">localtime</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">asctime</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">localtime</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()))</span><span class="c1">#加入时间戳</span>
-<span class="n">write_string</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">select_data</span><span class="p">)</span> <span class="o">+</span> <span class="n">localtime</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
-
-<span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">write data 将数据写入文件</span>
-<span class="sd">    mode = &quot;a+&quot; 模式:</span>
-<span class="sd">    开一个文件用于读写。</span>
-<span class="sd">    如果该文件已存在，文件指针将会放在文件的结尾。文件打开时会是追加模式。</span>
-<span class="sd">    如果该文件不存在，创建新文件用于读写。</span>
-<span class="sd">&#39;&#39;&#39;</span>
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="n">mode</span> <span class="o">=</span> <span class="s2">&quot;a+&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span> 
-    <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">write_string</span><span class="p">)</span>
-    <span class="n">file</span><span class="o">.</span><span class="n">close</span>
-<span class="c1">#end with</span>
-
-
-<span class="sd">&#39;&#39;&#39;open file to check data&#39;&#39;&#39;</span>
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span> <span class="k">as</span> <span class="n">file_object</span><span class="p">:</span>
-    <span class="n">data</span> <span class="o">=</span> <span class="n">file_object</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-<span class="c1">#end with</span>
-</pre></div>
-</div>
-<ul class="simple">
-<li><p>输出结果</p></li>
-</ul>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>[&lt;script&gt;document.write(&#39;&lt;a href=&quot;http://www.baidu.com/bdorz/login.gif?login&amp;tpl=mn&amp;u=&#39;+ encodeURIComponent(window.location.href+ (window.location.search === &quot;&quot; ? &quot;?&quot; : &quot;&amp;&quot;)+ &quot;bdorz_come=1&quot;)+ &#39;&quot; name=&quot;tj_login&quot; class=&quot;lb&quot;&gt;登录&lt;/a&gt;&#39;);
-[&lt;script&gt;document.write(&#39;&lt;a href=&quot;http://www.baidu.com/bdorz/login.gif?login&amp;tpl=mn&amp;u=&#39;+ encodeURIComponent(window.location.href+ (window.location.search === &quot;&quot; ? &quot;?&quot; : &quot;&amp;&quot;)+ &quot;bdorz_come=1&quot;)+ &#39;&quot; name=&quot;tj_login&quot; class=&quot;lb&quot;&gt;登录&lt;/a&gt;&#39;);
-                &lt;/script&gt;]Wed Nov 30 22:54:37 2022
-[&lt;script&gt;document.write(&#39;&lt;a href=&quot;http://www.baidu.com/bdorz/login.gif?login&amp;tpl=mn&amp;u=&#39;+ encodeURIComponent(window.location.href+ (window.location.search === &quot;&quot; ? &quot;?&quot; : &quot;&amp;&quot;)+ &quot;bdorz_come=1&quot;)+ &#39;&quot; name=&quot;tj_login&quot; class=&quot;lb&quot;&gt;登录&lt;/a&gt;&#39;);
-                &lt;/script&gt;]Wed Nov 30 22:56:27 2022
-[&lt;title&gt;百度一下，你就知道&lt;/title&gt;]Wed Nov 30 22:57:41 2022
-</pre></div>
-</div>
-</section>
 </section>
 <section id="id4">
-<h2>2.2 下载开源数据集（<em>本次活动数据集来源</em>）<a class="headerlink" href="#id4" title="永久链接至标题"></a></h2>
-<p>本次活动我们主要通过下载开源数据集的方式来获取数据，既然是通过网站上下载的数据集，那么我们就需要查看下载网站上给出的数据相关<em>内容说明</em>和<em>格式说明</em>，以便我们用正确的方式来打开和分析数据。<br></p>
+<h4>练习1:获取“共享单车数据“网页信息<a class="headerlink" href="#id4" title="永久链接至标题"></a></h4>
+<p>在这个练习中，你将学习如何使用 <strong>requests</strong> 库来获取运行在本地服务器上的“共享单车数据”网页内容。你的任务是编写一个程序，该程序能够连接到本地服务器的 <strong>IP</strong> 地址 <code class="docutils literal notranslate"> <span class="pre">http://127.0.0.1:8080</span></code>，并请求网页的数据。</p>
 <ul class="simple">
-<li><p>如下图所示，这是某个网站上的开源数据，分别对数据内容和格式进行详细说明。
-<img alt="image" src="_images/2-1.png" /></p></li>
+<li><p><strong>请按照以下步骤操作：</strong></p></li>
 </ul>
+<ol class="simple">
+<li><p>导入 requests 库。</p></li>
+<li><p>定义目标网址变量。</p></li>
+<li><p>使用 requests.get() 发送 GET 请求到服务器。</p></li>
+<li><p>设置响应的编码为 ‘utf-8’ 以正确显示文本。</p></li>
+<li><p>打印响应文本，即网页的 HTML 源码。</p></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;http://10.50.121.234:8080&quot;</span>
+
+<span class="n">bike_data_page</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>       <span class="c1">#用GET方法获取网页数据</span>
+<span class="n">bike_data_page</span><span class="o">.</span><span class="n">encoding</span> <span class="o">=</span> <span class="s2">&quot;utf-8&quot;</span>        <span class="c1">#设定网页编码方式：utf-8</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">bike_data_page</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>  <span class="c1">#输出结果</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>运行结果</p></li>
+</ul>
+<div class="highlight-htm notranslate"><div class="highlight"><pre><span></span>`&lt;!DOCTYPE html&gt;`
+    `&lt;html lang=&quot;en&quot;&gt;`
+    `&lt;head&gt;`
+        `&lt;meta charset=&quot;UTF-8&quot;&gt;`
+        `&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;`
+        `&lt;title&gt;`共享单车数据 `&lt;/title&gt;`
+        `&lt;style&gt;`
+            body {
+                font-family: Arial, sans-serif;
+                margin: 0;
+                padding: 0;
+                background-color: #f4f4f4;
+            }
+            header {
+                background-color: #333;
+                color: #fff;
+                text-align: center;
+                padding: 1em 0;
+            }
+            h1 {
+                margin: 0;
+            }
+            table {
+                width: 100%;
+                margin-top: 20px;
+                border-collapse: collapse;
+            }
+            th, td {
+                border: 1px solid #ddd;
+                padding: 8px;
+                text-align: left;
+            }
+            th {
+                background-color: #4CAF50;
+                color: white;
+            }
+            tr:nth-child(even) {
+                background-color: #f2f2f2;
+            }
+        `&lt;/style&gt;`
+    `&lt;/head&gt;`
+    `&lt;body&gt;`
+        `&lt;header&gt;`
+            `&lt;h1&gt;`共享单车数据 `&lt;/h1&gt;`
+        `&lt;/header&gt;`
+        `&lt;main&gt;`
+            `&lt;table&gt;`
+                `&lt;tr&gt;`
+                    `&lt;th&gt;`Index `&lt;/th&gt;`
+                    `&lt;th&gt;`Bike ID `&lt;/th&gt;`
+                    `&lt;th&gt;`Datetime `&lt;/th&gt;`
+                    `&lt;th&gt;`Date `&lt;/th&gt;`
+                    `&lt;th&gt;`Month `&lt;/th&gt;`
+                    `&lt;th&gt;`Season `&lt;/th&gt;`
+                    `&lt;th&gt;`Working Day `&lt;/th&gt;`
+                    `&lt;th&gt;`Localhost `&lt;/th&gt;`
+                    `&lt;th&gt;`Weather `&lt;/th&gt;`
+                    `&lt;th&gt;`Daytime `&lt;/th&gt;`
+                    `&lt;th&gt;`Temp Value `&lt;/th&gt;`
+                    `&lt;th&gt;`Temp Unit `&lt;/th&gt;`
+                    `&lt;th&gt;`Wind Speed `&lt;/th&gt;`
+                    `&lt;th&gt;`Wind Unit `&lt;/th&gt;`
+                `&lt;/tr&gt;`
+
+    `&lt;tr&gt;`
+                    `&lt;td&gt;`1170070`&lt;/td&gt;`
+                    `&lt;td&gt;`mr3774`&lt;/td&gt;`
+                    `&lt;td&gt;`18:14:00`&lt;/td&gt;`
+                    `&lt;td&gt;`7月10日`&lt;/td&gt;`
+                    `&lt;td&gt;`7`&lt;/td&gt;`
+                    `&lt;td&gt;`Summer`&lt;/td&gt;`
+                    `&lt;td&gt;`No`&lt;/td&gt;`
+                    `&lt;td&gt;`图书馆`&lt;/td&gt;`
+                    `&lt;td&gt;`Mostly cloudy`&lt;/td&gt;`
+                    `&lt;td&gt;`TRUE`&lt;/td&gt;`
+                    `&lt;td&gt;`6.1`&lt;/td&gt;`
+                    `&lt;td&gt;`C`&lt;/td&gt;`
+                    `&lt;td&gt;`1.9`&lt;/td&gt;`
+                    `&lt;td&gt;`km/h`&lt;/td&gt;`
+                `&lt;/tr&gt;`
+
+    `&lt;tr&gt;`
+                    `&lt;td&gt;`1170071`&lt;/td&gt;`
+                    `&lt;td&gt;`mr5322`&lt;/td&gt;`
+                    `&lt;td&gt;`18:14:00`&lt;/td&gt;`
+                    `&lt;td&gt;`7月10日`&lt;/td&gt;`
+                    `&lt;td&gt;`7`&lt;/td&gt;`
+                    `&lt;td&gt;`Summer`&lt;/td&gt;`
+                    `&lt;td&gt;`No`&lt;/td&gt;`
+                    `&lt;td&gt;`图书馆`&lt;/td&gt;`
+                    `&lt;td&gt;`Mostly cloudy`&lt;/td&gt;`
+                    `&lt;td&gt;`TRUE`&lt;/td&gt;`
+                    `&lt;td&gt;`6.1`&lt;/td&gt;`
+                    `&lt;td&gt;`C`&lt;/td&gt;`
+                    `&lt;td&gt;`1.9`&lt;/td&gt;`
+                    `&lt;td&gt;`km/h`&lt;/td&gt;`
+                `&lt;/tr&gt;`
+
+    `&lt;tr&gt;`
+                    `&lt;td&gt;`1170072`&lt;/td&gt;`
+                    `&lt;td&gt;`mr197`&lt;/td&gt;`
+                    `&lt;td&gt;`18:14:00`&lt;/td&gt;`
+                    `&lt;td&gt;`7月10日`&lt;/td&gt;`
+                    `&lt;td&gt;`7`&lt;/td&gt;`
+                    `&lt;td&gt;`Summer`&lt;/td&gt;`
+                    `&lt;td&gt;`No`&lt;/td&gt;`
+                    `&lt;td&gt;`图书馆`&lt;/td&gt;`
+                    `&lt;td&gt;`Mostly cloudy`&lt;/td&gt;`
+                    `&lt;td&gt;`TRUE`&lt;/td&gt;`
+                    `&lt;td&gt;`6.1`&lt;/td&gt;`
+                    `&lt;td&gt;`C`&lt;/td&gt;`
+                    `&lt;td&gt;`1.9`&lt;/td&gt;`
+                    `&lt;td&gt;`km/h`&lt;/td&gt;`
+                `&lt;/tr&gt;`
+
+    `&lt;tr&gt;`
+                    `&lt;td&gt;`1170075`&lt;/td&gt;`
+                    `&lt;td&gt;`mr4877`&lt;/td&gt;`
+                    `&lt;td&gt;`18:15:00`&lt;/td&gt;`
+                    `&lt;td&gt;`7月10日`&lt;/td&gt;`
+                    `&lt;td&gt;`7`&lt;/td&gt;`
+                    `&lt;td&gt;`Summer`&lt;/td&gt;`
+                    `&lt;td&gt;`No`&lt;/td&gt;`
+                    `&lt;td&gt;`莘庄`&lt;/td&gt;`
+                    `&lt;td&gt;`Mostly cloudy`&lt;/td&gt;`
+                    `&lt;td&gt;`TRUE`&lt;/td&gt;`
+                    `&lt;td&gt;`6.1`&lt;/td&gt;`
+                    `&lt;td&gt;`C`&lt;/td&gt;`
+                    `&lt;td&gt;`1.9`&lt;/td&gt;`
+                    `&lt;td&gt;`km/h`&lt;/td&gt;`
+                `&lt;/tr&gt;`
+
+    `&lt;tr&gt;`
+                    `&lt;td&gt;`1170077`&lt;/td&gt;`
+                    `&lt;td&gt;`mr5037`&lt;/td&gt;`
+                    `&lt;td&gt;`18:17:00`&lt;/td&gt;`
+                    `&lt;td&gt;`7月10日`&lt;/td&gt;`
+                    `&lt;td&gt;`7`&lt;/td&gt;`
+                    `&lt;td&gt;`Summer`&lt;/td&gt;`
+                    `&lt;td&gt;`No`&lt;/td&gt;`
+                    `&lt;td&gt;`图书馆`&lt;/td&gt;`
+                    `&lt;td&gt;`Mostly cloudy`&lt;/td&gt;`
+                    `&lt;td&gt;`TRUE`&lt;/td&gt;`
+                    `&lt;td&gt;`6.1`&lt;/td&gt;`
+                    `&lt;td&gt;`C`&lt;/td&gt;`
+                    `&lt;td&gt;`1.9`&lt;/td&gt;`
+                    `&lt;td&gt;`km/h`&lt;/td&gt;`
+                `&lt;/tr&gt;`
+
+    `&lt;tr&gt;`
+                    `&lt;td&gt;`1170078`&lt;/td&gt;`
+                    `&lt;td&gt;`mr2785`&lt;/td&gt;`
+                    `&lt;td&gt;`18:17:00`&lt;/td&gt;`
+                    `&lt;td&gt;`7月10日`&lt;/td&gt;`
+                    `&lt;td&gt;`7`&lt;/td&gt;`
+                    `&lt;td&gt;`Summer`&lt;/td&gt;`
+                    `&lt;td&gt;`No`&lt;/td&gt;`
+                    `&lt;td&gt;`图书馆`&lt;/td&gt;`
+                    `&lt;td&gt;`Mostly cloudy`&lt;/td&gt;`
+                    `&lt;td&gt;`TRUE`&lt;/td&gt;`
+                    `&lt;td&gt;`6.1`&lt;/td&gt;`
+                    `&lt;td&gt;`C`&lt;/td&gt;`
+                    `&lt;td&gt;`1.9`&lt;/td&gt;`
+                    `&lt;td&gt;`km/h`&lt;/td&gt;`
+                `&lt;/tr&gt;`
+
+    `&lt;tr&gt;`
+                    `&lt;td&gt;`1170079`&lt;/td&gt;`
+                    `&lt;td&gt;`mr4439`&lt;/td&gt;`
+                    `&lt;td&gt;`18:17:00`&lt;/td&gt;`
+                    `&lt;td&gt;`7月10日`&lt;/td&gt;`
+                    `&lt;td&gt;`7`&lt;/td&gt;`
+                    `&lt;td&gt;`Summer`&lt;/td&gt;`
+                    `&lt;td&gt;`No`&lt;/td&gt;`
+                    `&lt;td&gt;`图书馆`&lt;/td&gt;`
+                    `&lt;td&gt;`Mostly cloudy`&lt;/td&gt;`
+                    `&lt;td&gt;`TRUE`&lt;/td&gt;`
+                    `&lt;td&gt;`6.1`&lt;/td&gt;`
+                    `&lt;td&gt;`C`&lt;/td&gt;`
+                    `&lt;td&gt;`1.9`&lt;/td&gt;`
+                    `&lt;td&gt;`km/h`&lt;/td&gt;`
+                `&lt;/tr&gt;`
+
+    `&lt;tr&gt;`
+                    `&lt;td&gt;`1170080`&lt;/td&gt;`
+                    `&lt;td&gt;`mr5233`&lt;/td&gt;`
+                    `&lt;td&gt;`18:01:32`&lt;/td&gt;`
+                    `&lt;td&gt;`7月10日`&lt;/td&gt;`
+                    `&lt;td&gt;`7`&lt;/td&gt;`
+                    `&lt;td&gt;`Summer`&lt;/td&gt;`
+                    `&lt;td&gt;`No`&lt;/td&gt;`
+                    `&lt;td&gt;`莘庄`&lt;/td&gt;`
+                    `&lt;td&gt;`Mostly cloudy`&lt;/td&gt;`
+                    `&lt;td&gt;`TRUE`&lt;/td&gt;`
+                    `&lt;td&gt;`6.1`&lt;/td&gt;`
+                    `&lt;td&gt;`C`&lt;/td&gt;`
+                    `&lt;td&gt;`1.9`&lt;/td&gt;`
+                    `&lt;td&gt;`km/h`&lt;/td&gt;`
+                `&lt;/tr&gt;`
+
+    `&lt;tr&gt;`
+                    `&lt;td&gt;`1170081`&lt;/td&gt;`
+                    `&lt;td&gt;`mr8342`&lt;/td&gt;`
+                    `&lt;td&gt;`18:36:31`&lt;/td&gt;`
+                    `&lt;td&gt;`7月10日`&lt;/td&gt;`
+                    `&lt;td&gt;`7`&lt;/td&gt;`
+                    `&lt;td&gt;`Summer`&lt;/td&gt;`
+                    `&lt;td&gt;`No`&lt;/td&gt;`
+                    `&lt;td&gt;`图书馆`&lt;/td&gt;`
+                    `&lt;td&gt;`Mostly cloudy`&lt;/td&gt;`
+                    `&lt;td&gt;`TRUE`&lt;/td&gt;`
+                    `&lt;td&gt;`6.1`&lt;/td&gt;`
+                    `&lt;td&gt;`C`&lt;/td&gt;`
+                    `&lt;td&gt;`1.9`&lt;/td&gt;`
+                    `&lt;td&gt;`km/h`&lt;/td&gt;`
+                `&lt;/tr&gt;`
+
+    `&lt;tr&gt;`
+                    `&lt;td&gt;`1170082`&lt;/td&gt;`
+                    `&lt;td&gt;`mr3054`&lt;/td&gt;`
+                    `&lt;td&gt;`18:53:51`&lt;/td&gt;`
+                    `&lt;td&gt;`7月10日`&lt;/td&gt;`
+                    `&lt;td&gt;`7`&lt;/td&gt;`
+                    `&lt;td&gt;`Summer`&lt;/td&gt;`
+                    `&lt;td&gt;`No`&lt;/td&gt;`
+                    `&lt;td&gt;`图书馆`&lt;/td&gt;`
+                    `&lt;td&gt;`Mostly cloudy`&lt;/td&gt;`
+                    `&lt;td&gt;`TRUE`&lt;/td&gt;`
+                    `&lt;td&gt;`6.1`&lt;/td&gt;`
+                    `&lt;td&gt;`C`&lt;/td&gt;`
+                    `&lt;td&gt;`1.9`&lt;/td&gt;`
+                    `&lt;td&gt;`km/h`&lt;/td&gt;`
+                `&lt;/tr&gt;`
+
+    `&lt;tr&gt;`
+                    `&lt;td&gt;`1170083`&lt;/td&gt;`
+                    `&lt;td&gt;`mr9606`&lt;/td&gt;`
+                    `&lt;td&gt;`18:53:33`&lt;/td&gt;`
+                    `&lt;td&gt;`7月10日`&lt;/td&gt;`
+                    `&lt;td&gt;`7`&lt;/td&gt;`
+                    `&lt;td&gt;`Summer`&lt;/td&gt;`
+                    `&lt;td&gt;`No`&lt;/td&gt;`
+                    `&lt;td&gt;`图书馆`&lt;/td&gt;`
+                    `&lt;td&gt;`Mostly cloudy`&lt;/td&gt;`
+                    `&lt;td&gt;`TRUE`&lt;/td&gt;`
+                    `&lt;td&gt;`6.1`&lt;/td&gt;`
+                    `&lt;td&gt;`C`&lt;/td&gt;`
+                    `&lt;td&gt;`1.9`&lt;/td&gt;`
+                    `&lt;td&gt;`km/h`&lt;/td&gt;`
+                `&lt;/tr&gt;`
+
+    `&lt;tr&gt;`
+                    `&lt;td&gt;`1170084`&lt;/td&gt;`
+                    `&lt;td&gt;`mr4158`&lt;/td&gt;`
+                    `&lt;td&gt;`18:23:20`&lt;/td&gt;`
+                    `&lt;td&gt;`7月10日`&lt;/td&gt;`
+                    `&lt;td&gt;`7`&lt;/td&gt;`
+                    `&lt;td&gt;`Summer`&lt;/td&gt;`
+                    `&lt;td&gt;`No`&lt;/td&gt;`
+                    `&lt;td&gt;`莘庄`&lt;/td&gt;`
+                    `&lt;td&gt;`Mostly cloudy`&lt;/td&gt;`
+                    `&lt;td&gt;`TRUE`&lt;/td&gt;`
+                    `&lt;td&gt;`6.1`&lt;/td&gt;`
+                    `&lt;td&gt;`C`&lt;/td&gt;`
+                    `&lt;td&gt;`1.9`&lt;/td&gt;`
+                    `&lt;td&gt;`km/h`&lt;/td&gt;`
+                `&lt;/tr&gt;`
+
+    `&lt;tr&gt;`
+                    `&lt;td&gt;`1170085`&lt;/td&gt;`
+                    `&lt;td&gt;`mr8478`&lt;/td&gt;`
+                    `&lt;td&gt;`18:29:06`&lt;/td&gt;`
+                    `&lt;td&gt;`7月10日`&lt;/td&gt;`
+                    `&lt;td&gt;`7`&lt;/td&gt;`
+                    `&lt;td&gt;`Summer`&lt;/td&gt;`
+                    `&lt;td&gt;`No`&lt;/td&gt;`
+                    `&lt;td&gt;`莘庄`&lt;/td&gt;`
+                    `&lt;td&gt;`Mostly cloudy`&lt;/td&gt;`
+                    `&lt;td&gt;`TRUE`&lt;/td&gt;`
+                    `&lt;td&gt;`6.1`&lt;/td&gt;`
+                    `&lt;td&gt;`C`&lt;/td&gt;`
+                    `&lt;td&gt;`1.9`&lt;/td&gt;`
+                    `&lt;td&gt;`km/h`&lt;/td&gt;`
+                `&lt;/tr&gt;`
+
+    `&lt;tr&gt;`
+                    `&lt;td&gt;`1170086`&lt;/td&gt;`
+                    `&lt;td&gt;`mr7253`&lt;/td&gt;`
+                    `&lt;td&gt;`18:11:56`&lt;/td&gt;`
+                    `&lt;td&gt;`7月10日`&lt;/td&gt;`
+                    `&lt;td&gt;`7`&lt;/td&gt;`
+                    `&lt;td&gt;`Summer`&lt;/td&gt;`
+                    `&lt;td&gt;`No`&lt;/td&gt;`
+                    `&lt;td&gt;`图书馆`&lt;/td&gt;`
+                    `&lt;td&gt;`Mostly cloudy`&lt;/td&gt;`
+                    `&lt;td&gt;`TRUE`&lt;/td&gt;`
+                    `&lt;td&gt;`6.1`&lt;/td&gt;`
+                    `&lt;td&gt;`C`&lt;/td&gt;`
+                    `&lt;td&gt;`1.9`&lt;/td&gt;`
+                    `&lt;td&gt;`km/h`&lt;/td&gt;`
+                `&lt;/tr&gt;`
+
+    `&lt;tr&gt;`
+                    `&lt;td&gt;`1170087`&lt;/td&gt;`
+                    `&lt;td&gt;`mr5692`&lt;/td&gt;`
+                    `&lt;td&gt;`18:17:03`&lt;/td&gt;`
+                    `&lt;td&gt;`7月10日`&lt;/td&gt;`
+                    `&lt;td&gt;`7`&lt;/td&gt;`
+                    `&lt;td&gt;`Summer`&lt;/td&gt;`
+                    `&lt;td&gt;`No`&lt;/td&gt;`
+                    `&lt;td&gt;`图书馆`&lt;/td&gt;`
+                    `&lt;td&gt;`Mostly cloudy`&lt;/td&gt;`
+                    `&lt;td&gt;`TRUE`&lt;/td&gt;`
+                    `&lt;td&gt;`6.1`&lt;/td&gt;`
+                    `&lt;td&gt;`C`&lt;/td&gt;`
+                    `&lt;td&gt;`1.9`&lt;/td&gt;`
+                    `&lt;td&gt;`km/h`&lt;/td&gt;`
+                `&lt;/tr&gt;`
+
+    `&lt;tr&gt;`
+                    `&lt;td&gt;`1170088`&lt;/td&gt;`
+                    `&lt;td&gt;`mr6387`&lt;/td&gt;`
+                    `&lt;td&gt;`18:09:34`&lt;/td&gt;`
+                    `&lt;td&gt;`7月10日`&lt;/td&gt;`
+                    `&lt;td&gt;`7`&lt;/td&gt;`
+                    `&lt;td&gt;`Summer`&lt;/td&gt;`
+                    `&lt;td&gt;`No`&lt;/td&gt;`
+                    `&lt;td&gt;`图书馆`&lt;/td&gt;`
+                    `&lt;td&gt;`Mostly cloudy`&lt;/td&gt;`
+                    `&lt;td&gt;`TRUE`&lt;/td&gt;`
+                    `&lt;td&gt;`6.1`&lt;/td&gt;`
+                    `&lt;td&gt;`C`&lt;/td&gt;`
+                    `&lt;td&gt;`1.9`&lt;/td&gt;`
+                    `&lt;td&gt;`km/h`&lt;/td&gt;`
+                `&lt;/tr&gt;`
+
+    `&lt;tr&gt;`
+                    `&lt;td&gt;`1170089`&lt;/td&gt;`
+                    `&lt;td&gt;`mr8700`&lt;/td&gt;`
+                    `&lt;td&gt;`18:19:59`&lt;/td&gt;`
+                    `&lt;td&gt;`7月10日`&lt;/td&gt;`
+                    `&lt;td&gt;`7`&lt;/td&gt;`
+                    `&lt;td&gt;`Summer`&lt;/td&gt;`
+                    `&lt;td&gt;`No`&lt;/td&gt;`
+                    `&lt;td&gt;`莘庄`&lt;/td&gt;`
+                    `&lt;td&gt;`Mostly cloudy`&lt;/td&gt;`
+                    `&lt;td&gt;`TRUE`&lt;/td&gt;`
+                    `&lt;td&gt;`6.1`&lt;/td&gt;`
+                    `&lt;td&gt;`C`&lt;/td&gt;`
+                    `&lt;td&gt;`1.9`&lt;/td&gt;`
+                    `&lt;td&gt;`km/h`&lt;/td&gt;`
+                `&lt;/tr&gt;`
+
+    `&lt;tr&gt;`
+                    `&lt;td&gt;`1170090`&lt;/td&gt;`
+                    `&lt;td&gt;`mr3476`&lt;/td&gt;`
+                    `&lt;td&gt;`18:18:52`&lt;/td&gt;`
+                    `&lt;td&gt;`7月10日`&lt;/td&gt;`
+                    `&lt;td&gt;`7`&lt;/td&gt;`
+                    `&lt;td&gt;`Summer`&lt;/td&gt;`
+                    `&lt;td&gt;`No`&lt;/td&gt;`
+                    `&lt;td&gt;`图书馆`&lt;/td&gt;`
+                    `&lt;td&gt;`Mostly cloudy`&lt;/td&gt;`
+                    `&lt;td&gt;`TRUE`&lt;/td&gt;`
+                    `&lt;td&gt;`6.1`&lt;/td&gt;`
+                    `&lt;td&gt;`C`&lt;/td&gt;`
+                    `&lt;td&gt;`1.9`&lt;/td&gt;`
+                    `&lt;td&gt;`km/h`&lt;/td&gt;`
+                `&lt;/tr&gt;`
+
+    `&lt;tr&gt;`
+                    `&lt;td&gt;`1170091`&lt;/td&gt;`
+                    `&lt;td&gt;`mr1566`&lt;/td&gt;`
+                    `&lt;td&gt;`18:23:07`&lt;/td&gt;`
+                    `&lt;td&gt;`7月10日`&lt;/td&gt;`
+                    `&lt;td&gt;`7`&lt;/td&gt;`
+                    `&lt;td&gt;`Summer`&lt;/td&gt;`
+                    `&lt;td&gt;`No`&lt;/td&gt;`
+                    `&lt;td&gt;`莘庄`&lt;/td&gt;`
+                    `&lt;td&gt;`Mostly cloudy`&lt;/td&gt;`
+                    `&lt;td&gt;`TRUE`&lt;/td&gt;`
+                    `&lt;td&gt;`6.1`&lt;/td&gt;`
+                    `&lt;td&gt;`C`&lt;/td&gt;`
+                    `&lt;td&gt;`1.9`&lt;/td&gt;`
+                    `&lt;td&gt;`km/h`&lt;/td&gt;`
+                `&lt;/tr&gt;`
+
+    `&lt;tr&gt;`
+                    `&lt;td&gt;`1170092`&lt;/td&gt;`
+                    `&lt;td&gt;`mr5498`&lt;/td&gt;`
+                    `&lt;td&gt;`18:33:57`&lt;/td&gt;`
+                    `&lt;td&gt;`7月10日`&lt;/td&gt;`
+                    `&lt;td&gt;`7`&lt;/td&gt;`
+                    `&lt;td&gt;`Summer`&lt;/td&gt;`
+                    `&lt;td&gt;`No`&lt;/td&gt;`
+                    `&lt;td&gt;`图书馆`&lt;/td&gt;`
+                    `&lt;td&gt;`Mostly cloudy`&lt;/td&gt;`
+                    `&lt;td&gt;`TRUE`&lt;/td&gt;`
+                    `&lt;td&gt;`6.1`&lt;/td&gt;`
+                    `&lt;td&gt;`C`&lt;/td&gt;`
+                    `&lt;td&gt;`1.9`&lt;/td&gt;`
+                    `&lt;td&gt;`km/h`&lt;/td&gt;`
+                `&lt;/tr&gt;`
+
+    `&lt;tr&gt;`
+                    `&lt;td&gt;`1170093`&lt;/td&gt;`
+                    `&lt;td&gt;`mr1582`&lt;/td&gt;`
+                    `&lt;td&gt;`18:33:10`&lt;/td&gt;`
+                    `&lt;td&gt;`7月10日`&lt;/td&gt;`
+                    `&lt;td&gt;`7`&lt;/td&gt;`
+                    `&lt;td&gt;`Summer`&lt;/td&gt;`
+                    `&lt;td&gt;`No`&lt;/td&gt;`
+                    `&lt;td&gt;`图书馆`&lt;/td&gt;`
+                    `&lt;td&gt;`Mostly cloudy`&lt;/td&gt;`
+                    `&lt;td&gt;`TRUE`&lt;/td&gt;`
+                    `&lt;td&gt;`6.1`&lt;/td&gt;`
+                    `&lt;td&gt;`C`&lt;/td&gt;`
+                    `&lt;td&gt;`1.9`&lt;/td&gt;`
+                    `&lt;td&gt;`km/h`&lt;/td&gt;`
+                `&lt;/tr&gt;`
+
+    `&lt;tr&gt;`
+                    `&lt;td&gt;`1170094`&lt;/td&gt;`
+                    `&lt;td&gt;`mr8897`&lt;/td&gt;`
+                    `&lt;td&gt;`18:01:56`&lt;/td&gt;`
+                    `&lt;td&gt;`7月10日`&lt;/td&gt;`
+                    `&lt;td&gt;`7`&lt;/td&gt;`
+                    `&lt;td&gt;`Summer`&lt;/td&gt;`
+                    `&lt;td&gt;`No`&lt;/td&gt;`
+                    `&lt;td&gt;`莘庄`&lt;/td&gt;`
+                    `&lt;td&gt;`Mostly cloudy`&lt;/td&gt;`
+                    `&lt;td&gt;`TRUE`&lt;/td&gt;`
+                    `&lt;td&gt;`6.1`&lt;/td&gt;`
+                    `&lt;td&gt;`C`&lt;/td&gt;`
+                    `&lt;td&gt;`1.9`&lt;/td&gt;`
+                    `&lt;td&gt;`km/h`&lt;/td&gt;`
+                `&lt;/tr&gt;`
+
+    `&lt;tr&gt;`
+                    `&lt;td&gt;`1170095`&lt;/td&gt;`
+                    `&lt;td&gt;`mr1883`&lt;/td&gt;`
+                    `&lt;td&gt;`18:12:39`&lt;/td&gt;`
+                    `&lt;td&gt;`7月10日`&lt;/td&gt;`
+                    `&lt;td&gt;`7`&lt;/td&gt;`
+                    `&lt;td&gt;`Summer`&lt;/td&gt;`
+                    `&lt;td&gt;`No`&lt;/td&gt;`
+                    `&lt;td&gt;`图书馆`&lt;/td&gt;`
+                    `&lt;td&gt;`Mostly cloudy`&lt;/td&gt;`
+                    `&lt;td&gt;`TRUE`&lt;/td&gt;`
+                    `&lt;td&gt;`6.1`&lt;/td&gt;`
+                    `&lt;td&gt;`C`&lt;/td&gt;`
+                    `&lt;td&gt;`1.9`&lt;/td&gt;`
+                    `&lt;td&gt;`km/h`&lt;/td&gt;`
+                `&lt;/tr&gt;`
+
+    `&lt;tr&gt;`
+                    `&lt;td&gt;`1170096`&lt;/td&gt;`
+                    `&lt;td&gt;`mr9865`&lt;/td&gt;`
+                    `&lt;td&gt;`18:34:02`&lt;/td&gt;`
+                    `&lt;td&gt;`7月10日`&lt;/td&gt;`
+                    `&lt;td&gt;`7`&lt;/td&gt;`
+                    `&lt;td&gt;`Summer`&lt;/td&gt;`
+                    `&lt;td&gt;`No`&lt;/td&gt;`
+                    `&lt;td&gt;`莘庄`&lt;/td&gt;`
+                    `&lt;td&gt;`Mostly cloudy`&lt;/td&gt;`
+                    `&lt;td&gt;`TRUE`&lt;/td&gt;`
+                    `&lt;td&gt;`6.1`&lt;/td&gt;`
+                    `&lt;td&gt;`C`&lt;/td&gt;`
+                    `&lt;td&gt;`1.9`&lt;/td&gt;`
+                    `&lt;td&gt;`km/h`&lt;/td&gt;`
+                `&lt;/tr&gt;`
+
+    `&lt;tr&gt;`
+                    `&lt;td&gt;`1170097`&lt;/td&gt;`
+                    `&lt;td&gt;`mr3000`&lt;/td&gt;`
+                    `&lt;td&gt;`18:47:15`&lt;/td&gt;`
+                    `&lt;td&gt;`7月10日`&lt;/td&gt;`
+                    `&lt;td&gt;`7`&lt;/td&gt;`
+                    `&lt;td&gt;`Summer`&lt;/td&gt;`
+                    `&lt;td&gt;`No`&lt;/td&gt;`
+                    `&lt;td&gt;`图书馆`&lt;/td&gt;`
+                    `&lt;td&gt;`Mostly cloudy`&lt;/td&gt;`
+                    `&lt;td&gt;`TRUE`&lt;/td&gt;`
+                    `&lt;td&gt;`6.1`&lt;/td&gt;`
+                    `&lt;td&gt;`C`&lt;/td&gt;`
+                    `&lt;td&gt;`1.9`&lt;/td&gt;`
+                    `&lt;td&gt;`km/h`&lt;/td&gt;`
+                `&lt;/tr&gt;`
+
+    `&lt;tr&gt;`
+                    `&lt;td&gt;`1170098`&lt;/td&gt;`
+                    `&lt;td&gt;`mr4582`&lt;/td&gt;`
+                    `&lt;td&gt;`18:31:34`&lt;/td&gt;`
+                    `&lt;td&gt;`7月10日`&lt;/td&gt;`
+                    `&lt;td&gt;`7`&lt;/td&gt;`
+                    `&lt;td&gt;`Summer`&lt;/td&gt;`
+                    `&lt;td&gt;`No`&lt;/td&gt;`
+                    `&lt;td&gt;`图书馆`&lt;/td&gt;`
+                    `&lt;td&gt;`Mostly cloudy`&lt;/td&gt;`
+                    `&lt;td&gt;`TRUE`&lt;/td&gt;`
+                    `&lt;td&gt;`6.1`&lt;/td&gt;`
+                    `&lt;td&gt;`C`&lt;/td&gt;`
+                    `&lt;td&gt;`1.9`&lt;/td&gt;`
+                    `&lt;td&gt;`km/h`&lt;/td&gt;`
+                `&lt;/tr&gt;`
+
+    `&lt;tr&gt;`
+                    `&lt;td&gt;`1170099`&lt;/td&gt;`
+                    `&lt;td&gt;`mr6177`&lt;/td&gt;`
+                    `&lt;td&gt;`18:07:28`&lt;/td&gt;`
+                    `&lt;td&gt;`7月10日`&lt;/td&gt;`
+                    `&lt;td&gt;`7`&lt;/td&gt;`
+                    `&lt;td&gt;`Summer`&lt;/td&gt;`
+                    `&lt;td&gt;`No`&lt;/td&gt;`
+                    `&lt;td&gt;`图书馆`&lt;/td&gt;`
+                    `&lt;td&gt;`Mostly cloudy`&lt;/td&gt;`
+                    `&lt;td&gt;`TRUE`&lt;/td&gt;`
+                    `&lt;td&gt;`6.1`&lt;/td&gt;`
+                    `&lt;td&gt;`C`&lt;/td&gt;`
+                    `&lt;td&gt;`1.9`&lt;/td&gt;`
+                    `&lt;td&gt;`km/h`&lt;/td&gt;`
+                `&lt;/tr&gt;`
+
+    `&lt;tr&gt;`
+                    `&lt;td&gt;`1170100`&lt;/td&gt;`
+                    `&lt;td&gt;`mr8438`&lt;/td&gt;`
+                    `&lt;td&gt;`18:36:26`&lt;/td&gt;`
+                    `&lt;td&gt;`7月10日`&lt;/td&gt;`
+                    `&lt;td&gt;`7`&lt;/td&gt;`
+                    `&lt;td&gt;`Summer`&lt;/td&gt;`
+                    `&lt;td&gt;`No`&lt;/td&gt;`
+                    `&lt;td&gt;`莘庄`&lt;/td&gt;`
+                    `&lt;td&gt;`Mostly cloudy`&lt;/td&gt;`
+                    `&lt;td&gt;`TRUE`&lt;/td&gt;`
+                    `&lt;td&gt;`6.1`&lt;/td&gt;`
+                    `&lt;td&gt;`C`&lt;/td&gt;`
+                    `&lt;td&gt;`1.9`&lt;/td&gt;`
+                    `&lt;td&gt;`km/h`&lt;/td&gt;`
+                `&lt;/tr&gt;`
+
+    `&lt;tr&gt;`
+                    `&lt;td&gt;`1170101`&lt;/td&gt;`
+                    `&lt;td&gt;`mr5203`&lt;/td&gt;`
+                    `&lt;td&gt;`18:12:15`&lt;/td&gt;`
+                    `&lt;td&gt;`7月10日`&lt;/td&gt;`
+                    `&lt;td&gt;`7`&lt;/td&gt;`
+                    `&lt;td&gt;`Summer`&lt;/td&gt;`
+                    `&lt;td&gt;`No`&lt;/td&gt;`
+                    `&lt;td&gt;`莘庄`&lt;/td&gt;`
+                    `&lt;td&gt;`Mostly cloudy`&lt;/td&gt;`
+                    `&lt;td&gt;`TRUE`&lt;/td&gt;`
+                    `&lt;td&gt;`6.1`&lt;/td&gt;`
+                    `&lt;td&gt;`C`&lt;/td&gt;`
+                    `&lt;td&gt;`1.9`&lt;/td&gt;`
+                    `&lt;td&gt;`km/h`&lt;/td&gt;`
+                `&lt;/tr&gt;`
+
+    `&lt;tr&gt;`
+                    `&lt;td&gt;`1170102`&lt;/td&gt;`
+                    `&lt;td&gt;`mr5403`&lt;/td&gt;`
+                    `&lt;td&gt;`18:30:18`&lt;/td&gt;`
+                    `&lt;td&gt;`7月10日`&lt;/td&gt;`
+                    `&lt;td&gt;`7`&lt;/td&gt;`
+                    `&lt;td&gt;`Summer`&lt;/td&gt;`
+                    `&lt;td&gt;`No`&lt;/td&gt;`
+                    `&lt;td&gt;`莘庄`&lt;/td&gt;`
+                    `&lt;td&gt;`Mostly cloudy`&lt;/td&gt;`
+                    `&lt;td&gt;`TRUE`&lt;/td&gt;`
+                    `&lt;td&gt;`6.1`&lt;/td&gt;`
+                    `&lt;td&gt;`C`&lt;/td&gt;`
+                    `&lt;td&gt;`1.9`&lt;/td&gt;`
+                    `&lt;td&gt;`km/h`&lt;/td&gt;`
+                `&lt;/tr&gt;`
+
+    `&lt;/table&gt;`
+        `&lt;/main&gt;`
+    `&lt;/body&gt;`
+    `&lt;/html&gt;`
+</pre></div>
+</div>
+</section>
+<section id="beautifulsoup-p85">
+<h4>2.1.2解析网页（使用Beautifulsoup库） P85<a class="headerlink" href="#beautifulsoup-p85" title="永久链接至标题"></a></h4>
+<p>接下来将深入探讨如何分析网页的结构。在前面已经学习了如何使用 <strong>requests</strong> 库获取网页的 <strong>HTML</strong> 数据。现在，要学习如何从这些数据中读取信息，这是掌握网页数据处理和提取的关键一步。通过观察 <strong>HTML</strong> 源码，可以识别信息是如何被组织的，特别是标题和数据是如何通过 <code class="docutils literal notranslate"><span class="pre">&lt;th&gt;</span></code> 和 <code class="docutils literal notranslate"><span class="pre">&lt;td&gt;</span></code> 标签表示的。理解这些HTML标签及其组织方式，对于学习数据抓取和网页开发至关重要。</p>
+<ul class="simple">
+<li><p>beautifulsoup使用参考文档https://beautifulsoup.readthedocs.io/zh_CN/v4.4.0/index.html#id13</p></li>
+<li><p><strong>selcet方法介绍</strong>
+在 <strong>Beautiful Soup</strong> 中，<strong>select</strong> 方法允许你使用 <strong>CSS</strong> 选择器来定位页面中的元素。<strong>CSS</strong> 选择器是一种在<strong>CSS</strong>中用来选择你想要样式化的<strong>HTML</strong>元素的模式。<strong>select</strong> 方法返回一个列表，其中包含所有匹配的元素。</p></li>
+</ul>
+<blockquote>
+<div><p>下面是一些使用 select 方法的例子：
+<code class="docutils literal notranslate"><span class="pre">soup.select(&quot;div&quot;)</span></code> 选择所有的”&lt;div&gt;”元素。
+<code class="docutils literal notranslate"><span class="pre">soup.select(&quot;#some_id&quot;)</span></code> 选择 ID 为 some_id 的元素。
+<code class="docutils literal notranslate"><span class="pre">soup.select(&quot;.some_class&quot;)</span></code> 选择所有 class 包含 some_class 的元素。
+<code class="docutils literal notranslate"><span class="pre">soup.select(&quot;div</span> <span class="pre">span&quot;)</span></code> 选择所有在 “&lt;div&gt;” 元素内的”&lt;span&gt;” 元素。
+<code class="docutils literal notranslate"><span class="pre">soup.select(&quot;div</span> <span class="pre">&gt;</span> <span class="pre">span&quot;)</span> </code>选择所有直接位于”&lt;div&gt;” 元素内部的 “&lt;span&gt;” 元素。</p>
+</div></blockquote>
+<ul class="simple">
+<li><p><strong>示例代码</strong>
+获取网页中“&lt;header&gt;”标签内数据</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">bs4</span> <span class="kn">import</span> <span class="n">BeautifulSoup</span> <span class="c1">#新导入的库文件</span>
+
+<span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">bike_data_page</span><span class="o">.</span><span class="n">text</span><span class="p">,</span><span class="s1">&#39;html.parser&#39;</span><span class="p">)</span>  <span class="c1">#建立soup对象，获取网页源代码</span>
+<span class="n">select_data</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s2">&quot;header&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">select_data</span><span class="p">)</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>运行结果</p></li>
+</ul>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span>[`<span class="p">&lt;</span><span class="nt">header</span><span class="p">&gt;</span>`
+    `<span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>`共享单车数据 `<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>`
+    `<span class="p">&lt;/</span><span class="nt">header</span><span class="p">&gt;</span>`]
+</pre></div>
+</div>
+</section>
 <section id="id5">
-<h3>2.2.1 数据内容说明<a class="headerlink" href="#id5" title="永久链接至标题"></a></h3>
-<p>数据中包含某一年的某市某一区域内共享单车的每一次的租赁情况，期中包括时间、日期、月份、地点、天气等相关数据。<br></p>
+<h4>练习2：分别找标题和数据的标签并记录<a class="headerlink" href="#id5" title="永久链接至标题"></a></h4>
+<p><strong>注意：一定要先运行”练习1”代码！！再运行本行代码！！！！</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">bs4</span> <span class="kn">import</span> <span class="n">BeautifulSoup</span> <span class="c1">#新导入的库文件</span>
+
+<span class="c1">#使用select方法，抓取相关属性</span>
+<span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">bike_data_page</span><span class="o">.</span><span class="n">text</span><span class="p">,</span><span class="s1">&#39;html.parser&#39;</span><span class="p">)</span>  <span class="c1">#建立soup对象，获取网页源代码</span>
+<span class="n">select_head</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s2">&quot;th&quot;</span><span class="p">)</span>   <span class="c1">#获取标题数据</span>
+<span class="n">select_data</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s2">&quot;td&quot;</span><span class="p">)</span>   <span class="c1">#获取单车数据</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">select_head</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">select_data</span><span class="p">)</span>
+</pre></div>
+</div>
 <ul class="simple">
-<li><p>数据总量：1509922条<br>
-<strong>数据样式如图所示：</strong><br>
-<img alt="image" src="_images/2-2.png" /></p></li>
+<li><p>运行结果</p></li>
 </ul>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span>[`<span class="p">&lt;</span><span class="nt">th</span><span class="p">&gt;</span>`Index `<span class="p">&lt;/</span><span class="nt">th</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">th</span><span class="p">&gt;</span>`Bike ID `<span class="p">&lt;/</span><span class="nt">th</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">th</span><span class="p">&gt;</span>`Datetime `<span class="p">&lt;/</span><span class="nt">th</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">th</span><span class="p">&gt;</span>`Date `<span class="p">&lt;/</span><span class="nt">th</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">th</span><span class="p">&gt;</span>`Month `<span class="p">&lt;/</span><span class="nt">th</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">th</span><span class="p">&gt;</span>`Season `<span class="p">&lt;/</span><span class="nt">th</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">th</span><span class="p">&gt;</span>`Working Day `<span class="p">&lt;/</span><span class="nt">th</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">th</span><span class="p">&gt;</span>`Localhost `<span class="p">&lt;/</span><span class="nt">th</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">th</span><span class="p">&gt;</span>`Weather `<span class="p">&lt;/</span><span class="nt">th</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">th</span><span class="p">&gt;</span>`Daytime `<span class="p">&lt;/</span><span class="nt">th</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">th</span><span class="p">&gt;</span>`Temp Value `<span class="p">&lt;/</span><span class="nt">th</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">th</span><span class="p">&gt;</span>`Temp Unit `<span class="p">&lt;/</span><span class="nt">th</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">th</span><span class="p">&gt;</span>`Wind Speed `<span class="p">&lt;/</span><span class="nt">th</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">th</span><span class="p">&gt;</span>`Wind Unit `<span class="p">&lt;/</span><span class="nt">th</span><span class="p">&gt;</span>`]
+    [`<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`1170070 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`mr3774 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`18:14:00 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`7月10日 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`7 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`Summer `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`No `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`图书馆 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`Mostly cloudy `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`TRUE `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`6.1 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`C `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`1.9 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`km/h `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`1170071 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`mr5322 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`18:14:00 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`7月10日 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`7 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`Summer `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`No `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`图书馆 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`Mostly cloudy `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`TRUE `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`6.1 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`C `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`1.9 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`km/h `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`1170072 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`mr197 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`18:14:00 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`7月10日 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`7 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`Summer `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`No `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`图书馆 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`Mostly cloudy `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`TRUE `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`6.1 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`C `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`1.9 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`km/h `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`1170075 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`mr4877 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`18:15:00 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`7月10日 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`7 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`Summer `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`No `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`莘庄 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`Mostly cloudy `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`TRUE `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`6.1 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`C `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`1.9 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`km/h `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`1170077 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`mr5037 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`18:17:00 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`7月10日 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`7 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`Summer `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`No `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`图书馆 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`Mostly cloudy `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`TRUE `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`6.1 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`C `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`1.9 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`km/h `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`1170078 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`mr2785 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`18:17:00 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`7月10日 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`7 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`Summer `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`No `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`图书馆 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`Mostly cloudy `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`TRUE `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`6.1 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`C `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`1.9 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`km/h `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`1170079 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`mr4439 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`18:17:00 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`7月10日 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`7 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`Summer `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`No `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`图书馆 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`Mostly cloudy `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`TRUE `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`6.1 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`C `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`1.9 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`km/h `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`1170080 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`mr5233 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`18:01:32 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`7月10日 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`7 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`Summer `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`No `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`莘庄 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`Mostly cloudy `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`TRUE `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`6.1 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`C `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`1.9 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`km/h `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`1170081 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`mr8342 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`18:36:31 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`7月10日 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`7 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`Summer `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`No `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`图书馆 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`Mostly cloudy `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`TRUE `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`6.1 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`C `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`1.9 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`km/h `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`1170082 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`mr3054 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`18:53:51 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`7月10日 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`7 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`Summer `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`No `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`图书馆 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`Mostly cloudy `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`TRUE `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`6.1 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`C `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`1.9 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`km/h `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`1170083 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`mr9606 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`18:53:33 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`7月10日 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`7 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`Summer `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`No `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`图书馆 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`Mostly cloudy `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`TRUE `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`6.1 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`C `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`1.9 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`km/h `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`1170084 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`mr4158 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`18:23:20 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`7月10日 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`7 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`Summer `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`No `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`莘庄 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`Mostly cloudy `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`TRUE `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`6.1 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`C `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`1.9 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`km/h `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`1170085 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`mr8478 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`18:29:06 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`7月10日 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`7 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`Summer `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`No `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`莘庄 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`Mostly cloudy `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`TRUE `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`6.1 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`C `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`1.9 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`km/h `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`1170086 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`mr7253 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`18:11:56 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`7月10日 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`7 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`Summer `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`No `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`图书馆 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`Mostly cloudy `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`TRUE `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`6.1 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`C `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`1.9 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`km/h `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`1170087 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`mr5692 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`18:17:03 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`7月10日 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`7 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`Summer `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`No `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`图书馆 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`Mostly cloudy `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`TRUE `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`6.1 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`C `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`1.9 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`km/h `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`1170088 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`mr6387 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`18:09:34 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`7月10日 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`7 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`Summer `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`No `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`图书馆 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`Mostly cloudy `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`TRUE `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`6.1 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`C `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`1.9 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`km/h `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`1170089 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`mr8700 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`18:19:59 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`7月10日 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`7 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`Summer `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`No `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`莘庄 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`Mostly cloudy `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`TRUE `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`6.1 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`C `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`1.9 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`km/h `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`1170090 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`mr3476 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`18:18:52 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`7月10日 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`7 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`Summer `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`No `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`图书馆 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`Mostly cloudy `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`TRUE `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`6.1 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`C `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`1.9 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`km/h `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`1170091 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`mr1566 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`18:23:07 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`7月10日 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`7 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`Summer `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`No `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`莘庄 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`Mostly cloudy `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`TRUE `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`6.1 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`C `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`1.9 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`km/h `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`1170092 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`mr5498 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`18:33:57 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`7月10日 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`7 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`Summer `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`No `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`图书馆 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`Mostly cloudy `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`TRUE `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`6.1 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`C `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`1.9 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`km/h `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`1170093 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`mr1582 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`18:33:10 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`7月10日 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`7 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`Summer `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`No `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`图书馆 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`Mostly cloudy `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`TRUE `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`6.1 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`C `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`1.9 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`km/h `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`1170094 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`mr8897 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`18:01:56 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`7月10日 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`7 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`Summer `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`No `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`莘庄 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`Mostly cloudy `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`TRUE `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`6.1 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`C `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`1.9 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`km/h `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`1170095 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`mr1883 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`18:12:39 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`7月10日 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`7 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`Summer `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`No `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`图书馆 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`Mostly cloudy `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`TRUE `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`6.1 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`C `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`1.9 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`km/h `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`1170096 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`mr9865 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`18:34:02 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`7月10日 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`7 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`Summer `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`No `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`莘庄 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`Mostly cloudy `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`TRUE `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`6.1 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`C `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`1.9 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`km/h `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`1170097 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`mr3000 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`18:47:15 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`7月10日 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`7 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`Summer `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`No `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`图书馆 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`Mostly cloudy `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`TRUE `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`6.1 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`C `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`1.9 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`km/h `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`1170098 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`mr4582 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`18:31:34 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`7月10日 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`7 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`Summer `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`No `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`图书馆 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`Mostly cloudy `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`TRUE `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`6.1 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`C `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`1.9 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`km/h `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`1170099 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`mr6177 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`18:07:28 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`7月10日 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`7 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`Summer `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`No `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`图书馆 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`Mostly cloudy `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`TRUE `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`6.1 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`C `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`1.9 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`km/h `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`1170100 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`mr8438 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`18:36:26 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`7月10日 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`7 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`Summer `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`No `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`莘庄 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`Mostly cloudy `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`TRUE `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`6.1 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`C `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`1.9 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`km/h `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`1170101 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`mr5203 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`18:12:15 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`7月10日 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`7 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`Summer `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`No `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`莘庄 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`Mostly cloudy `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`TRUE `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`6.1 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`C `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`1.9 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`km/h `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`1170102 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`mr5403 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`18:30:18 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`7月10日 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`7 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`Summer `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`No `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`莘庄 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`Mostly cloudy `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`TRUE `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`6.1 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`C `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`1.9 `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`, `<span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span>`km/h `<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>`]
+</pre></div>
+</div>
 </section>
 <section id="id6">
-<h3>2.2.2 数据格式说明<a class="headerlink" href="#id6" title="永久链接至标题"></a></h3>
+<h4>练习3:整理获取的数据<a class="headerlink" href="#id6" title="永久链接至标题"></a></h4>
+<p>在之前的步骤中，我们已经使用 <strong>select</strong> 方法成功获取了包含 <strong>HTML</strong> 标签的共享单车数据的标题和数据。下一步，我们需要遍历 <strong>select_head</strong> 和 <strong>select_data</strong> 列表，从中提取文本内容。这需要从每个标签对象中获取 <strong>.text</strong> 属性的值来去除 <strong>HTML</strong> 标签。最终目标是将标题和数据合并，形成一个结构化的二维数组，其中第一行是数据标题，后续行是对应的数据，这样就能清晰地展示每个数据点与其对应标题的关系。</p>
+<ul class="simple">
+<li><p>查看标题、数据长度</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;标题长度&quot;</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">select_head</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;数据长度&quot;</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">select_data</span><span class="p">))</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>运行结果</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">标题长度</span> <span class="mi">14</span>
+<span class="n">数据长度</span> <span class="mi">420</span>
+</pre></div>
+</div>
+<p>接下来，我们将创建一个二维数组<strong>bike_data</strong>来组织这些数据。
+首先，通过上述打印信息比较 <strong>select_head</strong> 和 <strong>select_data</strong> 列表的长度，我们可以得知总共有30组数据，因为标题的数量是14，而数据的数量是420。在遍历 <strong>select_data</strong> 时，我们会将每14个数据项作为一组，添加到二维数组的新行中。
+转换过程如下图所示：
+<img alt="动画.gif" src="_images/2-1.gif" /></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">bike_data</span> <span class="o">=</span> <span class="p">[]</span> <span class="c1"># 建立一个空的二维数组</span>
+
+<span class="n">full_data</span> <span class="o">=</span> <span class="n">select_head</span> <span class="o">+</span> <span class="n">select_data</span> <span class="c1"># 将标题和数据的列表合并</span>
+<span class="n">extracted_data</span> <span class="o">=</span> <span class="p">[]</span> <span class="c1"># 建立一个空列表，用于记录每次遍历的结果</span>
+
+<span class="c1"># 遍历合并后的数据列表</span>
+<span class="k">for</span> <span class="n">count</span><span class="p">,</span> <span class="n">row_data</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">full_data</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span>
+    <span class="n">extracted_data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">row_data</span><span class="o">.</span><span class="n">text</span><span class="p">)</span> <span class="c1"># 添加当前元素的文本到列表</span>
+  
+    <span class="k">if</span> <span class="n">count</span> <span class="o">%</span> <span class="mi">14</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">bike_data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">extracted_data</span><span class="p">)</span> <span class="c1"># 每14个元素后，将累积的数据添加到二维数组中</span>
+        <span class="n">extracted_data</span> <span class="o">=</span> <span class="p">[]</span> <span class="c1"># 重置列表以用于下一组数据</span>
+    <span class="c1">#end if</span>
+<span class="c1">#end for</span>
+
+<span class="c1"># 打印二维数组中的每一行</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">bike_data</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>运行结果</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="s1">&#39;Index&#39;</span><span class="p">,</span> <span class="s1">&#39;Bike ID&#39;</span><span class="p">,</span> <span class="s1">&#39;Datetime&#39;</span><span class="p">,</span> <span class="s1">&#39;Date&#39;</span><span class="p">,</span> <span class="s1">&#39;Month&#39;</span><span class="p">,</span> <span class="s1">&#39;Season&#39;</span><span class="p">,</span> <span class="s1">&#39;Working Day&#39;</span><span class="p">,</span> <span class="s1">&#39;Localhost&#39;</span><span class="p">,</span> <span class="s1">&#39;Weather&#39;</span><span class="p">,</span> <span class="s1">&#39;Daytime&#39;</span><span class="p">,</span> <span class="s1">&#39;Temp Value&#39;</span><span class="p">,</span> <span class="s1">&#39;Temp Unit&#39;</span><span class="p">,</span> <span class="s1">&#39;Wind Speed&#39;</span><span class="p">,</span> <span class="s1">&#39;Wind Unit&#39;</span><span class="p">]</span>
+<span class="p">[</span><span class="s1">&#39;1170070&#39;</span><span class="p">,</span> <span class="s1">&#39;mr3774&#39;</span><span class="p">,</span> <span class="s1">&#39;18:14:00&#39;</span><span class="p">,</span> <span class="s1">&#39;7月10日&#39;</span><span class="p">,</span> <span class="s1">&#39;7&#39;</span><span class="p">,</span> <span class="s1">&#39;Summer&#39;</span><span class="p">,</span> <span class="s1">&#39;No&#39;</span><span class="p">,</span> <span class="s1">&#39;图书馆&#39;</span><span class="p">,</span> <span class="s1">&#39;Mostly cloudy&#39;</span><span class="p">,</span> <span class="s1">&#39;TRUE&#39;</span><span class="p">,</span> <span class="s1">&#39;6.1&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;1.9&#39;</span><span class="p">,</span> <span class="s1">&#39;km/h&#39;</span><span class="p">]</span>
+<span class="p">[</span><span class="s1">&#39;1170071&#39;</span><span class="p">,</span> <span class="s1">&#39;mr5322&#39;</span><span class="p">,</span> <span class="s1">&#39;18:14:00&#39;</span><span class="p">,</span> <span class="s1">&#39;7月10日&#39;</span><span class="p">,</span> <span class="s1">&#39;7&#39;</span><span class="p">,</span> <span class="s1">&#39;Summer&#39;</span><span class="p">,</span> <span class="s1">&#39;No&#39;</span><span class="p">,</span> <span class="s1">&#39;图书馆&#39;</span><span class="p">,</span> <span class="s1">&#39;Mostly cloudy&#39;</span><span class="p">,</span> <span class="s1">&#39;TRUE&#39;</span><span class="p">,</span> <span class="s1">&#39;6.1&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;1.9&#39;</span><span class="p">,</span> <span class="s1">&#39;km/h&#39;</span><span class="p">]</span>
+<span class="p">[</span><span class="s1">&#39;1170072&#39;</span><span class="p">,</span> <span class="s1">&#39;mr197&#39;</span><span class="p">,</span> <span class="s1">&#39;18:14:00&#39;</span><span class="p">,</span> <span class="s1">&#39;7月10日&#39;</span><span class="p">,</span> <span class="s1">&#39;7&#39;</span><span class="p">,</span> <span class="s1">&#39;Summer&#39;</span><span class="p">,</span> <span class="s1">&#39;No&#39;</span><span class="p">,</span> <span class="s1">&#39;图书馆&#39;</span><span class="p">,</span> <span class="s1">&#39;Mostly cloudy&#39;</span><span class="p">,</span> <span class="s1">&#39;TRUE&#39;</span><span class="p">,</span> <span class="s1">&#39;6.1&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;1.9&#39;</span><span class="p">,</span> <span class="s1">&#39;km/h&#39;</span><span class="p">]</span>
+<span class="p">[</span><span class="s1">&#39;1170075&#39;</span><span class="p">,</span> <span class="s1">&#39;mr4877&#39;</span><span class="p">,</span> <span class="s1">&#39;18:15:00&#39;</span><span class="p">,</span> <span class="s1">&#39;7月10日&#39;</span><span class="p">,</span> <span class="s1">&#39;7&#39;</span><span class="p">,</span> <span class="s1">&#39;Summer&#39;</span><span class="p">,</span> <span class="s1">&#39;No&#39;</span><span class="p">,</span> <span class="s1">&#39;莘庄&#39;</span><span class="p">,</span> <span class="s1">&#39;Mostly cloudy&#39;</span><span class="p">,</span> <span class="s1">&#39;TRUE&#39;</span><span class="p">,</span> <span class="s1">&#39;6.1&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;1.9&#39;</span><span class="p">,</span> <span class="s1">&#39;km/h&#39;</span><span class="p">]</span>
+<span class="p">[</span><span class="s1">&#39;1170077&#39;</span><span class="p">,</span> <span class="s1">&#39;mr5037&#39;</span><span class="p">,</span> <span class="s1">&#39;18:17:00&#39;</span><span class="p">,</span> <span class="s1">&#39;7月10日&#39;</span><span class="p">,</span> <span class="s1">&#39;7&#39;</span><span class="p">,</span> <span class="s1">&#39;Summer&#39;</span><span class="p">,</span> <span class="s1">&#39;No&#39;</span><span class="p">,</span> <span class="s1">&#39;图书馆&#39;</span><span class="p">,</span> <span class="s1">&#39;Mostly cloudy&#39;</span><span class="p">,</span> <span class="s1">&#39;TRUE&#39;</span><span class="p">,</span> <span class="s1">&#39;6.1&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;1.9&#39;</span><span class="p">,</span> <span class="s1">&#39;km/h&#39;</span><span class="p">]</span>
+<span class="p">[</span><span class="s1">&#39;1170078&#39;</span><span class="p">,</span> <span class="s1">&#39;mr2785&#39;</span><span class="p">,</span> <span class="s1">&#39;18:17:00&#39;</span><span class="p">,</span> <span class="s1">&#39;7月10日&#39;</span><span class="p">,</span> <span class="s1">&#39;7&#39;</span><span class="p">,</span> <span class="s1">&#39;Summer&#39;</span><span class="p">,</span> <span class="s1">&#39;No&#39;</span><span class="p">,</span> <span class="s1">&#39;图书馆&#39;</span><span class="p">,</span> <span class="s1">&#39;Mostly cloudy&#39;</span><span class="p">,</span> <span class="s1">&#39;TRUE&#39;</span><span class="p">,</span> <span class="s1">&#39;6.1&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;1.9&#39;</span><span class="p">,</span> <span class="s1">&#39;km/h&#39;</span><span class="p">]</span>
+<span class="p">[</span><span class="s1">&#39;1170079&#39;</span><span class="p">,</span> <span class="s1">&#39;mr4439&#39;</span><span class="p">,</span> <span class="s1">&#39;18:17:00&#39;</span><span class="p">,</span> <span class="s1">&#39;7月10日&#39;</span><span class="p">,</span> <span class="s1">&#39;7&#39;</span><span class="p">,</span> <span class="s1">&#39;Summer&#39;</span><span class="p">,</span> <span class="s1">&#39;No&#39;</span><span class="p">,</span> <span class="s1">&#39;图书馆&#39;</span><span class="p">,</span> <span class="s1">&#39;Mostly cloudy&#39;</span><span class="p">,</span> <span class="s1">&#39;TRUE&#39;</span><span class="p">,</span> <span class="s1">&#39;6.1&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;1.9&#39;</span><span class="p">,</span> <span class="s1">&#39;km/h&#39;</span><span class="p">]</span>
+<span class="p">[</span><span class="s1">&#39;1170080&#39;</span><span class="p">,</span> <span class="s1">&#39;mr5233&#39;</span><span class="p">,</span> <span class="s1">&#39;18:01:32&#39;</span><span class="p">,</span> <span class="s1">&#39;7月10日&#39;</span><span class="p">,</span> <span class="s1">&#39;7&#39;</span><span class="p">,</span> <span class="s1">&#39;Summer&#39;</span><span class="p">,</span> <span class="s1">&#39;No&#39;</span><span class="p">,</span> <span class="s1">&#39;莘庄&#39;</span><span class="p">,</span> <span class="s1">&#39;Mostly cloudy&#39;</span><span class="p">,</span> <span class="s1">&#39;TRUE&#39;</span><span class="p">,</span> <span class="s1">&#39;6.1&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;1.9&#39;</span><span class="p">,</span> <span class="s1">&#39;km/h&#39;</span><span class="p">]</span>
+<span class="p">[</span><span class="s1">&#39;1170081&#39;</span><span class="p">,</span> <span class="s1">&#39;mr8342&#39;</span><span class="p">,</span> <span class="s1">&#39;18:36:31&#39;</span><span class="p">,</span> <span class="s1">&#39;7月10日&#39;</span><span class="p">,</span> <span class="s1">&#39;7&#39;</span><span class="p">,</span> <span class="s1">&#39;Summer&#39;</span><span class="p">,</span> <span class="s1">&#39;No&#39;</span><span class="p">,</span> <span class="s1">&#39;图书馆&#39;</span><span class="p">,</span> <span class="s1">&#39;Mostly cloudy&#39;</span><span class="p">,</span> <span class="s1">&#39;TRUE&#39;</span><span class="p">,</span> <span class="s1">&#39;6.1&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;1.9&#39;</span><span class="p">,</span> <span class="s1">&#39;km/h&#39;</span><span class="p">]</span>
+<span class="p">[</span><span class="s1">&#39;1170082&#39;</span><span class="p">,</span> <span class="s1">&#39;mr3054&#39;</span><span class="p">,</span> <span class="s1">&#39;18:53:51&#39;</span><span class="p">,</span> <span class="s1">&#39;7月10日&#39;</span><span class="p">,</span> <span class="s1">&#39;7&#39;</span><span class="p">,</span> <span class="s1">&#39;Summer&#39;</span><span class="p">,</span> <span class="s1">&#39;No&#39;</span><span class="p">,</span> <span class="s1">&#39;图书馆&#39;</span><span class="p">,</span> <span class="s1">&#39;Mostly cloudy&#39;</span><span class="p">,</span> <span class="s1">&#39;TRUE&#39;</span><span class="p">,</span> <span class="s1">&#39;6.1&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;1.9&#39;</span><span class="p">,</span> <span class="s1">&#39;km/h&#39;</span><span class="p">]</span>
+<span class="p">[</span><span class="s1">&#39;1170083&#39;</span><span class="p">,</span> <span class="s1">&#39;mr9606&#39;</span><span class="p">,</span> <span class="s1">&#39;18:53:33&#39;</span><span class="p">,</span> <span class="s1">&#39;7月10日&#39;</span><span class="p">,</span> <span class="s1">&#39;7&#39;</span><span class="p">,</span> <span class="s1">&#39;Summer&#39;</span><span class="p">,</span> <span class="s1">&#39;No&#39;</span><span class="p">,</span> <span class="s1">&#39;图书馆&#39;</span><span class="p">,</span> <span class="s1">&#39;Mostly cloudy&#39;</span><span class="p">,</span> <span class="s1">&#39;TRUE&#39;</span><span class="p">,</span> <span class="s1">&#39;6.1&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;1.9&#39;</span><span class="p">,</span> <span class="s1">&#39;km/h&#39;</span><span class="p">]</span>
+<span class="p">[</span><span class="s1">&#39;1170084&#39;</span><span class="p">,</span> <span class="s1">&#39;mr4158&#39;</span><span class="p">,</span> <span class="s1">&#39;18:23:20&#39;</span><span class="p">,</span> <span class="s1">&#39;7月10日&#39;</span><span class="p">,</span> <span class="s1">&#39;7&#39;</span><span class="p">,</span> <span class="s1">&#39;Summer&#39;</span><span class="p">,</span> <span class="s1">&#39;No&#39;</span><span class="p">,</span> <span class="s1">&#39;莘庄&#39;</span><span class="p">,</span> <span class="s1">&#39;Mostly cloudy&#39;</span><span class="p">,</span> <span class="s1">&#39;TRUE&#39;</span><span class="p">,</span> <span class="s1">&#39;6.1&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;1.9&#39;</span><span class="p">,</span> <span class="s1">&#39;km/h&#39;</span><span class="p">]</span>
+<span class="p">[</span><span class="s1">&#39;1170085&#39;</span><span class="p">,</span> <span class="s1">&#39;mr8478&#39;</span><span class="p">,</span> <span class="s1">&#39;18:29:06&#39;</span><span class="p">,</span> <span class="s1">&#39;7月10日&#39;</span><span class="p">,</span> <span class="s1">&#39;7&#39;</span><span class="p">,</span> <span class="s1">&#39;Summer&#39;</span><span class="p">,</span> <span class="s1">&#39;No&#39;</span><span class="p">,</span> <span class="s1">&#39;莘庄&#39;</span><span class="p">,</span> <span class="s1">&#39;Mostly cloudy&#39;</span><span class="p">,</span> <span class="s1">&#39;TRUE&#39;</span><span class="p">,</span> <span class="s1">&#39;6.1&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;1.9&#39;</span><span class="p">,</span> <span class="s1">&#39;km/h&#39;</span><span class="p">]</span>
+<span class="p">[</span><span class="s1">&#39;1170086&#39;</span><span class="p">,</span> <span class="s1">&#39;mr7253&#39;</span><span class="p">,</span> <span class="s1">&#39;18:11:56&#39;</span><span class="p">,</span> <span class="s1">&#39;7月10日&#39;</span><span class="p">,</span> <span class="s1">&#39;7&#39;</span><span class="p">,</span> <span class="s1">&#39;Summer&#39;</span><span class="p">,</span> <span class="s1">&#39;No&#39;</span><span class="p">,</span> <span class="s1">&#39;图书馆&#39;</span><span class="p">,</span> <span class="s1">&#39;Mostly cloudy&#39;</span><span class="p">,</span> <span class="s1">&#39;TRUE&#39;</span><span class="p">,</span> <span class="s1">&#39;6.1&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;1.9&#39;</span><span class="p">,</span> <span class="s1">&#39;km/h&#39;</span><span class="p">]</span>
+<span class="p">[</span><span class="s1">&#39;1170087&#39;</span><span class="p">,</span> <span class="s1">&#39;mr5692&#39;</span><span class="p">,</span> <span class="s1">&#39;18:17:03&#39;</span><span class="p">,</span> <span class="s1">&#39;7月10日&#39;</span><span class="p">,</span> <span class="s1">&#39;7&#39;</span><span class="p">,</span> <span class="s1">&#39;Summer&#39;</span><span class="p">,</span> <span class="s1">&#39;No&#39;</span><span class="p">,</span> <span class="s1">&#39;图书馆&#39;</span><span class="p">,</span> <span class="s1">&#39;Mostly cloudy&#39;</span><span class="p">,</span> <span class="s1">&#39;TRUE&#39;</span><span class="p">,</span> <span class="s1">&#39;6.1&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;1.9&#39;</span><span class="p">,</span> <span class="s1">&#39;km/h&#39;</span><span class="p">]</span>
+<span class="p">[</span><span class="s1">&#39;1170088&#39;</span><span class="p">,</span> <span class="s1">&#39;mr6387&#39;</span><span class="p">,</span> <span class="s1">&#39;18:09:34&#39;</span><span class="p">,</span> <span class="s1">&#39;7月10日&#39;</span><span class="p">,</span> <span class="s1">&#39;7&#39;</span><span class="p">,</span> <span class="s1">&#39;Summer&#39;</span><span class="p">,</span> <span class="s1">&#39;No&#39;</span><span class="p">,</span> <span class="s1">&#39;图书馆&#39;</span><span class="p">,</span> <span class="s1">&#39;Mostly cloudy&#39;</span><span class="p">,</span> <span class="s1">&#39;TRUE&#39;</span><span class="p">,</span> <span class="s1">&#39;6.1&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;1.9&#39;</span><span class="p">,</span> <span class="s1">&#39;km/h&#39;</span><span class="p">]</span>
+<span class="p">[</span><span class="s1">&#39;1170089&#39;</span><span class="p">,</span> <span class="s1">&#39;mr8700&#39;</span><span class="p">,</span> <span class="s1">&#39;18:19:59&#39;</span><span class="p">,</span> <span class="s1">&#39;7月10日&#39;</span><span class="p">,</span> <span class="s1">&#39;7&#39;</span><span class="p">,</span> <span class="s1">&#39;Summer&#39;</span><span class="p">,</span> <span class="s1">&#39;No&#39;</span><span class="p">,</span> <span class="s1">&#39;莘庄&#39;</span><span class="p">,</span> <span class="s1">&#39;Mostly cloudy&#39;</span><span class="p">,</span> <span class="s1">&#39;TRUE&#39;</span><span class="p">,</span> <span class="s1">&#39;6.1&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;1.9&#39;</span><span class="p">,</span> <span class="s1">&#39;km/h&#39;</span><span class="p">]</span>
+<span class="p">[</span><span class="s1">&#39;1170090&#39;</span><span class="p">,</span> <span class="s1">&#39;mr3476&#39;</span><span class="p">,</span> <span class="s1">&#39;18:18:52&#39;</span><span class="p">,</span> <span class="s1">&#39;7月10日&#39;</span><span class="p">,</span> <span class="s1">&#39;7&#39;</span><span class="p">,</span> <span class="s1">&#39;Summer&#39;</span><span class="p">,</span> <span class="s1">&#39;No&#39;</span><span class="p">,</span> <span class="s1">&#39;图书馆&#39;</span><span class="p">,</span> <span class="s1">&#39;Mostly cloudy&#39;</span><span class="p">,</span> <span class="s1">&#39;TRUE&#39;</span><span class="p">,</span> <span class="s1">&#39;6.1&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;1.9&#39;</span><span class="p">,</span> <span class="s1">&#39;km/h&#39;</span><span class="p">]</span>
+<span class="p">[</span><span class="s1">&#39;1170091&#39;</span><span class="p">,</span> <span class="s1">&#39;mr1566&#39;</span><span class="p">,</span> <span class="s1">&#39;18:23:07&#39;</span><span class="p">,</span> <span class="s1">&#39;7月10日&#39;</span><span class="p">,</span> <span class="s1">&#39;7&#39;</span><span class="p">,</span> <span class="s1">&#39;Summer&#39;</span><span class="p">,</span> <span class="s1">&#39;No&#39;</span><span class="p">,</span> <span class="s1">&#39;莘庄&#39;</span><span class="p">,</span> <span class="s1">&#39;Mostly cloudy&#39;</span><span class="p">,</span> <span class="s1">&#39;TRUE&#39;</span><span class="p">,</span> <span class="s1">&#39;6.1&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;1.9&#39;</span><span class="p">,</span> <span class="s1">&#39;km/h&#39;</span><span class="p">]</span>
+<span class="p">[</span><span class="s1">&#39;1170092&#39;</span><span class="p">,</span> <span class="s1">&#39;mr5498&#39;</span><span class="p">,</span> <span class="s1">&#39;18:33:57&#39;</span><span class="p">,</span> <span class="s1">&#39;7月10日&#39;</span><span class="p">,</span> <span class="s1">&#39;7&#39;</span><span class="p">,</span> <span class="s1">&#39;Summer&#39;</span><span class="p">,</span> <span class="s1">&#39;No&#39;</span><span class="p">,</span> <span class="s1">&#39;图书馆&#39;</span><span class="p">,</span> <span class="s1">&#39;Mostly cloudy&#39;</span><span class="p">,</span> <span class="s1">&#39;TRUE&#39;</span><span class="p">,</span> <span class="s1">&#39;6.1&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;1.9&#39;</span><span class="p">,</span> <span class="s1">&#39;km/h&#39;</span><span class="p">]</span>
+<span class="p">[</span><span class="s1">&#39;1170093&#39;</span><span class="p">,</span> <span class="s1">&#39;mr1582&#39;</span><span class="p">,</span> <span class="s1">&#39;18:33:10&#39;</span><span class="p">,</span> <span class="s1">&#39;7月10日&#39;</span><span class="p">,</span> <span class="s1">&#39;7&#39;</span><span class="p">,</span> <span class="s1">&#39;Summer&#39;</span><span class="p">,</span> <span class="s1">&#39;No&#39;</span><span class="p">,</span> <span class="s1">&#39;图书馆&#39;</span><span class="p">,</span> <span class="s1">&#39;Mostly cloudy&#39;</span><span class="p">,</span> <span class="s1">&#39;TRUE&#39;</span><span class="p">,</span> <span class="s1">&#39;6.1&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;1.9&#39;</span><span class="p">,</span> <span class="s1">&#39;km/h&#39;</span><span class="p">]</span>
+<span class="p">[</span><span class="s1">&#39;1170094&#39;</span><span class="p">,</span> <span class="s1">&#39;mr8897&#39;</span><span class="p">,</span> <span class="s1">&#39;18:01:56&#39;</span><span class="p">,</span> <span class="s1">&#39;7月10日&#39;</span><span class="p">,</span> <span class="s1">&#39;7&#39;</span><span class="p">,</span> <span class="s1">&#39;Summer&#39;</span><span class="p">,</span> <span class="s1">&#39;No&#39;</span><span class="p">,</span> <span class="s1">&#39;莘庄&#39;</span><span class="p">,</span> <span class="s1">&#39;Mostly cloudy&#39;</span><span class="p">,</span> <span class="s1">&#39;TRUE&#39;</span><span class="p">,</span> <span class="s1">&#39;6.1&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;1.9&#39;</span><span class="p">,</span> <span class="s1">&#39;km/h&#39;</span><span class="p">]</span>
+<span class="p">[</span><span class="s1">&#39;1170095&#39;</span><span class="p">,</span> <span class="s1">&#39;mr1883&#39;</span><span class="p">,</span> <span class="s1">&#39;18:12:39&#39;</span><span class="p">,</span> <span class="s1">&#39;7月10日&#39;</span><span class="p">,</span> <span class="s1">&#39;7&#39;</span><span class="p">,</span> <span class="s1">&#39;Summer&#39;</span><span class="p">,</span> <span class="s1">&#39;No&#39;</span><span class="p">,</span> <span class="s1">&#39;图书馆&#39;</span><span class="p">,</span> <span class="s1">&#39;Mostly cloudy&#39;</span><span class="p">,</span> <span class="s1">&#39;TRUE&#39;</span><span class="p">,</span> <span class="s1">&#39;6.1&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;1.9&#39;</span><span class="p">,</span> <span class="s1">&#39;km/h&#39;</span><span class="p">]</span>
+<span class="p">[</span><span class="s1">&#39;1170096&#39;</span><span class="p">,</span> <span class="s1">&#39;mr9865&#39;</span><span class="p">,</span> <span class="s1">&#39;18:34:02&#39;</span><span class="p">,</span> <span class="s1">&#39;7月10日&#39;</span><span class="p">,</span> <span class="s1">&#39;7&#39;</span><span class="p">,</span> <span class="s1">&#39;Summer&#39;</span><span class="p">,</span> <span class="s1">&#39;No&#39;</span><span class="p">,</span> <span class="s1">&#39;莘庄&#39;</span><span class="p">,</span> <span class="s1">&#39;Mostly cloudy&#39;</span><span class="p">,</span> <span class="s1">&#39;TRUE&#39;</span><span class="p">,</span> <span class="s1">&#39;6.1&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;1.9&#39;</span><span class="p">,</span> <span class="s1">&#39;km/h&#39;</span><span class="p">]</span>
+<span class="p">[</span><span class="s1">&#39;1170097&#39;</span><span class="p">,</span> <span class="s1">&#39;mr3000&#39;</span><span class="p">,</span> <span class="s1">&#39;18:47:15&#39;</span><span class="p">,</span> <span class="s1">&#39;7月10日&#39;</span><span class="p">,</span> <span class="s1">&#39;7&#39;</span><span class="p">,</span> <span class="s1">&#39;Summer&#39;</span><span class="p">,</span> <span class="s1">&#39;No&#39;</span><span class="p">,</span> <span class="s1">&#39;图书馆&#39;</span><span class="p">,</span> <span class="s1">&#39;Mostly cloudy&#39;</span><span class="p">,</span> <span class="s1">&#39;TRUE&#39;</span><span class="p">,</span> <span class="s1">&#39;6.1&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;1.9&#39;</span><span class="p">,</span> <span class="s1">&#39;km/h&#39;</span><span class="p">]</span>
+<span class="p">[</span><span class="s1">&#39;1170098&#39;</span><span class="p">,</span> <span class="s1">&#39;mr4582&#39;</span><span class="p">,</span> <span class="s1">&#39;18:31:34&#39;</span><span class="p">,</span> <span class="s1">&#39;7月10日&#39;</span><span class="p">,</span> <span class="s1">&#39;7&#39;</span><span class="p">,</span> <span class="s1">&#39;Summer&#39;</span><span class="p">,</span> <span class="s1">&#39;No&#39;</span><span class="p">,</span> <span class="s1">&#39;图书馆&#39;</span><span class="p">,</span> <span class="s1">&#39;Mostly cloudy&#39;</span><span class="p">,</span> <span class="s1">&#39;TRUE&#39;</span><span class="p">,</span> <span class="s1">&#39;6.1&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;1.9&#39;</span><span class="p">,</span> <span class="s1">&#39;km/h&#39;</span><span class="p">]</span>
+<span class="p">[</span><span class="s1">&#39;1170099&#39;</span><span class="p">,</span> <span class="s1">&#39;mr6177&#39;</span><span class="p">,</span> <span class="s1">&#39;18:07:28&#39;</span><span class="p">,</span> <span class="s1">&#39;7月10日&#39;</span><span class="p">,</span> <span class="s1">&#39;7&#39;</span><span class="p">,</span> <span class="s1">&#39;Summer&#39;</span><span class="p">,</span> <span class="s1">&#39;No&#39;</span><span class="p">,</span> <span class="s1">&#39;图书馆&#39;</span><span class="p">,</span> <span class="s1">&#39;Mostly cloudy&#39;</span><span class="p">,</span> <span class="s1">&#39;TRUE&#39;</span><span class="p">,</span> <span class="s1">&#39;6.1&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;1.9&#39;</span><span class="p">,</span> <span class="s1">&#39;km/h&#39;</span><span class="p">]</span>
+<span class="p">[</span><span class="s1">&#39;1170100&#39;</span><span class="p">,</span> <span class="s1">&#39;mr8438&#39;</span><span class="p">,</span> <span class="s1">&#39;18:36:26&#39;</span><span class="p">,</span> <span class="s1">&#39;7月10日&#39;</span><span class="p">,</span> <span class="s1">&#39;7&#39;</span><span class="p">,</span> <span class="s1">&#39;Summer&#39;</span><span class="p">,</span> <span class="s1">&#39;No&#39;</span><span class="p">,</span> <span class="s1">&#39;莘庄&#39;</span><span class="p">,</span> <span class="s1">&#39;Mostly cloudy&#39;</span><span class="p">,</span> <span class="s1">&#39;TRUE&#39;</span><span class="p">,</span> <span class="s1">&#39;6.1&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;1.9&#39;</span><span class="p">,</span> <span class="s1">&#39;km/h&#39;</span><span class="p">]</span>
+<span class="p">[</span><span class="s1">&#39;1170101&#39;</span><span class="p">,</span> <span class="s1">&#39;mr5203&#39;</span><span class="p">,</span> <span class="s1">&#39;18:12:15&#39;</span><span class="p">,</span> <span class="s1">&#39;7月10日&#39;</span><span class="p">,</span> <span class="s1">&#39;7&#39;</span><span class="p">,</span> <span class="s1">&#39;Summer&#39;</span><span class="p">,</span> <span class="s1">&#39;No&#39;</span><span class="p">,</span> <span class="s1">&#39;莘庄&#39;</span><span class="p">,</span> <span class="s1">&#39;Mostly cloudy&#39;</span><span class="p">,</span> <span class="s1">&#39;TRUE&#39;</span><span class="p">,</span> <span class="s1">&#39;6.1&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;1.9&#39;</span><span class="p">,</span> <span class="s1">&#39;km/h&#39;</span><span class="p">]</span>
+<span class="p">[</span><span class="s1">&#39;1170102&#39;</span><span class="p">,</span> <span class="s1">&#39;mr5403&#39;</span><span class="p">,</span> <span class="s1">&#39;18:30:18&#39;</span><span class="p">,</span> <span class="s1">&#39;7月10日&#39;</span><span class="p">,</span> <span class="s1">&#39;7&#39;</span><span class="p">,</span> <span class="s1">&#39;Summer&#39;</span><span class="p">,</span> <span class="s1">&#39;No&#39;</span><span class="p">,</span> <span class="s1">&#39;莘庄&#39;</span><span class="p">,</span> <span class="s1">&#39;Mostly cloudy&#39;</span><span class="p">,</span> <span class="s1">&#39;TRUE&#39;</span><span class="p">,</span> <span class="s1">&#39;6.1&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;1.9&#39;</span><span class="p">,</span> <span class="s1">&#39;km/h&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</section>
+<section id="id7">
+<h4>2.1.3 数据存储<a class="headerlink" href="#id7" title="永久链接至标题"></a></h4>
+<p>注意：一定要先运行上面代码！！再运行本行代码！！！！</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">bike_data</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="n">columns</span><span class="o">=</span><span class="n">bike_data</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+<span class="c1"># 写入 CSV 文件</span>
+<span class="n">filename</span> <span class="o">=</span> <span class="s1">&#39;bike_data.csv&#39;</span>
+<span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;数据已写入 </span><span class="si">{</span><span class="n">filename</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>运行结果</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">数据已写入</span> <span class="n">bike_data</span><span class="o">.</span><span class="n">csv</span>
+</pre></div>
+</div>
+<p>2.1.4 网络爬虫道德规范</p>
+<p>请记住，获取网页内容时需要确保你遵循网站的 robots.txt 文件和服务条款，以免违反法律或道德规范。</p>
+<ul class="simple">
+<li><p><strong>以“百度”为例</strong>
+要获取百度的 <strong>robots.txt</strong> 文件，通常只需在浏览器的地址栏中输入以下URL：
+<code class="docutils literal notranslate"><span class="pre">https://www.baidu.com/robots.txt</span></code>
+这将直接显示百度站点根目录下的 <strong>robots.txt</strong> 文件内容。根据 <strong>robots.txt</strong> 的协议，爬虫会首先检查这个文件来确定它们是否有权限抓取该站点的特定部分。如果 <strong>robots.txt</strong> 文件存在，爬虫将遵循其中定义的规则。如果不存在，爬虫将默认可以访问站点的所有部分。
+<img alt="image.png" src="_images/2-2.png" /></p></li>
+</ul>
+</section>
+</section>
+<section id="id8">
+<h3>2.2 下载开源数据集（<em>本次活动数据集来源</em>）<a class="headerlink" href="#id8" title="永久链接至标题"></a></h3>
+<p>本次活动我们主要通过下载开源数据集的方式来获取数据，既然是通过网站上下载的数据集，那么我们就需要查看下载网站上给出的数据相关<em>内容说明</em>和<em>格式说明</em>，以便我们用正确的方式来打开和分析数据。<code class="docutils literal notranslate"><span class="pre">&lt;br&gt;</span></code></p>
+<ul class="simple">
+<li><p>如下图所示，这是某个网站上的开源数据，分别对数据内容和格式进行详细说明。
+<img alt="image.png" src="_images/2-3.png" /></p></li>
+</ul>
+<section id="id9">
+<h4>2.2.1 数据内容说明<a class="headerlink" href="#id9" title="永久链接至标题"></a></h4>
+<p>数据中包含某一年的某市某一区域内共享单车的每一次的租赁情况，期中包括时间、日期、月份、地点、天气等相关数据。<code class="docutils literal notranslate"><span class="pre">&lt;br&gt;</span></code></p>
+<ul class="simple">
+<li><p>数据总量：1509922条</p></li>
+<li><p><strong>数据样式如图所示：</strong>
+<img alt="image.png" src="_images/2-4.png" /></p></li>
+</ul>
+</section>
+<section id="id10">
+<h4>2.2.2 数据格式说明<a class="headerlink" href="#id10" title="永久链接至标题"></a></h4>
 <ul class="simple">
 <li><p>index 索引</p></li>
 <li><p>bike_id 车辆编号</p></li>
@@ -360,6 +1025,7 @@
 <li><p>wind_speed 风速</p></li>
 <li><p>wind_unit 风速单位</p></li>
 </ul>
+</section>
 </section>
 </section>
 </section>

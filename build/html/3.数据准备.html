@@ -23,7 +23,7 @@
     <link rel="index" title="索引" href="genindex.html" />
     <link rel="search" title="搜索" href="search.html" />
     <link rel="next" title="4.数据探索和可视化" href="4.%E6%95%B0%E6%8D%AE%E6%8E%A2%E7%B4%A2%E5%92%8C%E5%8F%AF%E8%A7%86%E5%8C%96.html" />
-    <link rel="prev" title="2.数据抽取（采集、获取方式）" href="2.%E6%95%B0%E6%8D%AE%E6%8A%BD%E5%8F%96.html" /> 
+    <link rel="prev" title="数据分析" href="2.%E6%95%B0%E6%8D%AE%E6%8A%BD%E5%8F%96.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -46,7 +46,7 @@
 <li class="toctree-l1"><a class="reference internal" href="about.html">序言：Python数据分析学习项目说明</a></li>
 <li class="toctree-l1"><a class="reference internal" href="0.%E5%BC%95%E8%A8%80.html">0.引言</a></li>
 <li class="toctree-l1"><a class="reference internal" href="1.%E9%97%AE%E9%A2%98%E5%AE%9A%E4%B9%89.html">1.问题定义——共享单车需求数据分析</a></li>
-<li class="toctree-l1"><a class="reference internal" href="2.%E6%95%B0%E6%8D%AE%E6%8A%BD%E5%8F%96.html">2.数据抽取（采集、获取方式）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2.%E6%95%B0%E6%8D%AE%E6%8A%BD%E5%8F%96.html">数据分析</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">3.数据准备</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#id2">3.1 数据导入</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#pandas">3.1.1 Pandas库介绍</a></li>
@@ -123,7 +123,7 @@
 </style>
 <section id="id1">
 <h1>3.数据准备<a class="headerlink" href="#id1" title="永久链接至标题"></a></h1>
-<p>本环节我们将进入数据分析准备阶段，原始数据并没有我们想象中的那么友好。有的数据会不符合格式，有的数据会缺失，所以我们在对数据可视化之前，需要将原始数据读取，然后将原始进行处理。祛除不符合要求格式的数据，从而才能将“洗”过的数据进行后面的统计、计算和加工。这个过程我们称之为“洗数据”。在实际运用中，我们会遇到各种情况，需要的数据类型不同，就要不同的处理方式，本章节我们将简单初步讲解如何简单的“洗数据”。——<em>老李</em><br></p>
+<p>本环节我们将进入数据分析准备阶段，原始数据并没有我们想象中的那么友好。有的数据会不符合格式，有的数据会缺失，所以我们在对数据可视化之前，需要将原始数据读取，然后将原始进行处理。祛除不符合要求格式的数据，从而才能将“洗”过的数据进行后面的统计、计算和加工。这个过程我们称之为“洗数据”。在实际运用中，我们会遇到各种情况，需要的数据类型不同，就要不同的处理方式，本章节我们将简单初步讲解如何简单的“洗数据”。——<em>老李</em><code class="docutils literal notranslate"><span class="pre">&lt;br&gt;</span></code></p>
 <blockquote>
 <div><p>这一部分我们将通过以下三个环节来完成：</p>
 <ul class="simple">
@@ -137,18 +137,18 @@
 <section id="pandas">
 <h3>3.1.1 Pandas库介绍<a class="headerlink" href="#pandas" title="永久链接至标题"></a></h3>
 <ul class="simple">
-<li><p>Pandas简介<br>
-Pandas（发音：/ˈpændəz/）是 Python 语言开发的用于数据处理（data manipulation）和数据分析（data analysis）的第三方库。它擅长处理数字型数据和时间序列数据，当然文本型的数据也能轻松处理。<br><br></p></li>
-<li><p>名字来源<br>
-Pandas 的命名来源并非「熊猫」，而是来自于计量经济学中术语<strong>面板数据</strong>（Panel data），它是一种数据集的结构类型，具有横截面和时间序列两个维度。不过，我们不用必须了解它，它只是一种灵感、思想来源。<br><br></p></li>
-<li><p>用途<br>
-Pandas 对数据的处理是为数据的分析服务的，它所提供的各种数据处理方法、工具是基于数理统计学出发，包含了日常应用中的众多数据分析方法。我们学习它不光掌控它的相应操作技术，还要从它的处理思路中学习数据分析的理论和方法。<br>
-1.轻松应用在<strong>金融、统计、数理研究、物理计算、社会科学、工程等领域里</strong>；<br>
-2.<strong>实现复杂的处理逻辑</strong>，这些往往是 Excel 等工具无法处理的；<br>
-3.可以做到<strong>非常震撼的可视化</strong>，它对接众多的高颜值可视化库，可以实现动态数据交互效果。<br><br></p></li>
-<li><p>适用的数据<br>
-Pandas 适合处理一个规正的二维数据（一维也可以，应用较少），即有 N 行 N 列，类似于 SQL 执行后产出的，或者 无合并单元格Excel 表格这样的数据。它可以把多个文件的数据合并在一起，如果结构不一样，也可以经过处理进行合并。<br>
-这里说的二维数据是指，像一个矩形的平面在横向和纵向被分隔成多个格子，每个格子里存放一个数据。下图是一个 pandas 中定义的数据框架：<br>
+<li><p>Pandas简介<code class="docutils literal notranslate"><span class="pre">&lt;br&gt;</span></code>
+Pandas（发音：/ˈpændəz/）是 Python 语言开发的用于数据处理（data manipulation）和数据分析（data analysis）的第三方库。它擅长处理数字型数据和时间序列数据，当然文本型的数据也能轻松处理。<code class="docutils literal notranslate"><span class="pre">&lt;br&gt;&lt;br&gt;</span></code></p></li>
+<li><p>名字来源<code class="docutils literal notranslate"><span class="pre">&lt;br&gt;</span></code>
+Pandas 的命名来源并非「熊猫」，而是来自于计量经济学中术语<strong>面板数据</strong>（Panel data），它是一种数据集的结构类型，具有横截面和时间序列两个维度。不过，我们不用必须了解它，它只是一种灵感、思想来源。<code class="docutils literal notranslate"><span class="pre">&lt;br&gt;&lt;br&gt;</span></code></p></li>
+<li><p>用途<code class="docutils literal notranslate"><span class="pre">&lt;br&gt;</span></code>
+Pandas 对数据的处理是为数据的分析服务的，它所提供的各种数据处理方法、工具是基于数理统计学出发，包含了日常应用中的众多数据分析方法。我们学习它不光掌控它的相应操作技术，还要从它的处理思路中学习数据分析的理论和方法。<code class="docutils literal notranslate"><span class="pre">&lt;br&gt;</span></code>
+1.轻松应用在<strong>金融、统计、数理研究、物理计算、社会科学、工程等领域里</strong>；<code class="docutils literal notranslate"><span class="pre">&lt;br&gt;</span></code>
+2.<strong>实现复杂的处理逻辑</strong>，这些往往是 Excel 等工具无法处理的；<code class="docutils literal notranslate"><span class="pre">&lt;br&gt;</span></code>
+3.可以做到<strong>非常震撼的可视化</strong>，它对接众多的高颜值可视化库，可以实现动态数据交互效果。<code class="docutils literal notranslate"><span class="pre">&lt;br&gt;&lt;br&gt;</span></code></p></li>
+<li><p>适用的数据<code class="docutils literal notranslate"><span class="pre">&lt;br&gt;</span></code>
+Pandas 适合处理一个规正的二维数据（一维也可以，应用较少），即有 N 行 N 列，类似于 SQL 执行后产出的，或者 无合并单元格Excel 表格这样的数据。它可以把多个文件的数据合并在一起，如果结构不一样，也可以经过处理进行合并。<code class="docutils literal notranslate"><span class="pre">&lt;br&gt;</span></code>
+这里说的二维数据是指，像一个矩形的平面在横向和纵向被分隔成多个格子，每个格子里存放一个数据。下图是一个 pandas 中定义的数据框架：<code class="docutils literal notranslate"><span class="pre">&lt;br&gt;</span></code>
 <img alt="image" src="_images/3-1.png" /></p></li>
 </ul>
 </section>
@@ -193,28 +193,28 @@ memory usage: 161.3+ MB
 </pre></div>
 </div>
 <ul class="simple">
-<li><p>代码解析<br></p></li>
+<li><p>代码解析<code class="docutils literal notranslate"><span class="pre">&lt;br&gt;</span></code></p></li>
 </ul>
-<p><code class="docutils literal notranslate"><span class="pre">DataFilePath</span> <span class="pre">=</span> <span class="pre">&quot;./bike_data.csv&quot;</span></code><br></p>
+<p><code class="docutils literal notranslate"><span class="pre">DataFilePath</span> <span class="pre">=</span> <span class="pre">&quot;./bike_data.csv&quot;&lt;br&gt;</span></code></p>
 <blockquote>
 <div><p>这句话这里我们需要访问csv文件，该文件与我们的Python文件正好在同一个路径下，所以使用‘./’访问即可</p>
 </div></blockquote>
-<p><code class="docutils literal notranslate"><span class="pre">BikeDataFrame</span> <span class="pre">=</span> <span class="pre">pd.read_csv(DataFilePath,encoding='gb2312')</span></code><br></p>
+<p><code class="docutils literal notranslate"><span class="pre">BikeDataFrame</span> <span class="pre">=</span> <span class="pre">pd.read_csv(DataFilePath,encoding='gb2312')&lt;br&gt;</span></code></p>
 <blockquote>
-<div><p>建立BikeDataFrame对象<br>
-通过read_csv方法来访问数据<br>
-encoding表示数据字符编码方式,这里我们使用<strong>gb2312</strong>国标码，该参数不写默认编码为：utf-8。可以尝试使用默认编码，系统会报错如下图所示：<br>
-<img alt="image" src="_images/3-2.png" /><br></p>
+<div><p>建立BikeDataFrame对象<code class="docutils literal notranslate"><span class="pre">&lt;br&gt;</span></code>
+通过read_csv方法来访问数据<code class="docutils literal notranslate"><span class="pre">&lt;br&gt;</span></code>
+encoding表示数据字符编码方式,这里我们使用<strong>gb2312</strong>国标码，该参数不写默认编码为：utf-8。可以尝试使用默认编码，系统会报错如下图所示：<code class="docutils literal notranslate"><span class="pre">&lt;br&gt;</span></code>
+<img alt="image" src="_images/3-2.png" /><code class="docutils literal notranslate"><span class="pre">&lt;br&gt;</span></code></p>
 </div></blockquote>
-<p><code class="docutils literal notranslate"><span class="pre">BikeDataFrame.info()</span></code><br></p>
+<p><code class="docutils literal notranslate"><span class="pre">BikeDataFrame.info()&lt;br&gt;</span></code></p>
 <blockquote>
-<div><p>建立完“BikeDataFrame”对象之后，就可以通过各种**方法（功能函数）<strong>来访问、修改、调取“BikeDataFrame”中的数据。</strong><br>
-本代码中调用”info”功能来查看文档中的数据大致情况，如上运行结果所示:<br></p>
+<div><p>建立完“BikeDataFrame”对象之后，就可以通过各种**方法（功能函数）<strong>来访问、修改、调取“BikeDataFrame”中的数据。</strong><code class="docutils literal notranslate"><span class="pre">&lt;br&gt;</span></code>
+本代码中调用”info”功能来查看文档中的数据大致情况，如上运行结果所示:<code class="docutils literal notranslate"><span class="pre">&lt;br&gt;</span></code></p>
 <ul class="simple">
-<li><p>‘#’表示 默认索引序号<br></p></li>
-<li><p>‘Column’ 表示数据中每一列的名称，对应章节2.2.2中的数据格式<br></p></li>
-<li><p>‘Non-Null Count’ **这是我们重点要看的数据，这一列指我们数据中非空数据数量。*<em>如果我们数据都是完整的，那么这一列所有的数值都是我们前文提到的“<strong>1509922</strong></em>”条数据。但是从结果来看，这个数据表里面的数据是有所缺少的，特别是从weather之后的数据量只有之前的1/10。如果我们要做天气类的数据分析，那么就需要舍弃掉很多不包含天气等相关因素的数据。<br></p></li>
-<li><p>‘Dtype’指数据的格式类型，目前我们可以看到大部份为object（通用数据格式），如果我们事先已经知道数据类型，可以在导入数据的时候设定对应的数据类型，这里我们不做讨论。<br></p></li>
+<li><p>‘#’表示 默认索引序号<code class="docutils literal notranslate"><span class="pre">&lt;br&gt;</span></code></p></li>
+<li><p>‘Column’ 表示数据中每一列的名称，对应章节2.2.2中的数据格式<code class="docutils literal notranslate"><span class="pre">&lt;br&gt;</span></code></p></li>
+<li><p>‘Non-Null Count’ **这是我们重点要看的数据，这一列指我们数据中非空数据数量。*<em>如果我们数据都是完整的，那么这一列所有的数值都是我们前文提到的“<strong>1509922</strong></em>”条数据。但是从结果来看，这个数据表里面的数据是有所缺少的，特别是从weather之后的数据量只有之前的1/10。如果我们要做天气类的数据分析，那么就需要舍弃掉很多不包含天气等相关因素的数据。<code class="docutils literal notranslate"><span class="pre">&lt;br&gt;</span></code></p></li>
+<li><p>‘Dtype’指数据的格式类型，目前我们可以看到大部份为object（通用数据格式），如果我们事先已经知道数据类型，可以在导入数据的时候设定对应的数据类型，这里我们不做讨论。<code class="docutils literal notranslate"><span class="pre">&lt;br&gt;</span></code></p></li>
 </ul>
 </div></blockquote>
 </section>
@@ -228,21 +228,21 @@ encoding表示数据字符编码方式,这里我们使用<strong>gb2312</strong>
 </pre></div>
 </div>
 <ul class="simple">
-<li><p>输出结果<br>
-<img alt="image" src="_images/3-3.png" /><br></p></li>
+<li><p>输出结果<code class="docutils literal notranslate"><span class="pre">&lt;br&gt;</span></code>
+<img alt="image" src="_images/3-3.png" /><code class="docutils literal notranslate"><span class="pre">&lt;br&gt;</span></code></p></li>
 </ul>
 <ul class="simple">
-<li><p>代码解析<br>
-<code class="docutils literal notranslate"><span class="pre">head(10)</span></code><br>
-函数主要功能，显示前10行数据情况，不写参数时为系统默认数值5，也可以给更加大的数值用于观察数据的变化。这个是不是比用excel打开海量数据进行观察方便多了？<br>
+<li><p>代码解析<code class="docutils literal notranslate"><span class="pre">&lt;br&gt;</span></code>
+<code class="docutils literal notranslate"><span class="pre">head(10)&lt;br&gt;</span></code>
+函数主要功能，显示前10行数据情况，不写参数时为系统默认数值5，也可以给更加大的数值用于观察数据的变化。这个是不是比用excel打开海量数据进行观察方便多了？<code class="docutils literal notranslate"><span class="pre">&lt;br&gt;</span></code>
 这里的结果可以说明前面在3.1.2的问题，在weather之后的数据都是“NaN”的数值，这代表了数据都是空值，这就需要我们进一步处理了。</p></li>
 </ul>
 </section>
 <section id="p88">
 <h3>3.1.4 检测与处理重复值 P88<a class="headerlink" href="#p88" title="永久链接至标题"></a></h3>
-<p>数据去掉重复数值这一步是我们在数据分析中经常会用到的，在某些特定的场景下需要去掉某些重复的数值。这里我们举例的就是对原始数据的处理，可能因为共享单车硬件的因素，比如在数据交换通信过程中，发生了通信异常，导致同一条数据被反复上传记录的情况时有发生。这里我们可以看到在6月份的时候，就有很多条在同一地点、同一个时间、同一天、同一个bike_ID的数据有多条记录。这个时候就需要我们使用<code class="docutils literal notranslate"><span class="pre">drop_duplicates()</span></code>功能函数来除去这些重复的数值。<br></p>
+<p>数据去掉重复数值这一步是我们在数据分析中经常会用到的，在某些特定的场景下需要去掉某些重复的数值。这里我们举例的就是对原始数据的处理，可能因为共享单车硬件的因素，比如在数据交换通信过程中，发生了通信异常，导致同一条数据被反复上传记录的情况时有发生。这里我们可以看到在6月份的时候，就有很多条在同一地点、同一个时间、同一天、同一个bike_ID的数据有多条记录。这个时候就需要我们使用 <code class="docutils literal notranslate"><span class="pre">drop_duplicates()</span></code>功能函数来除去这些重复的数值。<code class="docutils literal notranslate"><span class="pre">&lt;br&gt;</span></code></p>
 <p><strong>当然，在数据除重的过程中，我们需要以下几个步骤：</strong></p>
-<p>1.观察重复数值的形态<br>
+<p>1.观察重复数值的形态<code class="docutils literal notranslate"><span class="pre">&lt;br&gt;</span></code>
 在删除重复的数值之前，我们首先要了解到是什么数据重复了，主要重复的点在哪里，删除重复数据的时候需要哪些关键字，从而避免造成多删、误删、少删的情况出现。在这里我们可以看到，主要重复的数值关键字集中在“bike_id“、”datetime“、”date”、“localhost”这些上面。</p>
 <ul class="simple">
 <li><p>示例代码</p></li>
@@ -251,11 +251,11 @@ encoding表示数据字符编码方式,这里我们使用<strong>gb2312</strong>
 </pre></div>
 </div>
 <ul class="simple">
-<li><p>输出结果<br>
-<img alt="image" src="_images/3-4.png" /><br></p></li>
+<li><p>输出结果<code class="docutils literal notranslate"><span class="pre">&lt;br&gt;</span></code>
+<img alt="image" src="_images/3-4.png" /><code class="docutils literal notranslate"><span class="pre">&lt;br&gt;</span></code></p></li>
 </ul>
-<p>2.统计重复的数值<br>
-当然，我们在看了重复数据之后，我们还需要统计一下重复的数值，可以通过<code class="docutils literal notranslate"><span class="pre">info()</span></code>功能来观察，发现共有2309条数据重复。（这里的重复指在已有数据的情况下，再出现的重复数据会被统计。）</p>
+<p>2.统计重复的数值<code class="docutils literal notranslate"><span class="pre">&lt;br&gt;</span></code>
+当然，我们在看了重复数据之后，我们还需要统计一下重复的数值，可以通过 <code class="docutils literal notranslate"><span class="pre">info()</span></code>功能来观察，发现共有2309条数据重复。（这里的重复指在已有数据的情况下，再出现的重复数据会被统计。）</p>
 <ul class="simple">
 <li><p>示例代码</p></li>
 </ul>
@@ -263,7 +263,7 @@ encoding表示数据字符编码方式,这里我们使用<strong>gb2312</strong>
 </pre></div>
 </div>
 <ul class="simple">
-<li><p>输出结果<br></p></li>
+<li><p>输出结果<code class="docutils literal notranslate"><span class="pre">&lt;br&gt;</span></code></p></li>
 </ul>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
 Int64Index: 2309 entries, 120259 to 1417556
@@ -288,9 +288,9 @@ dtypes: float64(1), int64(2), object(11)
 memory usage: 270.6+ KB
 </pre></div>
 </div>
-<p>3.删除重复的数值<br>
-通过之前两个步骤的分析，我们已经锁定了“bike_id“、”datetime“、”date”、“localhost”这4个关键字。再进一步分析，同一辆车只可能在同一个出现在同一个地点。如下图所示，一辆单车在同一时间出现在了两个地点，所以这个时候我们在删除重复值的时候，不能将“localhost”考虑为除重关键字，不然会出现跨越空间的问题，本次数据集里面就有这么几条数据跨空间了，可以观察下图。<br>
-<img alt="image" src="_images/3-5.png" /><br></p>
+<p>3.删除重复的数值<code class="docutils literal notranslate"><span class="pre">&lt;br&gt;</span></code>
+通过之前两个步骤的分析，我们已经锁定了“bike_id“、”datetime“、”date”、“localhost”这4个关键字。再进一步分析，同一辆车只可能在同一个出现在同一个地点。如下图所示，一辆单车在同一时间出现在了两个地点，所以这个时候我们在删除重复值的时候，不能将“localhost”考虑为除重关键字，不然会出现跨越空间的问题，本次数据集里面就有这么几条数据跨空间了，可以观察下图。<code class="docutils literal notranslate"><span class="pre">&lt;br&gt;</span></code>
+<img alt="image" src="_images/3-5.png" /><code class="docutils literal notranslate"><span class="pre">&lt;br&gt;</span></code></p>
 <ul class="simple">
 <li><p>示例代码</p></li>
 </ul>
@@ -298,12 +298,12 @@ memory usage: 270.6+ KB
 </pre></div>
 </div>
 <ul class="simple">
-<li><p>代码解析<br>
-<code class="docutils literal notranslate"><span class="pre">subset</span></code>关键字,表示根据关键字进行重复排查，排查优先级按照列表里面给的名称决定。<br>
-<code class="docutils literal notranslate"><span class="pre">keep</span></code>关键字，‘first’表示出现重复的数据，只保留第一个数据，其余删除。<br>
+<li><p>代码解析<code class="docutils literal notranslate"><span class="pre">&lt;br&gt;</span></code>
+<code class="docutils literal notranslate"><span class="pre">subset</span></code>关键字,表示根据关键字进行重复排查，排查优先级按照列表里面给的名称决定。<code class="docutils literal notranslate"><span class="pre">&lt;br&gt;</span></code>
+<code class="docutils literal notranslate"><span class="pre">keep</span></code>关键字，‘first’表示出现重复的数据，只保留第一个数据，其余删除。<code class="docutils literal notranslate"><span class="pre">&lt;br&gt;</span></code>
 <code class="docutils literal notranslate"><span class="pre">inplace</span></code>关键字，‘True’表示替换原表格数据，不返回处理好的新表格。</p></li>
 </ul>
-<p>4.查看祛重结果<br>
+<p>4.查看祛重结果<code class="docutils literal notranslate"><span class="pre">&lt;br&gt;</span></code>
 删除掉重复的数值之后，查看一下相关数据结果。</p>
 <ul class="simple">
 <li><p>示例代码</p></li>
@@ -312,7 +312,7 @@ memory usage: 270.6+ KB
 </pre></div>
 </div>
 <ul class="simple">
-<li><p>输出结果<br></p></li>
+<li><p>输出结果<code class="docutils literal notranslate"><span class="pre">&lt;br&gt;</span></code></p></li>
 </ul>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
 Int64Index: 1488664 entries, 0 to 1509921
@@ -345,7 +345,7 @@ memory usage: 170.4+ MB
 </pre></div>
 </div>
 <ul class="simple">
-<li><p>输出结果<br></p></li>
+<li><p>输出结果<code class="docutils literal notranslate"><span class="pre">&lt;br&gt;</span></code></p></li>
 </ul>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
 Int64Index: 0 entries
@@ -373,7 +373,7 @@ memory usage: 0.0+ bytes
 </section>
 <section id="id5">
 <h3>3.1.5 检测与处理缺失值<a class="headerlink" href="#id5" title="永久链接至标题"></a></h3>
-<p>1.观察数据<br>
+<p>1.观察数据<code class="docutils literal notranslate"><span class="pre">&lt;br&gt;</span></code>
 在前面数据祛重的时候，我们已经通过info这个功能函数发现数据有缺失值（NaN），不过我们需要再观察一下数据样式，以确保这些缺失值是否会对我们后面的数据分析产生影响。根据1.2中的提出问题，我们需要通过天气数据来进行预测未来共享单车的租赁情况，所以数据中的天气数据至关重要。我们可以看到下表中的天气数据有缺失的情况，所以我们需要将缺失天气数据的单车信息剔除。</p>
 <ul class="simple">
 <li><p>示例代码</p></li>
@@ -382,12 +382,12 @@ memory usage: 0.0+ bytes
 </pre></div>
 </div>
 <ul class="simple">
-<li><p>输出结果<br>
-<img alt="image" src="_images/3-6.png" /><br></p></li>
+<li><p>输出结果<code class="docutils literal notranslate"><span class="pre">&lt;br&gt;</span></code>
+<img alt="image" src="_images/3-6.png" /><code class="docutils literal notranslate"><span class="pre">&lt;br&gt;</span></code></p></li>
 </ul>
-<p>2.删除数据<br>
-下图是我们刚导入数据时候显示的信息，上面我们说到要删除没有天气数据的单车数据，我们这里可以看到基本上缺失的都是天气数据（天气、风速、温度等），同时date数据也有两条缺失，所以我们这里直接选择将包含缺失值（NaN）的数据直接删除，不在分类进行讨论删除。<br>
-<img alt="image" src="_images/3-7-1.png" /><br></p>
+<p>2.删除数据<code class="docutils literal notranslate"><span class="pre">&lt;br&gt;</span></code>
+下图是我们刚导入数据时候显示的信息，上面我们说到要删除没有天气数据的单车数据，我们这里可以看到基本上缺失的都是天气数据（天气、风速、温度等），同时date数据也有两条缺失，所以我们这里直接选择将包含缺失值（NaN）的数据直接删除，不在分类进行讨论删除。<code class="docutils literal notranslate"><span class="pre">&lt;br&gt;</span></code>
+<img alt="image" src="_images/3-7-1.png" /><code class="docutils literal notranslate"><span class="pre">&lt;br&gt;</span></code></p>
 <ul class="simple">
 <li><p>示例代码</p></li>
 </ul>
@@ -396,18 +396,18 @@ memory usage: 0.0+ bytes
 </pre></div>
 </div>
 <ul class="simple">
-<li><p>输出结果<br>
-<img alt="image" src="_images/3-7.png" /><br></p></li>
+<li><p>输出结果<code class="docutils literal notranslate"><span class="pre">&lt;br&gt;</span></code>
+<img alt="image" src="_images/3-7.png" /><code class="docutils literal notranslate"><span class="pre">&lt;br&gt;</span></code></p></li>
 </ul>
 <ul>
-<li><p>代码解析<br>
-<code class="docutils literal notranslate"><span class="pre">axis</span></code>关键字，‘0’表示按行还是列进行空缺数据删除，我们这里是按照行的进行删除，因为天气数据没有，这一行数据就没有意义了<br>
-<code class="docutils literal notranslate"><span class="pre">inplace</span></code>关键字，‘True’表示替换原表格数据，不返回处理好的新表格。<br></p>
-<p>最后用<code class="docutils literal notranslate"><span class="pre">head</span></code>函数观察一下删除好的数据情况，这里我们可以看到天气数据都已经在表中显示了。</p>
+<li><p>代码解析<code class="docutils literal notranslate"><span class="pre">&lt;br&gt;</span></code>
+<code class="docutils literal notranslate"><span class="pre">axis</span></code>关键字，‘0’表示按行还是列进行空缺数据删除，我们这里是按照行的进行删除，因为天气数据没有，这一行数据就没有意义了<code class="docutils literal notranslate"><span class="pre">&lt;br&gt;</span></code>
+<code class="docutils literal notranslate"><span class="pre">inplace</span></code>关键字，‘True’表示替换原表格数据，不返回处理好的新表格。<code class="docutils literal notranslate"><span class="pre">&lt;br&gt;</span></code></p>
+<p>最后用 <code class="docutils literal notranslate"><span class="pre">head</span></code>函数观察一下删除好的数据情况，这里我们可以看到天气数据都已经在表中显示了。</p>
 </li>
 </ul>
-<p>3.观察处理后的数据<br>
-最后我们还是要通过<code class="docutils literal notranslate"><span class="pre">info()</span></code>函数再观察一下整体数据，从结果来看数据初步整理已经完成，缺失数值已经删除，所有数据均以对齐，共计162424条数据可以分析。这时候我们可以和刚刚导入的数据进行对比一下，发现数据少了将近1/10，<strong>这就是导入数据后初步处理的重要性</strong>。</p>
+<p>3.观察处理后的数据<code class="docutils literal notranslate"><span class="pre">&lt;br&gt;</span></code>
+最后我们还是要通过 <code class="docutils literal notranslate"><span class="pre">info()</span></code>函数再观察一下整体数据，从结果来看数据初步整理已经完成，缺失数值已经删除，所有数据均以对齐，共计162424条数据可以分析。这时候我们可以和刚刚导入的数据进行对比一下，发现数据少了将近1/10，<strong>这就是导入数据后初步处理的重要性</strong>。</p>
 <ul class="simple">
 <li><p>示例代码</p></li>
 </ul>
@@ -415,7 +415,7 @@ memory usage: 0.0+ bytes
 </pre></div>
 </div>
 <ul class="simple">
-<li><p>输出结果<br></p></li>
+<li><p>输出结果<code class="docutils literal notranslate"><span class="pre">&lt;br&gt;</span></code></p></li>
 </ul>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
 Int64Index: 162424 entries, 120996 to 366423
@@ -443,7 +443,7 @@ memory usage: 18.6+ MB
 </section>
 <section id="id6">
 <h3>3.1.6 完整代码<a class="headerlink" href="#id6" title="永久链接至标题"></a></h3>
-<p>之前说了那么多肯定会有疑惑，我到底该写多少代码？我们将初步数据分析后的代码整理如下所示。有些同学会惊讶于只有短短那么5行（还有2行用于打印查看结果不计算在内），其实这5行代码凝聚了我们之前很多智慧和结晶。需要通过反复对“祛重”和“删除空值”的调试才有下面的代码，或者我们准确的说是代码中的“参数”——毕竟这才是决定我们之后分析数据是怎么样子的。笔者在写<code class="docutils literal notranslate"><span class="pre">drop_duplicates</span></code>时，通过很多代码去调试、查看、分析数据中可能存在的重复值。因为考虑到读者是初学者，故在上文并没有提及是怎么发现这些重复数据的，而是直接给了一个发现思路和过程，如果你感兴趣可以去验证一下。</p>
+<p>之前说了那么多肯定会有疑惑，我到底该写多少代码？我们将初步数据分析后的代码整理如下所示。有些同学会惊讶于只有短短那么5行（还有2行用于打印查看结果不计算在内），其实这5行代码凝聚了我们之前很多智慧和结晶。需要通过反复对“祛重”和“删除空值”的调试才有下面的代码，或者我们准确的说是代码中的“参数”——毕竟这才是决定我们之后分析数据是怎么样子的。笔者在写 <code class="docutils literal notranslate"><span class="pre">drop_duplicates</span></code>时，通过很多代码去调试、查看、分析数据中可能存在的重复值。因为考虑到读者是初学者，故在上文并没有提及是怎么发现这些重复数据的，而是直接给了一个发现思路和过程，如果你感兴趣可以去验证一下。</p>
 <ul class="simple">
 <li><p>示例代码</p></li>
 </ul>
@@ -463,7 +463,7 @@ memory usage: 18.6+ MB
 </pre></div>
 </div>
 <ul class="simple">
-<li><p>输出结果<br></p></li>
+<li><p>输出结果<code class="docutils literal notranslate"><span class="pre">&lt;br&gt;</span></code></p></li>
 </ul>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
 Int64Index: 162424 entries, 120996 to 366423
@@ -488,24 +488,24 @@ dtypes: float64(1), int64(2), object(11)
 memory usage: 18.6+ MB
 </pre></div>
 </div>
-<p><img alt="image" src="_images/3-8.png" /><br></p>
+<p><img alt="image" src="_images/3-8.png" /><code class="docutils literal notranslate"><span class="pre">&lt;br&gt;</span></code></p>
 </section>
 </section>
 <section id="id7">
 <h2>3.2 数据清洗(选学)**<a class="headerlink" href="#id7" title="永久链接至标题"></a></h2>
-<p>经过前面初步的数据处理之后，我们要开始清洗我们的数据了。这时候有同学会提问，数据都已经处理好了还需要“洗”什么？那这里给大家举一个例子。我们可以从打印出来数据观察到‘datetime’这一栏数据，这里面有一个关键数“小时”值是我们需要的，因为这个数值可以统计一天内租赁共享单车的高峰期在哪里。如果我们可以提取出来，单独给这个参数一列那就更加方便后面数据的统计了。所以笔者就使用了下面这行代码：<br></p>
+<p>经过前面初步的数据处理之后，我们要开始清洗我们的数据了。这时候有同学会提问，数据都已经处理好了还需要“洗”什么？那这里给大家举一个例子。我们可以从打印出来数据观察到‘datetime’这一栏数据，这里面有一个关键数“小时”值是我们需要的，因为这个数值可以统计一天内租赁共享单车的高峰期在哪里。如果我们可以提取出来，单独给这个参数一列那就更加方便后面数据的统计了。所以笔者就使用了下面这行代码：<code class="docutils literal notranslate"><span class="pre">&lt;br&gt;</span></code></p>
 <blockquote>
-<div><p><code class="docutils literal notranslate"><span class="pre">pd.to_datetime(</span> <span class="pre">BikeDataFrame['datetime'])</span></code><br></p>
+<div><p><code class="docutils literal notranslate"><span class="pre">pd.to_datetime(</span> <span class="pre">BikeDataFrame['datetime'])&lt;br&gt;</span></code></p>
 </div></blockquote>
-<p>但事与愿违，我们得到的数据还是有一些错误数据存在，我们可以通过系统报错来得知竟然有时间超过了<code class="docutils literal notranslate"><span class="pre">23:59:59</span></code>，所以这里需要把“datetime”数据整理一下。<br></p>
+<p>但事与愿违，我们得到的数据还是有一些错误数据存在，我们可以通过系统报错来得知竟然有时间超过了 <code class="docutils literal notranslate"><span class="pre">23:59:59</span></code>，所以这里需要把“datetime”数据整理一下。<code class="docutils literal notranslate"><span class="pre">&lt;br&gt;</span></code></p>
 <blockquote>
-<div><p><strong>代码运行后报错内容：</strong><br>
-<img alt="image" src="_images/3-9.png" /><br></p>
+<div><p><strong>代码运行后报错内容：</strong><code class="docutils literal notranslate"><span class="pre">&lt;br&gt;</span></code>
+<img alt="image" src="_images/3-9.png" /><code class="docutils literal notranslate"><span class="pre">&lt;br&gt;</span></code></p>
 </div></blockquote>
-<p>同时,我们还发现另一个问题，就是‘datetime’数据长度不一。有的格式为<code class="docutils literal notranslate"><span class="pre">hh:mm:ss</span></code>，有的格式为<code class="docutils literal notranslate"><span class="pre">(h)h:mm:ss</span></code>，即小时位置的两位时间数中如果高位数为0，结果中就省略了，这也会为我们后期数据处理带来麻烦。<br></p>
+<p>同时,我们还发现另一个问题，就是‘datetime’数据长度不一。有的格式为 <code class="docutils literal notranslate"><span class="pre">hh:mm:ss</span></code>，有的格式为 <code class="docutils literal notranslate"><span class="pre">(h)h:mm:ss</span></code>，即小时位置的两位时间数中如果高位数为0，结果中就省略了，这也会为我们后期数据处理带来麻烦。<code class="docutils literal notranslate"><span class="pre">&lt;br&gt;</span></code></p>
 <blockquote>
-<div><p><strong>不符合格式的时间数据：</strong><br>
-<img alt="image" src="_images/3-10.png" /><br></p>
+<div><p><strong>不符合格式的时间数据：</strong><code class="docutils literal notranslate"><span class="pre">&lt;br&gt;</span></code>
+<img alt="image" src="_images/3-10.png" /><code class="docutils literal notranslate"><span class="pre">&lt;br&gt;</span></code></p>
 </div></blockquote>
 <section id="id8">
 <h3>3.2.1 导入数据并初步处理<a class="headerlink" href="#id8" title="永久链接至标题"></a></h3>
@@ -527,7 +527,7 @@ memory usage: 18.6+ MB
 </section>
 <section id="id9">
 <h3>3.2.2 查看不符合条件的时间数据<a class="headerlink" href="#id9" title="永久链接至标题"></a></h3>
-<p>这里我们需要通过条件方法来获取不符合条件的数据，第一个就是超过<code class="docutils literal notranslate"><span class="pre">23:59:59</span></code>的数据；第二个就是长度为7的数据，说明该数据没有按照统一格式存储。通过运行后的结果我们可以得到一共有<strong>23670</strong>条这样的数据，接下来我们就需要处理一下，这类数据。</p>
+<p>这里我们需要通过条件方法来获取不符合条件的数据，第一个就是超过 <code class="docutils literal notranslate"><span class="pre">23:59:59</span></code>的数据；第二个就是长度为7的数据，说明该数据没有按照统一格式存储。通过运行后的结果我们可以得到一共有<strong>23670</strong>条这样的数据，接下来我们就需要处理一下，这类数据。</p>
 <ul class="simple">
 <li><p>示例代码</p></li>
 </ul>
@@ -536,15 +536,15 @@ memory usage: 18.6+ MB
 </pre></div>
 </div>
 <ul class="simple">
-<li><p>输出结果<br>
-<img alt="image" src="_images/3-11.png" /><br></p></li>
+<li><p>输出结果<code class="docutils literal notranslate"><span class="pre">&lt;br&gt;</span></code>
+<img alt="image" src="_images/3-11.png" /><code class="docutils literal notranslate"><span class="pre">&lt;br&gt;</span></code></p></li>
 </ul>
 </section>
 <section id="id10">
 <h3>3.2.3 处理不符合条件的时间数据<a class="headerlink" href="#id10" title="永久链接至标题"></a></h3>
-<p>由于<code class="docutils literal notranslate"><span class="pre">datetime</span></code>数据就是字符串，所以我处理时候可以按照以下顺序思路：<br></p>
+<p>由于 <code class="docutils literal notranslate"><span class="pre">datetime</span></code>数据就是字符串，所以我处理时候可以按照以下顺序思路：<code class="docutils literal notranslate"><span class="pre">&lt;br&gt;</span></code></p>
 <ol class="simple">
-<li><p>使用字符串自带对齐函数<code class="docutils literal notranslate"><span class="pre">rjust</span></code>进行右对齐，设定长度为8，空缺位以0补足，符合条件的不会处理。</p></li>
+<li><p>使用字符串自带对齐函数 <code class="docutils literal notranslate"><span class="pre">rjust</span></code>进行右对齐，设定长度为8，空缺位以0补足，符合条件的不会处理。</p></li>
 <li><p>通过切片的方式提取字符串前两位数据，获得小时时间并转换成整形。</p></li>
 <li><p>对超过24的时间用取余的方法解决，最后转换成字符串并连接更新时间数据。</p></li>
 </ol>
@@ -568,8 +568,8 @@ memory usage: 18.6+ MB
 </pre></div>
 </div>
 <ul class="simple">
-<li><p>输出结果<br>
-<img alt="image" src="_images/3-12.png" /><br></p></li>
+<li><p>输出结果<code class="docutils literal notranslate"><span class="pre">&lt;br&gt;</span></code>
+<img alt="image" src="_images/3-12.png" /><code class="docutils literal notranslate"><span class="pre">&lt;br&gt;</span></code></p></li>
 <li><p>示例代码(检验处理后结果)</p></li>
 </ul>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#最后检验一下是否有不符合条件的数据，我们可以看到结果是没有</span>
@@ -577,14 +577,14 @@ memory usage: 18.6+ MB
 </pre></div>
 </div>
 <ul class="simple">
-<li><p>输出结果<br>
-<img alt="image" src="_images/3-13.png" /><br></p></li>
+<li><p>输出结果<code class="docutils literal notranslate"><span class="pre">&lt;br&gt;</span></code>
+<img alt="image" src="_images/3-13.png" /><code class="docutils literal notranslate"><span class="pre">&lt;br&gt;</span></code></p></li>
 </ul>
 <ul class="simple">
-<li><p>结论<br>
-通过上面两个结果我们可以发现：<br></p>
+<li><p>结论<code class="docutils literal notranslate"><span class="pre">&lt;br&gt;</span></code>
+通过上面两个结果我们可以发现：<code class="docutils literal notranslate"><span class="pre">&lt;br&gt;</span></code></p>
 <ol class="simple">
-<li><p>数据中新增了<code class="docutils literal notranslate"><span class="pre">hour</span></code>列</p></li>
+<li><p>数据中新增了 <code class="docutils literal notranslate"><span class="pre">hour</span></code>列</p></li>
 <li><p>再次检查数据，发现没有不符合条件的数据了，表示数据已经处理成功。</p></li>
 </ol>
 </li>
@@ -592,14 +592,14 @@ memory usage: 18.6+ MB
 </section>
 <section id="value">
 <h3>3.2.4 怎么还有’#VALUE!’数据？？？<a class="headerlink" href="#value" title="永久链接至标题"></a></h3>
-<p>在前面显示数据结果的时候，笔者还发现一个问题，就是<code class="docutils literal notranslate"><span class="pre">temp_vlaue</span></code>和<code class="docutils literal notranslate"><span class="pre">wind_speed</span></code>应该都是<code class="docutils literal notranslate"><span class="pre">float</span></code>类型的。可是导入数据后只有后者类型正确，前者系统还是识别成<code class="docutils literal notranslate"><span class="pre">object</span></code>类型，这就说明数据有问题。经过一番探查，在对<code class="docutils literal notranslate"><span class="pre">temp_vlaue</span></code>使用<code class="docutils literal notranslate"><span class="pre">BikeDataFrame['temp_value'].astype('float')</span></code>这行转换代码系统报错了,说无法对’#VALUE!’这个字符串数值进行转换。那么这里我们就可以初步得到一个信息，就是<code class="docutils literal notranslate"><span class="pre">temp_vlaue</span></code>这一列的数据有异样。<br></p>
+<p>在前面显示数据结果的时候，笔者还发现一个问题，就是 <code class="docutils literal notranslate"><span class="pre">temp_vlaue</span></code>和 <code class="docutils literal notranslate"><span class="pre">wind_speed</span></code>应该都是 <code class="docutils literal notranslate"><span class="pre">float</span></code>类型的。可是导入数据后只有后者类型正确，前者系统还是识别成 <code class="docutils literal notranslate"><span class="pre">object</span></code>类型，这就说明数据有问题。经过一番探查，在对 <code class="docutils literal notranslate"><span class="pre">temp_vlaue</span></code>使用 <code class="docutils literal notranslate"><span class="pre">BikeDataFrame['temp_value'].astype('float')</span></code>这行转换代码系统报错了,说无法对’#VALUE!’这个字符串数值进行转换。那么这里我们就可以初步得到一个信息，就是 <code class="docutils literal notranslate"><span class="pre">temp_vlaue</span></code>这一列的数据有异样。<code class="docutils literal notranslate"><span class="pre">&lt;br&gt;</span></code></p>
 <blockquote>
-<div><p><strong>显示数据结果的异样</strong><br>
-<img alt="image" src="_images/3-14.png" /><br>
-<strong>调用代码后的报错</strong><br>
-<img alt="image" src="_images/3-14-1.png" /><br></p>
+<div><p><strong>显示数据结果的异样</strong><code class="docutils literal notranslate"><span class="pre">&lt;br&gt;</span></code>
+<img alt="image" src="_images/3-14.png" /><code class="docutils literal notranslate"><span class="pre">&lt;br&gt;</span></code>
+<strong>调用代码后的报错</strong><code class="docutils literal notranslate"><span class="pre">&lt;br&gt;</span></code>
+<img alt="image" src="_images/3-14-1.png" /><code class="docutils literal notranslate"><span class="pre">&lt;br&gt;</span></code></p>
 </div></blockquote>
-<p>接下来，我们通过查找<code class="docutils literal notranslate"><span class="pre">temp_vlaue</span></code>列中是否包含<code class="docutils literal notranslate"><span class="pre">'#VALUE!'</span></code>的方法得到一下结果，我们可以从代码调试的结果中得到有<strong>19261</strong>条数据产生异常，那么这里我们就需要运用到一个新的功能函数来处理这个异样数据。</p>
+<p>接下来，我们通过查找 <code class="docutils literal notranslate"><span class="pre">temp_vlaue</span></code>列中是否包含 <code class="docutils literal notranslate"><span class="pre">'#VALUE!'</span></code>的方法得到一下结果，我们可以从代码调试的结果中得到有<strong>19261</strong>条数据产生异常，那么这里我们就需要运用到一个新的功能函数来处理这个异样数据。</p>
 <ul class="simple">
 <li><p>示例代码</p></li>
 </ul>
@@ -607,13 +607,13 @@ memory usage: 18.6+ MB
 </pre></div>
 </div>
 <ul class="simple">
-<li><p>输出结果<br>
-<img alt="image" src="_images/3-15.png" /><br></p></li>
+<li><p>输出结果<code class="docutils literal notranslate"><span class="pre">&lt;br&gt;</span></code>
+<img alt="image" src="_images/3-15.png" /><code class="docutils literal notranslate"><span class="pre">&lt;br&gt;</span></code></p></li>
 </ul>
 </section>
 <section id="drop-value">
 <h3>3.2.5 使用drop函数删除包含’#VALUE!’数值的数据<a class="headerlink" href="#drop-value" title="永久链接至标题"></a></h3>
-<p>前面我们已经找到了问题所在，接下来我们就是需要将这个数据进行删除。好在pandas提供了<code class="docutils literal notranslate"><span class="pre">drop</span></code>函数，只要我们提供需要被删除数据的index信息，就可以整行删除这些数据。我们首先通过条件筛选来获得需要删除的数据，最后调用index属性给<code class="docutils literal notranslate"><span class="pre">drop</span></code>函数即可。</p>
+<p>前面我们已经找到了问题所在，接下来我们就是需要将这个数据进行删除。好在pandas提供了 <code class="docutils literal notranslate"><span class="pre">drop</span></code>函数，只要我们提供需要被删除数据的index信息，就可以整行删除这些数据。我们首先通过条件筛选来获得需要删除的数据，最后调用index属性给 <code class="docutils literal notranslate"><span class="pre">drop</span></code>函数即可。</p>
 <ul class="simple">
 <li><p>示例代码</p></li>
 </ul>
@@ -625,7 +625,7 @@ memory usage: 18.6+ MB
 </pre></div>
 </div>
 <ul class="simple">
-<li><p>输出结果<br></p></li>
+<li><p>输出结果<code class="docutils literal notranslate"><span class="pre">&lt;br&gt;</span></code></p></li>
 </ul>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
 Int64Index: 143163 entries, 120996 to 366423
@@ -652,8 +652,8 @@ memory usage: 17.5+ MB
 </pre></div>
 </div>
 <ul class="simple">
-<li><p>结论<br>
-通过上面的删除和转换操作，我们最后可以通过<code class="docutils literal notranslate"><span class="pre">info</span></code>函数观察得到，<code class="docutils literal notranslate"><span class="pre">temp_value</span></code>数据已经由原来的<code class="docutils literal notranslate"><span class="pre">object</span></code>类型转换成<code class="docutils literal notranslate"><span class="pre">float</span></code>类型，之后的数据处理就很方便了。</p></li>
+<li><p>结论<code class="docutils literal notranslate"><span class="pre">&lt;br&gt;</span></code>
+通过上面的删除和转换操作，我们最后可以通过 <code class="docutils literal notranslate"><span class="pre">info</span></code>函数观察得到，<code class="docutils literal notranslate"><span class="pre">temp_value</span></code>数据已经由原来的 <code class="docutils literal notranslate"><span class="pre">object</span></code>类型转换成 <code class="docutils literal notranslate"><span class="pre">float</span></code>类型，之后的数据处理就很方便了。</p></li>
 </ul>
 </section>
 <section id="id11">
@@ -696,7 +696,7 @@ memory usage: 17.5+ MB
 </pre></div>
 </div>
 <ul class="simple">
-<li><p>输出结果<br></p></li>
+<li><p>输出结果<code class="docutils literal notranslate"><span class="pre">&lt;br&gt;</span></code></p></li>
 </ul>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Writing</span> <span class="n">import_data_CleanUP</span><span class="o">.</span><span class="n">py</span>
 </pre></div>
@@ -710,7 +710,7 @@ memory usage: 17.5+ MB
 </pre></div>
 </div>
 <ul class="simple">
-<li><p>输出结果<br></p></li>
+<li><p>输出结果<code class="docutils literal notranslate"><span class="pre">&lt;br&gt;</span></code></p></li>
 </ul>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
 Int64Index: 143163 entries, 120996 to 366423
@@ -736,7 +736,7 @@ dtypes: float64(2), int64(3), object(10)
 memory usage: 17.5+ MB
 </pre></div>
 </div>
-<p><img alt="image" src="_images/3-16.png" /><br></p>
+<p><img alt="image" src="_images/3-16.png" /><code class="docutils literal notranslate"><span class="pre">&lt;br&gt;</span></code></p>
 </section>
 </section>
 </section>
@@ -745,7 +745,7 @@ memory usage: 17.5+ MB
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="页脚">
-        <a href="2.%E6%95%B0%E6%8D%AE%E6%8A%BD%E5%8F%96.html" class="btn btn-neutral float-left" title="2.数据抽取（采集、获取方式）" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
+        <a href="2.%E6%95%B0%E6%8D%AE%E6%8A%BD%E5%8F%96.html" class="btn btn-neutral float-left" title="数据分析" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
         <a href="4.%E6%95%B0%E6%8D%AE%E6%8E%A2%E7%B4%A2%E5%92%8C%E5%8F%AF%E8%A7%86%E5%8C%96.html" class="btn btn-neutral float-right" title="4.数据探索和可视化" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
